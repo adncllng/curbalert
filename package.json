@@ -5,9 +5,12 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "axios": "^0.18.0",
+    "bulma": "^0.7.1",
+    "bulma-start": "0.0.2",
+    "google-maps-react": "^1.1.11",
     "nodemon": "^1.17.5",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4"
@@ -18,5 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "google-maps": "^3.2.1"
   }
 }
