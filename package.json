@@ -8,6 +8,7 @@
     "bulma": "^0.7.1",
     "bulma-start": "0.0.2",
     "google-maps-react": "^1.1.11",
+    "jwt-decode": "^2.2.0",
     "nodemon": "^1.17.5",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

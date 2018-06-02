@@ -1,47 +1,41 @@
-import React, { Component } from 'react';
-import './App.css';
-
+import React, { Component } from "react";
 
 class NavBar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
     return (
-      <nav class="navbar is-white">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item brand-text" href="/">
+      <nav className="navbar is-white">
+        <div className="container">
+            <div className="navbar-brand">
+                <a className="navbar-item brand-text" href="/">
                   Curb Alert
                 </a>
-                <div class="navbar-burger burger" data-target="navMenu">
+                <div className="navbar-burger burger" data-target="navMenu">
                   <span></span>
                   <span></span>
                   <span></span>
                 </div>
             </div>
-            <div id="navMenu" class="navbar-menu">
-              <div class="navbar-start">
-                <a class="navbar-item" href="">
+            <div id="navMenu" className="navbar-menu">
+              <div className="navbar-start">
+                <a className="navbar-item" href="#">
                   New Post
                 </a>
-                <a class="navbar-item" href="">
+                <a className="navbar-item" href="#">
                   All Posts
                 </a>
-                <a class="navbar-item" href="">
-                  Profile
-                </a>
-                <a class="navbar-item" href="">
-                  Logout
+                <a className="navbar-item" href="/login">
+                  Login
                 </a>
               </div>
             </div>
         </div>
       </nav>
-    )
+    );
   }
 }
-
 
 export default NavBar;
