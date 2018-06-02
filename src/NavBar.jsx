@@ -7,9 +7,19 @@ class NavBar extends Component {
     super(props)
   }
 
+  state = {
+    isActive: false,
+  }
+
+  toggleNav = () => {
+    this.setState(prevState => ({
+      isActive: !prevState.isActive
+    }))
+  }
+
   render() {
     return (
-      <nav className="navbar is-white">
+      <nav className="navbar is-white" aria-label="main navigation">
         <div className="container">
             <div className="navbar-brand">
                 <a className="navbar-item brand-text" href="/">
