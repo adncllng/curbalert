@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import axios from 'axios';
-class Home extends Component {
+import './App.css';
+import { GoogleApiWrapper } from 'google-maps-react'
+import MapContainer from './MapContainer.jsx'
 
-componentDidMount(){
-  axios.get('http://localhost:3001/')
-  .then(function (response) {
-    console.log(response.data)
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
+class Home extends Component {
+  componentDidMount() {
+    axios.get('http://localhost:3001/')
+    .then(function (response) {
+      console.log(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   render() {
     return (
-<div>hello WOrld</div>
+      <div>
+        <MapContainer google={this.props.google} />
+      </div>
     );
   }
 }
- export default Home;
+
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyAAEye939ft3vqu11_JHAt3JgcuwfigHw0',
+})(Home);
