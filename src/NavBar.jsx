@@ -13,7 +13,7 @@ class NavBar extends Component {
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item brand-text" href="/">
-                  <img src="http://res.cloudinary.com/ninayujiri/image/upload/v1527916815/curb-alert.png" alt="Curb Alert" width="200px" />
+                  Curb Alert
                 </a>
                 <div class="navbar-burger burger" data-target="navMenu">
                   <span></span>

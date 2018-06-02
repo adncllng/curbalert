@@ -26,5 +26,5 @@ class Home extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyAAEye939ft3vqu11_JHAt3JgcuwfigHw0',
+  apiKey: process.env.GOOGLE_API_KEY,
 })(Home);
