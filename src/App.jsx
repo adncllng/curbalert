@@ -5,6 +5,15 @@ import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
 
 class App extends Component {
+
+	this.state = {
+
+
+
+
+	}
+
+
 	render() {
 		return (
 			<div className="App">
@@ -17,5 +26,7 @@ class App extends Component {
 		);
 	}
 }
+
+
 
 export default App;
