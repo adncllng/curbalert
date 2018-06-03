@@ -8,7 +8,7 @@ import MapContainer from "./MapContainer.jsx";
 class Home extends Component {
   componentDidMount() {
     axios
-      .get("http://localhost:3001/")
+      .get("http://localhost:3001/posts")
       .then(function(response) {
         console.log(response.data);
       })

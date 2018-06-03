@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
 
 
 // Get users listing JSON
@@ -18,7 +19,7 @@ module.exports = (knex) => {
   });
 
   // Login route
-  router.post("/login", (req, res) => {
+  router.post("/users/new", (req, res) => {
     knex
       .select(req.body.email)
       .from("users")

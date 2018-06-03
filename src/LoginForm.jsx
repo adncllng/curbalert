@@ -59,7 +59,6 @@ class LoginForm extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    debugger
     this.Auth.login(this.state.email, this.state.password)
       .then(res => {
         this.props.history.replace("/");
