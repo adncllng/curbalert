@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import AuthService from "./AuthService.jsx";
+import axios from "axios";
+
 // import { userLogin } from './actions.js';
 
 class LoginForm extends Component {
@@ -17,32 +19,32 @@ class LoginForm extends Component {
   render() {
     return (
       <div className="modal-card">
-        <form>
-          <section className="modal-card-body">
-            <p className="modal-card-title">Login</p>
-            <br/>
-            <div className="field">
-              <label className="label">Email</label>
-              <input
-                className="input"
-                type="email"
-                placeholder="Email"
-                name="email"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="field">
-              <label className="label">Password</label>
-              <input
-                className="input"
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={this.handleChange}
-              />
-            </div>
-            <button className="button is-light">Submit</button>
-          </section>
+        <form onSubmit={this.handleFormSubmit}>
+        <section className="modal-card-body">
+          <p className="modal-card-title">Login</p>
+          <br/>
+          <div className="field">
+            <label className="label">Email</label>
+            <input
+              className="input"
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="field">
+            <label className="label">Password</label>
+            <input
+              className="input"
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={this.handleChange}
+            />
+          </div>
+          <button className="button is-light">Submit</button>
+        </section>
         </form>
       </div>
     );
@@ -57,8 +59,8 @@ class LoginForm extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-
-    this.Auth.login(this.state.username, this.state.password)
+    debugger
+    this.Auth.login(this.state.email, this.state.password)
       .then(res => {
         this.props.history.replace("/");
       })

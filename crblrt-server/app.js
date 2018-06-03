@@ -13,7 +13,6 @@ const knexLogger  = require('knex-logger');
 require('dotenv').config();
 
 
-
 var app = express();
 
 // view engine setup

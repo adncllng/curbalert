@@ -3,7 +3,7 @@ var router = express.Router();
 
 module.exports = (knex) => {
 
-  router.get("/", (req, res) => {
+  router.get("/api/posts", (req, res) => {
     knex
       .select("*")
       .from("posts")
