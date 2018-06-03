@@ -24,20 +24,21 @@ module.exports = (knex) => {
       .from("users")
       .then((user) => {
         if (user) {
-        if (password == user.password) {
-          //If all credentials are correct do this
-          let token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET_TOKEN, { expiresIn: 129600 }); // Signing the token
-          res.status(200).json({
-            status: 'success',
-            token: token
-          });
-        } else {
-          res.status(401).json({
-            err: 'Email or password is incorrect'
-          });
-        }
-      };
-  });
+          if (password == user.password) {
+            //If all credentials are correct do this
+            let token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET_TOKEN, { expiresIn: 129600 }); // Signing the token
+            res.status(200).json({
+              status: 'success',
+              token: token
+            });
+          } else {
+            res.status(401).json({
+              err: 'Email or password is incorrect'
+            });
+          }
+        };
+      });
+    });
 
   return router;
 }
