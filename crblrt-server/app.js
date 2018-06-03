@@ -31,7 +31,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/', indexRouter(knex));
+app.use('/posts', indexRouter(knex));
 app.use('/users', usersRouter(knex));
 
 // catch 404 and forward to error handler
