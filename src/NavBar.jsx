@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles/scss/App.css';
 
 
 class NavBar extends Component {
@@ -7,32 +7,42 @@ class NavBar extends Component {
     super(props)
   }
 
+  state = {
+    isActive: false,
+  }
+
+  toggleNav = () => {
+    this.setState(prevState => ({
+      isActive: !prevState.isActive
+    }))
+  }
+
   render() {
     return (
-      <nav class="navbar is-white">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item brand-text" href="/">
+      <nav className="navbar is-white" aria-label="main navigation">
+        <div className="container">
+            <div className="navbar-brand">
+                <a className="navbar-item brand-text" href="/">
                   Curb Alert
                 </a>
-                <div class="navbar-burger burger" data-target="navMenu">
+                <div className="navbar-burger burger" data-target="navMenu">
                   <span></span>
                   <span></span>
                   <span></span>
                 </div>
             </div>
-            <div id="navMenu" class="navbar-menu">
-              <div class="navbar-start">
-                <a class="navbar-item" href="">
+            <div id="navMenu" className="navbar-menu">
+              <div className="navbar-start">
+                <a className="navbar-item" href="">
                   New Post
                 </a>
-                <a class="navbar-item" href="">
+                <a className="navbar-item" href="">
                   All Posts
                 </a>
-                <a class="navbar-item" href="">
+                <a className="navbar-item" href="">
                   Profile
                 </a>
-                <a class="navbar-item" href="">
+                <a className="navbar-item" href="">
                   Logout
                 </a>
               </div>
