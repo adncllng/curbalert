@@ -7,7 +7,12 @@ class RegisterForm extends Component {
 
     this.state = {
       email: '',
-      password: ''
+      username: '',
+      password: '',
+      passwordConfirm: '',
+      city: '',
+      prov: '',
+      country: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,9 +27,13 @@ class RegisterForm extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    axios.post('/register', {
+    axios.post('/users/new', {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      passwordConfirm: this.state.passwordConfirm,
+      city: this.state.city,
+      prov: this.state.prov,
+      country: this.state.country
     })
     .then(res => localStorage.setItem('secret', res.data));
   }
@@ -79,8 +88,8 @@ class RegisterForm extends Component {
               className="input"
               type="password"
               placeholder="Password"
-              name="password"
-              value={this.state.password}
+              name="passwordConfirm"
+              value={this.state.passwordConfirm}
               onChange={e => this.handleChange(e)}
             />
           </div>
@@ -90,7 +99,7 @@ class RegisterForm extends Component {
             <input
               className="input"
               type="city"
-              placeholder="city"
+              placeholder="City"
               autoComplete="address-level2"
               name="city"
               value={this.state.city}
@@ -103,7 +112,7 @@ class RegisterForm extends Component {
             <input
               className="input"
               type="province"
-              placeholder="province"
+              placeholder="Province"
               autoComplete="address-level1"
               name="province"
               value={this.state.province}
@@ -116,7 +125,7 @@ class RegisterForm extends Component {
             <input
               className="input"
               type="country"
-              placeholder="country"
+              placeholder="Country"
               autoComplete='country-name'
               name="country"
               value={this.state.country}
