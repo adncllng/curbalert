@@ -13,8 +13,9 @@ class MapContainer extends Component {
   // }
 
   componentDidMount() {
-    this.loadMap(); // call loadMap function to load the google map
     this.props.createPostList();
+    this.loadMap(); // call loadMap function to load the google map
+    this.loadMarkers();
   }
 
   loadMap() {
@@ -31,20 +32,23 @@ class MapContainer extends Component {
       })
 
       this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
+    }
+  }
 
-      console.log(this.props)
+  loadMarkers() {
+    console.log(this.props)
 
-      let posts = null;
-      if(this.props.posts.length) {
-        this.state.props.posts.forEach( post => {
-          const marker = new google.maps.Marker({
-            position: {lat: post.geo_tag.x, lng: post.geo_tag.y},
-            map: this.map,
-            title: post.title
-          });
-        })
-      }
+    let posts = null;
+    if(this.props.posts.length) {
+      const {google} = this.props; // sets props equal to google
 
+      this.state.props.posts.forEach(post => {
+        const marker = new google.maps.Marker({
+          position: {lat: post.geo_tag.x, lng: post.geo_tag.y},
+          map: this.map,
+          title: post.title
+        });
+      })
     }
   }
 

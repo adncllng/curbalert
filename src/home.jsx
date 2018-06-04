@@ -7,7 +7,7 @@ import MapContainer from './MapContainer.jsx'
 
 class Home extends Component {
   componentDidMount() {
-//    // this.props.createPostList();
+// this.props.createPostList();
   }
 
 //   render() {
