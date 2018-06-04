@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET posts listing. */
 module.exports = (knex) => {
 
-  router.get("/posts", (req, res) => {
+  router.get("/", (req, res) => {
     knex
       .select("*")
       .from("posts")
