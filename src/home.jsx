@@ -7,19 +7,13 @@ import MapContainer from './MapContainer.jsx'
 
 class Home extends Component {
   componentDidMount() {
-    axios.get('http://localhost:3001/')
-    .then(function (response) {
-      console.log(response.data)
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+
   }
 
   render() {
     return (
       <div>
-        <MapContainer google={this.props.google} />
+        <MapContainer state={this.state} google={this.props.google} />
       </div>
     );
   }
@@ -28,4 +22,3 @@ class Home extends Component {
 export default GoogleApiWrapper({
   apiKey: process.env.GOOGLE_API_KEY,
 })(Home);
- // asf
