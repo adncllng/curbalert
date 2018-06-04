@@ -3,6 +3,10 @@
 # dependencies
 /node_modules
 /crblrt-server/node_modules
+.sass-cache
+
+# styles
+src/**/*.css
 
 # testing
 /coverage
