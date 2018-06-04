@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 
 class MapContainer extends Component {
-
   state = {
     locations: [
       { name: "Bookshelf", location: {lat: 45.4768, lng: -73.5842} },
