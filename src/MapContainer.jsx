@@ -19,6 +19,7 @@ class MapContainer extends Component {
   }
 
   loadMap() {
+
     if (this.props && this.props.google) { // checks to make sure that props have been passed
       const {google} = this.props; // sets props equal to google
       const maps = google.maps; // sets maps to google maps props
@@ -39,10 +40,10 @@ class MapContainer extends Component {
     console.log(this.props)
 
     let posts = null;
-    if(this.props.posts.length) {
+    if(this.props && this.props.posts) {
       const {google} = this.props; // sets props equal to google
 
-      this.state.props.posts.forEach(post => {
+      this.props.posts.forEach(post => {
         const marker = new google.maps.Marker({
           position: {lat: post.geo_tag.x, lng: post.geo_tag.y},
           map: this.map,
