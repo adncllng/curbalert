@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var postsRouter = require('./routes/posts');
 const ENV = process.env.ENV || "development";
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
@@ -34,7 +35,7 @@ app.use(function(req, res, next) {
 
 app.use('/', indexRouter(knex));
 app.use('/users', usersRouter(knex));
-
+app.use('/posts', postsRouter(knex));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

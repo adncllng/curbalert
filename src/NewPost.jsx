@@ -76,12 +76,28 @@ class NewPost extends Component {
           );
         });
     });
-
     // Once all the files are uploaded
     axios.all(uploaders).then(() => {
       console.log('hello');
     });
   };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log(this)
+    const formData = new FormData();
+    formData.append('file', "file");
+    formData.append('tags', `codeinfuse, medium, gist`);
+    formData.append('upload_preset', 'iy');
+    formData.append('api_key', '335');
+    formData.append('timestamp', (Date.now() / 1000) | 0);
+
+    axios.post('http://localhost:3001/posts', {data:formData})
+    .then(res => {
+      console.log(res)
+    })
+  }
+
 
   render() {
     let { trashPicUrl, trashTags } = this.state;
@@ -91,7 +107,7 @@ class NewPost extends Component {
     if (trashPicUrl) {
       trashPic = <img src={trashPicUrl} />;
     } else {
-      trashPic = <h1>hello World</h1>;
+      trashPic = null;
     }
 
     if (trashTags) {
@@ -102,11 +118,39 @@ class NewPost extends Component {
 
     return (
       <div>
-        <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
-          <p>Drop your files or click here to upload</p>
-        </Dropzone>
         {trashPic}
-        {tags}
+        <div className="modal-card">
+                <form onSubmit={this.handleFormSubmit}>
+                <section className="modal-card-body">
+                <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
+                </Dropzone>
+                  <p className="modal-card-title">make a curb alert</p>
+                  <br/>
+                  <div className="field">
+                    <label className="label">Add Tag</label>
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="tag"
+                      name="tag"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="field">
+                    <label className="label">Location</label>
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="Montreal"
+                      name="location"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <button className="button is-light">Submit</button>
+                </section>
+                </form>
+              </div>
+              {tags}
       </div>
     );
   }
