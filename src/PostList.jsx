@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import axios from 'axios';
-import './styles/mystyles.scss';
 import { GoogleApiWrapper } from 'google-maps-react'
 import MapContainer from './MapContainer.jsx'
 
@@ -16,7 +15,7 @@ class PostList extends Component {
       posts = this.props.posts.map(post => {
         return (<div className="card">
           <div className="card-image">
-            <figure className="image is-4by3">
+            <figure className="image">
               <img src={post.image_url} style={{ maxWidth: 100000000, maxHeight: 100000000 }}/>
             </figure>
           </div>
@@ -34,11 +33,24 @@ class PostList extends Component {
               <time dateTime="">11:09 PM - 1 Jan 2016</time>
             </div>
           </div>
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">Edit</a>
+            <a href="#" class="card-footer-item">Delete</a>
+            <a href="#" class="card-footer-item">Posts</a>
+          </footer>
         </div>)
       })
     }
 		return (
-      <div>{posts}</div>
+    <div className="container">
+      <div className="section">
+        <div className="row columns">
+          <div className="column is-one-third">
+            <div>{posts}</div>
+          </div>
+        </div>
+      </div>
+    </div>
     )
 	}
 }
