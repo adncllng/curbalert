@@ -33,8 +33,8 @@ class NavBar extends Component {
             </div>
             <div id="navMenu" className="navbar-menu">
               <div className="navbar-start">
-                <a className="navbar-item" href="">
-                  New Post
+                <a className="navbar-item" href="/upload">
+                  Upload
                 </a>
                 <a className="navbar-item" href="">
                   All Posts
