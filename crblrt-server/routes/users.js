@@ -6,7 +6,6 @@ const exjwt = require('express-jwt');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
-
 // Get users listing JSON
 module.exports = (knex) => {
   router.get("/", (req, res) => {
@@ -19,7 +18,7 @@ module.exports = (knex) => {
   });
 
   //Register route
-  router.post("/users/new", (req, res) => {
+  router.post("/register", (req, res) => {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
@@ -27,37 +26,25 @@ module.exports = (knex) => {
     const prov = req.body.prov;
     const country = req.body.country;
     const hashedPassword = bcrypt.hashSync(password, 10);
-    const token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET_TOKEN, { expiresIn: 129600 }); // Signing the token
 
     knex.transaction(() => {
-      return knex('users').select('id').where('token', token).returning('id')
-      .then((users) => {
-        if (!users.length) {
-          return knex('users').insert({
-            token
-          }).returning('id');
-        }
-
-        let id = users[0].id;
-
-        return knex('users').where('id', id).returning('email')
-          .update({
-            email,
-            username,
-            password_digest: hashedPassword,
-            city,
-            prov,
-            country
-          })
-          .then((email) => {
-            res.status(200).send(email);
-          })
-          .catch((error) => {
-            res.status(500).send(error);
-          })
+      return knex('users').insert({
+        email,
+        username,
+        password_digest: hashedPassword,
+        city,
+        prov,
+        country
+      })
+      .returning('id')
+      .then((id) => {
+        const token = jwt.sign({ id: id[0] }, process.env.SECRET_TOKEN, { expiresIn: 129600 }); // Signing the token
+        console.log('token', token);
+        res.json({ token: token });
       })
     })
   });
+
 
   // Login route
   router.post('/login', (req, res) => {
@@ -65,36 +52,56 @@ module.exports = (knex) => {
     const password = req.body.password;
 
     knex.transaction(() => {
-      return knex('users').select('id').where('email', email)
+      return knex('users')
+      .where('email', email)
       .then((users) => {
-        if (!users.length) {
-          return Promise.reject(new Error('User not found'));
-        }
-        return knex('users').where('id', users[0].id)
-          .then((user) => {
-            const password_digest = user[0].password_digest;
-            if(!bycrpt.compareSync(password, password_digest)) {
-              return Promise.reject(new Error('Incorrect password'));
-            }
-            return knex('users').where('id', user[0].id)
-              .update({
-                token
-              })
-              .then(() => {
-                //If all credentials are correct do this
-                let token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET_TOKEN, { expiresIn: 129600 }); // Signing the token
-                res.status(200).json({
-                  status: 'success',
-                  token: token
-                });
-              })
-              .catch((error) => {
-                res.status(500).send('Email or password is incorrect');
-              });
-          })
+        // if (!users.length) {
+        //   return Promise.reject(new Error('User not found'));
+        // }
+
+        console.log(users);
+
+        var passwordIsValid = bcrypt.compareSync(password, users[0].password_digest);
+
+        if (!passwordIsValid) return res.status(401).send({ token: null });
+          const token = jwt.sign({ id: users[0].id }, process.env.SECRET_TOKEN, { expiresIn: 129600 });
+          res.status(200).send({ token: token });
         })
+
+        .catch((error) => {
+          res.status(500).send('Email or password is incorrect');
+        });
+
+        })
+
      })
-  });
+
+
+
 
   return router;
 }
+
+
+
+
+
+
+
+  // return knex('users').where('id', users[0].id)
+  //         .then((user) => {
+  //           const password_digest = user[0].password_digest;
+  //           if(!bcrypt.compareSync(password, password_digest)) {
+  //             return Promise.reject(new Error('Incorrect password'));
+  //           }
+  //           return knex('users').where('id', user[0].id)
+  //             .update({
+  //               token
+  //             })
+  //             .then(() => {
+  //               //If all credentials are correct do this
+  //               let token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET_TOKEN, { expiresIn: 129600 }); // Signing the token
+  //               res.status(200).json({
+  //                 status: 'success',
+  //                 token: token
+  //               });

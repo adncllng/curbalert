@@ -27,7 +27,7 @@ class RegisterForm extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    axios.post('/users/new', {
+    axios.post('http://localhost:3001/users/register', {
       email: this.state.email,
       password: this.state.password,
       passwordConfirm: this.state.passwordConfirm,
@@ -35,7 +35,10 @@ class RegisterForm extends Component {
       prov: this.state.prov,
       country: this.state.country
     })
-    .then(res => localStorage.setItem('secret', res.data));
+    .then(res => {
+      localStorage.setItem('secret', res.data.token);
+      console.log(res.data.token);
+    });
   }
 
   render() {
