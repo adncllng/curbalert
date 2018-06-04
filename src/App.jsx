@@ -5,6 +5,8 @@ import './styles/scss/App.css';
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
 import PostList from "./PostList.jsx"
+import LoginForm from "./LoginForm.jsx"
+import RegisterForm from "./RegisterForm.jsx"
 
 class App extends Component {
 
