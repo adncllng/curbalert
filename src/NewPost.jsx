@@ -3,7 +3,7 @@ import axios from 'axios';
 import Dropzone from 'react-dropzone';
 
 const vision = require('node-cloud-vision-api');
-vision.init({ auth: 'AIzaSyAnrjzdyVfMk1uUpLopu1hRzggD7L0LQsM' });
+vision.init({ auth: process.env.REACT_APP_GOOGLE_API_KEY });
 
 class NewPost extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class NewPost extends Component {
       formData.append('file', file);
       formData.append('tags', `codeinfuse, medium, gist`);
       formData.append('upload_preset', 'iyxcz7xd');
-      formData.append('api_key', '335537953636657');
+      formData.append('api_key', process.env.REACT_APP_VISION_API_KEY);
       formData.append('timestamp', (Date.now() / 1000) | 0);
 
       // Make an upload request to cloudinary
@@ -66,7 +66,7 @@ class NewPost extends Component {
                   return ann.description;
                 });
                 this.setState({
-                  trashTags: tags,
+                  trashTags: tags
                 });
               }
             },
@@ -84,15 +84,19 @@ class NewPost extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    console.log(this)
-    const formData = new FormData();
-    formData.append('file', "file");
-    formData.append('tags', `codeinfuse, medium, gist`);
-    formData.append('upload_preset', 'iy');
-    formData.append('api_key', '335');
-    formData.append('timestamp', (Date.now() / 1000) | 0);
 
-    axios.post('http://localhost:3001/posts', {data:formData})
+    const data = {
+      user_id: 1,
+      title: 'Bookshelf',
+      content: "ANYTHING",
+      image_url: this.state.trashPicUrl,
+      geo_tag: '45.4768, -73.5842',
+      point_value: 10,
+      visible: true,
+      tags: this.state.trashTags
+    }
+
+    axios.post('http://localhost:3001/posts', data)
     .then(res => {
       console.log(res)
     })
