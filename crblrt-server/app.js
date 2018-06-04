@@ -6,6 +6,8 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const postsRouter = require('./routes/posts');
+
 const ENV = process.env.ENV || "development";
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
