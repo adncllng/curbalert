@@ -7,24 +7,22 @@ import MapContainer from './MapContainer.jsx'
 
 class Home extends Component {
   componentDidMount() {
-    axios.get('http://localhost:3001/posts')
-    .then(function (response) {
-      console.log(response.data)
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+//    // this.props.createPostList();
   }
 
-  render() {
-    return (
-      <div>
-        <MapContainer state={this.state} google={this.props.google} />
-      </div>
-    );
-  }
+//   render() {
+//     return (
+//       <div>
+//         <MapContainer google={this.props.google} />
+//       </div>
+//     );
+//   }
+// }
+
+// export default GoogleApiWrapper({
+//   apiKey: process.env.GOOGLE_API_KEY,
+// })(Home);
+
 }
 
-export default GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_API_KEY,
-})(Home);
+export default Home;

@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import axios from 'axios';
 import './styles/scss/App.css';
+import { GoogleApiWrapper } from 'google-maps-react'
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
 import PostList from "./PostList.jsx"
+import MapContainer from './MapContainer.jsx'
+
 
 class App extends Component {
 
@@ -12,7 +15,7 @@ class App extends Component {
 		posts: []
 	}
 
-createPostList = () => {
+	createPostList = () => {
 	let postsArr = [];
     axios.get('http://localhost:3001/api/posts')
     .then(response => {
@@ -33,7 +36,10 @@ createPostList = () => {
 			<div className="App">
 				<NavBar />
 				<Switch>
-					<Route exact path="/" component={Home} />
+					<Route exact path="/" render={() => (
+						<MapContainer posts={this.state.posts} createPostList={this.createPostList} google={this.props.google} />
+					)}/>
+
 					<Route exact path="/posts" render={() => (
 						<PostList posts={this.state.posts} createPostList={this.createPostList} />
 					)}/>
@@ -43,4 +49,6 @@ createPostList = () => {
 	}
 }
 
-export default App;
+export default GoogleApiWrapper({
+  apiKey: process.env.GOOGLE_API_KEY,
+})(App);
