@@ -35,7 +35,7 @@ module.exports = (knex) => {
   router.get('/', (req, res) => {
     knex
       .select('*')
-      .from('')
+      .from('posts')
       .then((results) => {
         res.json(results);
       });

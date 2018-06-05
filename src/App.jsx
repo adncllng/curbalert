@@ -5,11 +5,8 @@ import './styles/scss/App.css';
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
 import PostList from "./PostList.jsx"
-import MapContainer from './MapContainer.jsx'
-
 
 import NewPost from "./NewPost.jsx"
-import { GoogleApiWrapper } from 'google-maps-react'
 import MapContainer from './MapContainer.jsx'
 require('dotenv').config()
 
