@@ -22,8 +22,8 @@ class App extends Component {
   		posts: [],
       center: {lat: 0, lng: 0},
       zoom: 11
-      };
-  	}
+    }
+  }
 
   componentDidMount() {
     Geocode.fromAddress("1275 Avenue des Canadiens-de-Montreal").then(
@@ -58,7 +58,7 @@ class App extends Component {
           <Route exact path='/login' component={ LoginForm }/>
           <Route exact path='/register' component={ RegisterForm }/>
 
-					<Route exact path='/posts/new' render={() => (
+					<Route exact path='/upload' render={() => (
 						<NewPost trashUploadHandler={this.trashUploadHandler} addPost={this.addPost} />
 					)}/>
 

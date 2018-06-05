@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import AuthService from "./AuthService.jsx";
+import Geocode from 'react-geocode';
 
+Geocode.setApiKey(process.env.GOOGLE_API_KEY);
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -12,9 +14,8 @@ class RegisterForm extends Component {
       username: '',
       password: '',
       passwordConfirm: '',
-      city: '',
-      prov: '',
-      country: ''
+      address: '',
+      geo_tag: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -34,22 +35,32 @@ class RegisterForm extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    axios.post('http://localhost:3001/users/register', {
-      email: this.state.email,
-      username: this.state.username,
-      password: this.state.password,
-      passwordConfirm: this.state.passwordConfirm,
-      city: this.state.city,
-      prov: this.state.prov,
-      country: this.state.country
-    })
-    .then(res => {
-      localStorage.setItem('secret', res.data.token);
-      console.log(res.data.token);
 
-      this.props.history.replace("/");
+    Geocode.fromAddress(this.state.address).then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        this.setState({ geo_tag: (`${lat}, ${lng}`)});
 
-    });
+        axios.post('http://localhost:3001/users/register', {
+          email: this.state.email,
+          username: this.state.username,
+          password: this.state.password,
+          passwordConfirm: this.state.passwordConfirm,
+          geo_tag: this.state.geo_tag
+        })
+        .then(res => {
+          localStorage.setItem('secret', res.data.token);
+          console.log(res.data.token);
+
+          this.props.history.replace("/");
+
+        });
+      },
+      error => {
+        console.error(error);
+      }
+    );
+
   }
 
   render() {
@@ -131,35 +142,11 @@ class RegisterForm extends Component {
               <div className="column">
                 <input
                   className="input"
-                  type="city"
-                  placeholder="City"
+                  type="address"
+                  placeholder="Address"
                   autoComplete="address-level2"
-                  name="city"
-                  value={this.state.city}
-                  onChange={e => this.handleChange(e)}
-                />
-              </div>
-
-              <div className="column">
-                <input
-                  className="input"
-                  type="prov"
-                  placeholder="Province"
-                  autoComplete="address-level1"
-                  name="prov"
-                  value={this.state.province}
-                  onChange={e => this.handleChange(e)}
-                />
-              </div>
-
-              <div className="column">
-                <input
-                  className="input"
-                  type="country"
-                  placeholder="Country"
-                  autoComplete='country-name'
-                  name="country"
-                  value={this.state.country}
+                  name="address"
+                  value={this.state.address}
                   onChange={e => this.handleChange(e)}
                 />
               </div>
