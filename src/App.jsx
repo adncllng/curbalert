@@ -63,8 +63,11 @@ class App extends Component {
 					)}/>
 
 					<Route exact path="/" render={() => (
-						 <div style={{width: '100%', height: '600px'}}>
-              <MapContainer center={this.state.center} zoom={this.state.zoom} posts={this.state.posts} createPostList={this.createPostList} />
+            <div>
+              <Home />
+  						 <div style={{width: '100%', height: '600px'}}>
+                <MapContainer center={this.state.center} zoom={this.state.zoom} posts={this.state.posts} createPostList={this.createPostList} />
+              </div>
             </div>
           )}/>
 
