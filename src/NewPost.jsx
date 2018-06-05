@@ -10,9 +10,25 @@ class NewPost extends Component {
     super(props);
     this.state = {
       trashPicUrl: null,
-      trashTags: null,
+      trashTags: [],
+      trashTitle: null,
+      trashTag:null
+
     };
+  this.handleChange = this.handleChange.bind(this);
+  this.addTag = this.addTag.bind(this);
   }
+
+  handleChange(event) {
+  this.setState({[event.target.name]: event.target.value});
+}
+addTag(event) {
+  console.log("hello")
+
+  this.setState({trashTags: [...this.state.trashTags, this.state.trashTag]})
+}
+
+
 
   componentDidMount() {
     axios
@@ -46,8 +62,12 @@ class NewPost extends Component {
           const data = response.data;
           const fileURL = data.secure_url; //URL for future references
           const url = data.url;
+          console.log(data)
 
-          this.setState({ trashPicUrl: data.url });
+          this.setState({
+            trashPicUrl: data.url,
+            trashTitle: data.original_filename,
+          });
 
           console.log(data.url);
           // VISION part - takes url and responds with labes
@@ -87,7 +107,7 @@ class NewPost extends Component {
 
     const data = {
       user_id: 1,
-      title: 'Bookshelf',
+      title: this.state.trashTitle,
       content: "ANYTHING",
       image_url: this.state.trashPicUrl,
       geo_tag: '45.4768, -73.5842',
@@ -96,9 +116,11 @@ class NewPost extends Component {
       tags: this.state.trashTags
     }
 
-    axios.post('http://localhost:3001/posts', data)
+    axios.post('http://localhost:3001/api/posts', data)
     .then(res => {
       console.log(res)
+    }).catch(err=>{
+      console.log()
     })
   }
 
@@ -130,16 +152,20 @@ class NewPost extends Component {
                 </Dropzone>
                   <p className="modal-card-title">make a curb alert</p>
                   <br/>
-                  <div className="field">
-                    <label className="label">Add Tag</label>
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="tag"
-                      name="tag"
-                      onChange={this.handleChange}
-                    />
-                  </div>
+
+
+                  <div class="field is-grouped">
+                   <p className="control is-expanded">
+                     <input name="trashTag"onChange={this.handleChange} className="input" type="text" placeholder="enter tag"/>
+                   </p>
+                   <p className="control">
+                     <a className="button is-info" onClick={this.addTag}>
+                       + tag
+                     </a>
+                   </p>
+                 </div>
+
+
                   <div className="field">
                     <label className="label">Location</label>
                     <input
