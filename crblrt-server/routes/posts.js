@@ -4,10 +4,13 @@ const router = express.Router();
 
 module.exports = (knex) => {
   router.post('/', (req, res) => {
+
     const {
       user_id, title, content, image_url, geo_tag, point_value, visible, tags,
     } = req.body;
     let postId = null;
+
+    console.log(req.body)
     knex('posts')
       .returning('id')
       .insert({
@@ -15,7 +18,7 @@ module.exports = (knex) => {
         title,
         content,
         image_url,
-        geo_tag,
+        geo_tag: `${geo_tag.x}, ${geo_tag.y}`,
         point_value,
         visible,
       })
@@ -27,11 +30,12 @@ module.exports = (knex) => {
           .then((tag_ids) => {
             knex('posts_tags')
               .insert(tag_ids.map(tagId => ({ post_id: Number(postId), tag_id: Number(tagId) })))
-              .then(res.send('fucking hell'));
+              .then(res.send('hi'));
           });
-      });
+      }).catch((err)=>{
+        return res.status(400).send(JSON.stringify(err))
+      })
   });
-
   router.get('/', (req, res) => {
     knex
       .select('*')

@@ -10,9 +10,32 @@ class NewPost extends Component {
     super(props);
     this.state = {
       trashPicUrl: null,
-      trashTags: null,
+      trashTags: [],
+      trashTitle: null,
+      trashTag: null,
     };
+    //this.handleChange = this.handleChange.bind(this);
+    //this.addTag = this.addTag.bind(this);
   }
+
+  handleChange = event => {
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  addTag = event => {
+    event.preventDefault();
+    this.setState({
+      trashTags: [...this.state.trashTags, this.state.trashTag],
+      trashTag: '',
+    });
+  };
+  // removeTag = event => {
+  //   event.preventDefault()
+  //   let index = his.state.trashTags.indexOf(event.taget.name)
+  //   this.setState({
+  //     trashTags: [...this.state.trashTags, ,
+  //     trashTag: ""
+  //   })
 
   componentDidMount() {
     axios
@@ -46,8 +69,12 @@ class NewPost extends Component {
           const data = response.data;
           const fileURL = data.secure_url; //URL for future references
           const url = data.url;
+          console.log(data);
 
-          this.setState({ trashPicUrl: data.url });
+          this.setState({
+            trashPicUrl: data.url,
+            trashTitle: data.original_filename,
+          });
 
           console.log(data.url);
           // VISION part - takes url and responds with labes
@@ -66,7 +93,7 @@ class NewPost extends Component {
                   return ann.description;
                 });
                 this.setState({
-                  trashTags: tags
+                  trashTags: tags,
                 });
               }
             },
@@ -84,30 +111,50 @@ class NewPost extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-
+    const that = this;
     const data = {
-      user_id: 1,
-      title: 'Bookshelf',
-      content: "ANYTHING",
+      user_id: 2, //need to get the user id
+      title: this.state.trashTitle,
+      content: "hello", // need to get the content
       image_url: this.state.trashPicUrl,
-      geo_tag: '45.4768, -73.5842',
-      point_value: 10,
+      geo_tag: { // need to get the location 
+        x: 45.4548,
+        y: -73.5699,
+      },
+      point_value: 6,
+      tags: this.state.trashTags,
       visible: true,
-      tags: this.state.trashTags
-    }
+      // user_id: 1,
+      // title: this.state.trashTitle,
+      // content: "ANYTHING",
+      // image_url: this.state.trashPicUrl,
+      // geo_tag: '45.4768, -73.5842',
+      // point_value: 10,
+      // visible: true,
+      // tags: this.state.trashTags
+    };
 
-    axios.post('http://localhost:3001/posts', data)
-    .then(res => {
-      console.log(res)
-    })
-  }
+    axios
+      .post('http://localhost:3001/api/posts', data)
+      .then(res => {
+        console.log(res);
 
+        that.setState({
+          trashPicUrl: null,
+          trashTags: [],
+          trashTitle: null,
+          trashTag: null,
+        });
+      })
+      .catch(err => {
+        console.log();
+      });
+  };
 
   render() {
     let { trashPicUrl, trashTags } = this.state;
     let trashPic = null;
     let tags = null;
-
     if (trashPicUrl) {
       trashPic = <img src={trashPicUrl} />;
     } else {
@@ -124,37 +171,44 @@ class NewPost extends Component {
       <div>
         {trashPic}
         <div className="modal-card">
-                <form onSubmit={this.handleFormSubmit}>
-                <section className="modal-card-body">
-                <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
-                </Dropzone>
-                  <p className="modal-card-title">make a curb alert</p>
-                  <br/>
-                  <div className="field">
-                    <label className="label">Add Tag</label>
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="tag"
-                      name="tag"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div className="field">
-                    <label className="label">Location</label>
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="Montreal"
-                      name="location"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <button className="button is-light">Submit</button>
-                </section>
-                </form>
+          <form onSubmit={this.handleFormSubmit}>
+            <section className="modal-card-body">
+              <Dropzone onDrop={this.handleDrop} multiple accept="image/*" />
+              <p className="modal-card-title">make a curb alert</p>
+              <br />
+
+              <div class="field is-grouped">
+                <p className="control is-expanded">
+                  <input
+                    name="trashTag"
+                    onChange={this.handleChange}
+                    className="input"
+                    type="text"
+                    value={this.state.trashTag}
+                  />
+                </p>
+                <p className="control">
+                  <a className="button is-info" onClick={this.addTag}>
+                    + tag
+                  </a>
+                </p>
               </div>
-              {tags}
+
+              <div className="field">
+                <label className="label">Location</label>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Montreal"
+                  name="location"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <button className="button is-light">Submit</button>
+            </section>
+          </form>
+        </div>
+        {tags}
       </div>
     );
   }
