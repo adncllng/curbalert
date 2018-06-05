@@ -8,6 +8,8 @@ import NavBar from "./NavBar.jsx";
 import PostList from "./PostList.jsx"
 import NewPost from "./NewPost.jsx"
 import MapContainer from './MapContainer.jsx'
+import LoginForm from './LoginForm.jsx';
+import RegisterForm from './RegisterForm.jsx';
 require('dotenv').config()
 
 Geocode.setApiKey(process.env.GOOGLE_API_KEY);
@@ -35,9 +37,9 @@ class App extends Component {
     );
   }
 
-	createPostList = () => {
+  createPostList = () => {
     let that = this;
-	let postsArr = [];
+    let postsArr = [];
     axios.get('http://localhost:3001/api/posts')
     .then(response => {
       postsArr = response.data;
@@ -49,10 +51,13 @@ class App extends Component {
   }
 
   render() {
-		return (
-			<div className="App">
-				<NavBar />
-				<Switch>
+    return (
+      <div className="App">
+        <NavBar />
+        <Switch>
+          <Route exact path='/login' component={ LoginForm }/>
+          <Route exact path='/register' component={ RegisterForm }/>
+
 					<Route exact path='/upload' render={() => (
 						<NewPost trashUploadHandler={this.trashUploadHandler} addPost={this.addPost} />
 					)}/>
@@ -61,15 +66,15 @@ class App extends Component {
 						 <div style={{width: '100%', height: '600px'}}>
               <MapContainer center={this.state.center} zoom={this.state.zoom} posts={this.state.posts} createPostList={this.createPostList} />
             </div>
-					)}/>
+          )}/>
 
-					<Route exact path="/posts" render={() => (
-						<PostList posts={this.state.posts} createPostList={this.createPostList} />
-					)}/>
-				</Switch>
-			</div>
-		);
-	}
+          <Route exact path="/posts" render={() => (
+            <PostList posts={this.state.posts} createPostList={this.createPostList} />
+          )}/>
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App

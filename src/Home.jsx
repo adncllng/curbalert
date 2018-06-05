@@ -5,23 +5,23 @@ import './styles/scss/App.css';
 
 
 class Home extends Component {
-  componentDidMount() {
-// this.props.createPostList();
+
+  render() {
+    return (
+      <section className="hero is-light is-medium header-image">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title">
+              A better way to street scavenge.
+            </h1>
+            <h2 className="subtitle">
+              Because people get rid of good shit.
+            </h2>
+          </div>
+        </div>
+      </section>
+    );
   }
-
-  // render() {
-  //   return (
-  //     <div>
-  //       <MapContainer />
-  //     </div>
-  //   );
-  // }
-
 }
-
-// export default GoogleApiWrapper({
-//   apiKey: process.env.GOOGLE_API_KEY,
-// })(Home);
-
 
 export default Home;

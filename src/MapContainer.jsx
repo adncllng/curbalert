@@ -20,7 +20,7 @@ const Marker = ({ text }) => (
 
 class MapContainer extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
     this.state = {
       posts: this.props.posts
     }

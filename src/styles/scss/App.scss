@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  // text-align: center;
 }
 
 .App-logo {
@@ -25,6 +25,7 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+
 }
 
 .nav.is-dark {
@@ -59,3 +60,16 @@
 .nav.menu .nav-item.is-active .icon-btn .fa {
   color: #2EB398;
 }
+
+.hero {
+  text-align: center;
+}
+
+.header-image {
+  background-image: url("http://res.cloudinary.com/ninayujiri/image/upload/v1528216125/joel-stylis-573185-unsplash.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #999;
+  }
