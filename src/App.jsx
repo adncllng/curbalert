@@ -1,23 +1,38 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import axios from 'axios';
+import Geocode from 'react-geocode';
 import './styles/scss/App.css';
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
 import PostList from "./PostList.jsx"
-
 import NewPost from "./NewPost.jsx"
 import MapContainer from './MapContainer.jsx'
 require('dotenv').config()
 
+Geocode.setApiKey(process.env.GOOGLE_API_KEY);
 
 class App extends Component {
 
   constructor(props) {
     super(props);
   	this.state = {
-  		posts: []
+  		posts: [],
+      center: {lat: 0, lng: 0},
+      zoom: 11
+      };
   	}
+
+  componentDidMount() {
+    Geocode.fromAddress("1275 Avenue des Canadiens-de-Montreal").then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        this.setState({ center: { lat: lat, lng: lng} })
+      },
+      error => {
+        console.error(error);
+      }
+    );
   }
 
 	createPostList = () => {
@@ -44,7 +59,7 @@ class App extends Component {
 
 					<Route exact path="/" render={() => (
 						 <div style={{width: '100%', height: '600px'}}>
-              <MapContainer posts={this.state.posts} createPostList={this.createPostList} />
+              <MapContainer center={this.state.center} zoom={this.state.zoom} posts={this.state.posts} createPostList={this.createPostList} />
             </div>
 					)}/>
 
