@@ -6,7 +6,7 @@
 .sass-cache
 
 # styles
-src/**/*.css
+# src/**/*.css
 
 # testing
 /coverage
