@@ -9,6 +9,8 @@ module.exports = (knex) => {
       user_id, title, content, image_url, geo_tag, point_value, visible, tags,
     } = req.body;
     let postId = null;
+
+    console.log(req.body)
     knex('posts')
       .returning('id')
       .insert({
@@ -16,7 +18,7 @@ module.exports = (knex) => {
         title,
         content,
         image_url,
-        geo_tag,
+        geo_tag: `${geo_tag.x}, ${geo_tag.y}`,
         point_value,
         visible,
       })
