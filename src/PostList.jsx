@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import axios from 'axios';
-import { GoogleApiWrapper } from 'google-maps-react'
-import MapContainer from './MapContainer.jsx'
+import './styles/scss/App.css';
 
 class PostList extends Component {
  componentDidMount() {

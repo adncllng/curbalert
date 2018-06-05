@@ -19,7 +19,7 @@ class NavBar extends Component {
 
   render() {
     return (
-      <nav className="navbar is-white" aria-label="main navigation">
+      <nav className="navbar has-shadow">
         <div className="container">
             <div className="navbar-brand">
                 <a className="navbar-item brand-text" href="/">
@@ -35,15 +35,11 @@ class NavBar extends Component {
               <div className="navbar-start">
                 <a className="navbar-item" href="/upload">
                   Upload
-                </a>
-                <a className="navbar-item" href="">
+                <a className="navbar-item" href="/posts">
                   All Posts
                 </a>
-                <a className="navbar-item" href="">
-                  Profile
-                </a>
-                <a className="navbar-item" href="">
-                  Logout
+                <a className="navbar-item" href="/login">
+                  Login
                 </a>
               </div>
             </div>
