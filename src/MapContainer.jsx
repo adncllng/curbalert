@@ -1,70 +1,60 @@
 import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
+
 import ReactDOM from 'react-dom'
 
-class MapContainer extends Component {
-  // state = {
-  //   locations: [
-  //     { name: "Bookshelf", location: {lat: 45.4768, lng: -73.5842} },
-  //     { name: "Radio", location: {lat: 45.4548, lng: -73.5699} },
-  //     { name: "Houseplant", location: {lat: 45.4914, lng: -73.5605} },
-  //     { name: "Bike", location: {lat: 45.5017, lng: -73.5673} },
-  //     { name: "Dresser", location: {lat: 45.5232, lng: -73.587} }
-  //   ]
-  // }
+const WeWork = ({ text }) => (
+  <div style={{
+    color: 'white',
+    background: 'grey',
+    padding: '15px 10px',
+    display: 'inline-flex',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '100%',
+    transform: 'translate(-50%, -50%)'
+  }}>
+    {text}
+  </div>
+);
+
+class MapContainer extends React.Component {
+  constructor(props) {
+    super(props); 
+    this.state = {
+      posts: this.props.posts
+    }
+  }
+
+  static defaultProps = {
+    center: {lat: 45.5017, lng: -73.5673},
+    zoom: 11
+  };
 
   componentDidMount() {
     this.props.createPostList();
-    this.loadMap(); // call loadMap function to load the google map
-    this.loadMarkers();
   }
 
-  loadMap() {
-
-    if (this.props && this.props.google) { // checks to make sure that props have been passed
-      const {google} = this.props; // sets props equal to google
-      const maps = google.maps; // sets maps to google maps props
-
-      const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
-      const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
-
-      const mapConfig = Object.assign({}, {
-        center: {lat: 45.5017, lng: -73.5673},
-        zoom: 13
-      })
-
-      this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
-    }
-  }
-
-  loadMarkers() {
-    console.log(this.props)
-
-    let posts = null;
-    if(this.props && this.props.posts) {
-      const {google} = this.props; // sets props equal to google
-
-      this.props.posts.forEach(post => {
-        const marker = new google.maps.Marker({
-          position: {lat: post.geo_tag.x, lng: post.geo_tag.y},
-          map: this.map,
-          title: post.title
-        });
-      })
-    }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ posts: nextProps.posts })
   }
 
   render() {
-    const style = {
-      width: '100%',
-      height: '700px'
-    }
-
+      const markers = this.state.posts.map(marker =>
+        <WeWork
+          key={marker.id}
+          lat={marker ? marker.geo_tag.x : ''}
+          lng={marker ? marker.geo_tag.y : ''}
+          text={marker ? marker.title : ''}
+        />
+      )
     return (
-      <div ref='map' style={style}>
-        Loading map...
-      </div>
-    )
+       <GoogleMapReact defaultCenter={this.props.center} defaultZoom={this.props.zoom}>
+          {markers}
+      </GoogleMapReact>
+    );
   }
 }
 
-export default MapContainer;
+export default MapContainer

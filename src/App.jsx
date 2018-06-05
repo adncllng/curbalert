@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import axios from 'axios';
 import './styles/scss/App.css';
-import { GoogleApiWrapper } from 'google-maps-react'
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
 import PostList from "./PostList.jsx"
@@ -11,33 +10,35 @@ import MapContainer from './MapContainer.jsx'
 
 class App extends Component {
 
-	state = {
-		posts: []
-	}
+  constructor(props) {
+    super(props);
+  	this.state = {
+  		posts: []
+  	}
+  }
 
 	createPostList = () => {
+    let that = this;
 	let postsArr = [];
     axios.get('http://localhost:3001/api/posts')
     .then(response => {
-			postsArr = response.data;
-			postsArr.forEach(post => {
-			this.setState(prevState => ({
-					posts: [...prevState.posts, post]
-				}));
-			});
+      postsArr = response.data;
+      this.setState({ posts: [...that.state.posts, ...postsArr] })
     })
     .catch(error => {
       console.log(error);
     });
-	}
+  }
 
-	render() {
+  render() {
 		return (
 			<div className="App">
 				<NavBar />
 				<Switch>
 					<Route exact path="/" render={() => (
-						<MapContainer posts={this.state.posts} createPostList={this.createPostList} google={this.props.google} />
+						 <div style={{width: '100%', height: '600px'}}>
+              <MapContainer posts={this.state.posts} createPostList={this.createPostList} />
+            </div>
 					)}/>
 
 					<Route exact path="/posts" render={() => (
@@ -49,6 +50,4 @@ class App extends Component {
 	}
 }
 
-export default GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_API_KEY,
-})(App);
+export default App
