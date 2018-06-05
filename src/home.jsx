@@ -28,4 +28,3 @@ class Home extends Component {
 export default GoogleApiWrapper({
   apiKey: process.env.GOOGLE_API_KEY,
 })(Home);
- // asf
