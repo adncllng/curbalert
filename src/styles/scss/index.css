@@ -54,3 +54,8 @@
 
 .nav.menu .nav-item.is-active .icon-btn .fa {
   color: #2EB398; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif; }

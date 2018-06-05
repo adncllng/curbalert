@@ -8,6 +8,7 @@
     "bulma": "^0.7.1",
     "bulma-extensions": "^1.0.32",
     "bulma-start": "0.0.2",
+    "google-map-react": "^0.24.0",
     "moment": "^2.22.2",
     "node-cloud-vision-api": "^0.2.0",
     "node-sass": "^4.9.0",
