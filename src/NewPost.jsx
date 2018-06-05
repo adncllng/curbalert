@@ -20,12 +20,16 @@ class NewPost extends Component {
   }
 
   handleChange(event) {
+    event.preventDefault()
   this.setState({[event.target.name]: event.target.value});
 }
 addTag(event) {
-  console.log("hello")
+  event.preventDefault()
+  this.setState({
+    trashTags: [...this.state.trashTags, this.state.trashTag],
+    trashTag: ""
+  })
 
-  this.setState({trashTags: [...this.state.trashTags, this.state.trashTag]})
 }
 
 
@@ -104,7 +108,7 @@ addTag(event) {
 
   handleFormSubmit = event => {
     event.preventDefault();
-
+    const that = this;
     const data = {
       user_id: 1,
       title: this.state.trashTitle,
@@ -119,6 +123,14 @@ addTag(event) {
     axios.post('http://localhost:3001/api/posts', data)
     .then(res => {
       console.log(res)
+
+      that.setState({
+        trashPicUrl: null,
+        trashTags: [],
+        trashTitle: null,
+        trashTag:null
+      });
+
     }).catch(err=>{
       console.log()
     })
@@ -129,7 +141,6 @@ addTag(event) {
     let { trashPicUrl, trashTags } = this.state;
     let trashPic = null;
     let tags = null;
-
     if (trashPicUrl) {
       trashPic = <img src={trashPicUrl} />;
     } else {
@@ -156,7 +167,7 @@ addTag(event) {
 
                   <div class="field is-grouped">
                    <p className="control is-expanded">
-                     <input name="trashTag"onChange={this.handleChange} className="input" type="text" placeholder="enter tag"/>
+                     <input name="trashTag"  onChange={this.handleChange} className="input" type="text" value={this.state.trashTag} />
                    </p>
                    <p className="control">
                      <a className="button is-info" onClick={this.addTag}>
