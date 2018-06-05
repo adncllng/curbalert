@@ -1,29 +1,28 @@
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
-var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var postsRouter = require("./routes/posts");
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const postsRouter = require('./routes/posts');
 
 const ENV = process.env.ENV || "development";
-const knexConfig = require("./knexfile");
-const knex = require("knex")(knexConfig[ENV]);
-const knexLogger = require("knex-logger");
-require("dotenv").config();
+const knexConfig  = require("./knexfile");
+const knex        = require("knex")(knexConfig[ENV]);
+const knexLogger  = require('knex-logger');
+require('dotenv').config();
 
-var app = express();
+const app = express();
 
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
+// app.set("views", path.join(__dirname, "views"));
+// app.set("view engine", "ejs");
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(function(req, res, next) {
