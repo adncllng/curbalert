@@ -58,7 +58,7 @@ class App extends Component {
           <Route exact path='/login' component={ LoginForm }/>
           <Route exact path='/register' component={ RegisterForm }/>
 
-					<Route exact path='/upload' render={() => (
+					<Route exact path='/posts/new' render={() => (
 						<NewPost trashUploadHandler={this.trashUploadHandler} addPost={this.addPost} />
 					)}/>
 
