@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
-
 import ReactDOM from 'react-dom'
+import GoogleMapReact from 'google-map-react';
+import Geocode from 'react-geocode';
 
 const Marker = ({ text }) => (
   <div style={{
@@ -25,11 +25,6 @@ class MapContainer extends Component {
       posts: this.props.posts
     }
   }
-
-  static defaultProps = {
-    center: {lat: 45.5017, lng: -73.5673},
-    zoom: 11
-  };
 
   componentDidMount() {
     this.props.createPostList();
