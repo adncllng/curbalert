@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import AuthService from "./AuthService.jsx";
 import axios from "axios";
 
-// import { userLogin } from './actions.js';
-
 class LoginForm extends Component {
   constructor() {
     super();
@@ -17,31 +15,41 @@ class LoginForm extends Component {
   }
 
   render() {
+
     return (
-      <div className="modal-card">
+
+      <div className="column is-4 is-offset-4">
         <form onSubmit={this.handleFormSubmit}>
         <section className="modal-card-body">
           <p className="modal-card-title">Login</p>
           <br/>
           <div className="field">
-            <label className="label">Email</label>
-            <input
-              className="input"
-              type="email"
-              placeholder="Email"
-              name="email"
-              onChange={this.handleChange}
-            />
+            <p className="control has-icons-left">
+              <input
+                className="input"
+                type="email"
+                placeholder="Email"
+                name="email"
+                onChange={this.handleChange}
+              />
+              <span className="icon is-small is-left">
+                <i className="fa fa-envelope"></i>
+              </span>
+            </p>
           </div>
           <div className="field">
-            <label className="label">Password</label>
-            <input
-              className="input"
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={this.handleChange}
-            />
+            <p className="control has-icons-left">
+              <input
+                className="input"
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={this.handleChange}
+              />
+              <span className="icon is-small is-left">
+                <i className="fa fa-lock"></i>
+              </span>
+            </p>
           </div>
           <button className="button is-light">Submit</button>
         </section>
