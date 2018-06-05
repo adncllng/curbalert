@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 
 import ReactDOM from 'react-dom'
 
-const WeWork = ({ text }) => (
+const Marker = ({ text }) => (
   <div style={{
     color: 'white',
     background: 'grey',
@@ -12,7 +12,6 @@ const WeWork = ({ text }) => (
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: '100%',
     transform: 'translate(-50%, -50%)'
   }}>
     {text}
@@ -42,7 +41,7 @@ class MapContainer extends React.Component {
 
   render() {
       const markers = this.state.posts.map(marker =>
-        <WeWork
+        <Marker
           key={marker.id}
           lat={marker ? marker.geo_tag.x : ''}
           lng={marker ? marker.geo_tag.y : ''}
