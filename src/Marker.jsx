@@ -27,4 +27,4 @@ class Marker extends Component {
   }
 }
 
-export default Marker;
+export default Marker

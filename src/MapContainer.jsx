@@ -24,8 +24,13 @@ class MapContainer extends Component {
   }
 
   toggleModal(key) {
-    // do a loop to find the post that matches the key
-    this.props.showModal(this.state.posts[0])
+    let thisPost = null;
+      this.state.posts.forEach((post, i) => {
+      if (post.id == key){
+       thisPost = post
+      }
+    })
+    this.props.showModal(thisPost)
   }
 
   render() {

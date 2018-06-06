@@ -7,7 +7,7 @@ class PostModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: this.props.posts,
+      posts: this.props.posts
     };
   }
 
@@ -20,13 +20,13 @@ class PostModal extends Component {
       <div className="modal is-active">
         <div className="modal-card">
           <header className="modal-card-head">
-            <p className="modal-card-title">{this.state.posts[0].title}</p>
+            <p className="modal-card-title">{this.props.modalParams.title}</p>
             <button className="delete" onClick={this.handleClick.bind(this)} />
           </header>
           <section className="modal-card-body">
-            <img src={this.state.posts[0].image_url} style={{ maxWidth: '200px' }}/>
+            <img src={this.props.modalParams.image_url} style={{ maxWidth: '200px' }}/>
             <div className="content">
-              {this.state.posts[0].content}
+              {this.props.modalParams.content}
             </div>
           </section>
           <footer className="modal-card-foot">
@@ -38,4 +38,4 @@ class PostModal extends Component {
   }
 }
 
-export default PostModal;
+export default PostModal
