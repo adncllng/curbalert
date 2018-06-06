@@ -10,6 +10,7 @@ import NewPost from "./NewPost.jsx"
 import MapContainer from './MapContainer.jsx'
 import LoginForm from './LoginForm.jsx';
 import RegisterForm from './RegisterForm.jsx';
+import AuthService from "./AuthService.jsx";
 require('dotenv').config()
 
 Geocode.setApiKey(process.env.GOOGLE_API_KEY);
@@ -18,14 +19,30 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+    this.Auth = new AuthService();
   	this.state = {
   		posts: [],
       center: {lat: 0, lng: 0},
-      zoom: 11
+      zoom: 11,
+      currentUser: {}
     }
   }
 
   componentDidMount() {
+    let currentEmail = this.Auth.getEmail("email");
+    console.log("currentEmail :", currentEmail)
+
+    axios.get('http://localhost:3001/users')
+    .then(response => {
+      let usersArr = response.data;
+      usersArr.forEach(user => {
+        if (user.email == currentEmail) {
+          this.setState({ currentUser: user })
+          console.log("state :", this.state.currentUser)
+        }
+      });
+    });
+
     Geocode.fromAddress("1275 Avenue des Canadiens-de-Montreal").then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
@@ -53,7 +70,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NavBar />
+        <NavBar user={this.state.currentUser}/>
         <Switch>
           <Route exact path='/login' component={ LoginForm }/>
           <Route exact path='/register' component={ RegisterForm }/>

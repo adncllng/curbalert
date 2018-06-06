@@ -49,11 +49,8 @@ class RegisterForm extends Component {
           geo_tag: this.state.geo_tag
         })
         .then(res => {
-          localStorage.setItem('secret', res.data.token);
-          console.log(res.data.token);
-
+          localStorage.setItem('token_id', res.data.token);
           this.props.history.replace("/");
-
         });
       },
       error => {
@@ -157,8 +154,6 @@ class RegisterForm extends Component {
           </section>
         </form>
       </div>
-
-
     );
   }
 
