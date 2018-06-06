@@ -4,8 +4,8 @@ import "./styles/scss/SideBar.css";
 class SideBar extends Component {
 	constructor(props) {
 		super(props);
-		// this.handleChange = this.handleChange.bind(this);
-		// this.handleFormSubmit = this.handleFormSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleFormSubmit = this.handleFormSubmit.bind(this);
 		this.state = {
 			posts: this.props.posts
 		};
@@ -18,14 +18,13 @@ class SideBar extends Component {
 		});
 	}
 
-	// handleFormSubmit(e) {
-	// 	e.preventDefault();
-	// 		this.props.getItem();
-	// 	})
-	// 	.catch(err => {
-	// 		alert(err);
-	// 	});
-	// }
+	handleFormSubmit(e) {
+		e.preventDefault();
+		let foundPosts = this.props.posts.filter(post => {
+			return post.tags.indexOf(this.state.searchTag) > -1;
+		});
+		this.props.filterPosts(foundPosts);
+	}
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({ posts: nextProps.posts });
@@ -39,7 +38,7 @@ class SideBar extends Component {
 					<li>
 						<a href="#">
 							{post.title}
-							<img src={post.image_url} />
+							<img src={post.image_url} style={{ maxWidth: "100%" }} />
 						</a>
 					</li>
 				);
@@ -60,9 +59,9 @@ class SideBar extends Component {
 									<p className="control has-icons-left">
 										<input
 											className="input"
-											type="email"
+											type="search"
 											placeholder="Search"
-											name="email"
+											name="searchTag"
 											onChange={this.handleChange}
 										/>
 										<span className="icon is-small is-left">
@@ -73,6 +72,7 @@ class SideBar extends Component {
 								<button className="button is-light">Submit</button>
 							</section>
 						</form>
+						<button onClick={this.props.resetPosts}>Clear</button>
 					</div>
 					<ul className="menu-list">{posts}</ul>
 				</aside>

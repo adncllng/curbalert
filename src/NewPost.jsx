@@ -152,7 +152,7 @@ class NewPost extends Component {
     let trashPic = null;
     let tags = null;
     if (trashPicUrl) {
-      trashPic = <img src={trashPicUrl} />;
+      trashPic = <img src={trashPicUrl} style={{ maxWidth: '100%' }}/>;
     } else {
       trashPic = null;
     }
