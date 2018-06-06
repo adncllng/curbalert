@@ -165,6 +165,8 @@ class App extends Component {
 							<PostList
 								posts={this.state.posts}
 								createPostList={this.createPostList}
+								filterPosts={this.filterPosts}
+								resetPosts={this.resetPosts}
 							/>
 						)}
 					/>
