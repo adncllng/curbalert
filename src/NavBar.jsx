@@ -81,12 +81,13 @@ class NavBar extends Component {
 							</a>
 						</div>
 
-						{navEnd}
-					</div>
-				</div>
-			</nav>
-		);
-	}
+              { navEnd }
+
+            </div>
+        </div>
+      </nav>
+    )
+  }
 }
 
 export default NavBar;

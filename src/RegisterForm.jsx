@@ -6,6 +6,7 @@ import Geocode from "react-geocode";
 Geocode.setApiKey(process.env.GOOGLE_API_KEY);
 
 class RegisterForm extends Component {
+
 	constructor(props) {
 		super(props);
 
