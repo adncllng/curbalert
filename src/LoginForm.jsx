@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { browserHistory, useRouterHistory } from 'react-router';
 import AuthService from "./AuthService.jsx";
 import axios from "axios";
 
@@ -11,13 +12,30 @@ class LoginForm extends Component {
   }
 
   componentWillMount() {
-    if (this.Auth.loggedIn()) this.props.history.replace("/");
+    if (this.Auth.loggedIn())window.location.assign('/');
   }
 
+  handleChange(e) {
+    // need to move this to action.js eventually
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleFormSubmit(e) {
+    e.preventDefault();
+    this.Auth.login(this.state.email, this.state.password)
+    .then(res => {
+      this.props.getUser();
+      window.location.assign('/');
+    })
+    .catch(err => {
+      alert(err);
+    });
+  }
+  
   render() {
-
     return (
-
       <div className="column is-4 is-offset-4">
         <form onSubmit={this.handleFormSubmit}>
         <section className="modal-card-body">
@@ -58,23 +76,6 @@ class LoginForm extends Component {
     );
   }
 
-  handleChange(e) {
-    // need to move this to action.js eventually
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  handleFormSubmit(e) {
-    e.preventDefault();
-    this.Auth.login(this.state.email, this.state.password)
-      .then(res => {
-        this.props.history.replace("/");
-      })
-      .catch(err => {
-        alert(err);
-      });
-  }
 }
 
 export default LoginForm;

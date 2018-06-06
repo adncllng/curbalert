@@ -13,7 +13,7 @@ class NewPost extends Component {
       trashPicUrl: null,
       trashTags: [],
       trashTitle: null,
-      trashTag: null,
+      trashTag: "",
     };
     //this.handleChange = this.handleChange.bind(this);
     //this.addTag = this.addTag.bind(this);
@@ -112,6 +112,7 @@ class NewPost extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
+<<<<<<< HEAD
     Geocode.fromAddress(this.state.address).then(response => {
 
       const { lat, lng } = response.results[0].geometry.location;
@@ -143,6 +144,41 @@ class NewPost extends Component {
         })
         .catch(err => {
           console.log();
+=======
+    const that = this;
+    const data = {
+      user_id: 2, //need to get the user id
+      title: this.state.trashTitle,
+      content: "hello", // need to get the content
+      image_url: this.state.trashPicUrl,
+      geo_tag: { // need to get the location
+        x: 45.4548,
+        y: -73.5699,
+      },
+      point_value: 6,
+      tags: this.state.trashTags,
+      visible: true,
+      // user_id: 1,
+      // title: this.state.trashTitle,
+      // content: "ANYTHING",
+      // image_url: this.state.trashPicUrl,
+      // geo_tag: '45.4768, -73.5842',
+      // point_value: 10,
+      // visible: true,
+      // tags: this.state.trashTags
+    };
+
+    axios
+      .post('http://localhost:3001/api/posts', data)
+      .then(res => {
+        console.log(res);
+
+        that.setState({
+          trashPicUrl: null,
+          trashTags: [],
+          trashTitle: null,
+          trashTag: "",
+>>>>>>> 48d4c8c339a16c766671fdc8da71446183fb02b9
         });
     });
   };
@@ -173,7 +209,7 @@ class NewPost extends Component {
               <p className="modal-card-title">make a curb alert</p>
               <br />
 
-              <div class="field is-grouped">
+              <div className="field is-grouped">
                 <p className="control is-expanded">
                   <input
                     name="trashTag"
