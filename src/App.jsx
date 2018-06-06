@@ -1,100 +1,112 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import axios from 'axios';
-import Geocode from 'react-geocode';
-import './styles/scss/App.css';
+import axios from "axios";
+import "./styles/scss/App.css";
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
-import PostList from "./PostList.jsx"
-import NewPost from "./NewPost.jsx"
-import MapContainer from './MapContainer.jsx'
-import LoginForm from './LoginForm.jsx';
-import RegisterForm from './RegisterForm.jsx';
+import PostList from "./PostList.jsx";
+import NewPost from "./NewPost.jsx";
+import MapContainer from "./MapContainer.jsx";
+import LoginForm from "./LoginForm.jsx";
+import RegisterForm from "./RegisterForm.jsx";
 import AuthService from "./AuthService.jsx";
-require('dotenv').config()
-
-Geocode.setApiKey(process.env.GOOGLE_API_KEY);
+require("dotenv").config();
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.Auth = new AuthService();
+		this.state = {
+			posts: [],
+			center: { lat: 45.5, lng: -73.57 }, // defaults to dt mtl
+			zoom: 11,
+			currentUser: {}
+		};
+	}
 
-  constructor(props) {
-    super(props);
-    this.Auth = new AuthService();
-  	this.state = {
-  		posts: [],
-      center: {lat: 0, lng: 0},
-      zoom: 11,
-      currentUser: {}
-    }
-  }
+	componentDidMount() {
+		let currentEmail = this.Auth.getEmail("email");
+		console.log("currentEmail :", currentEmail);
 
-  componentDidMount() {
-    let currentEmail = this.Auth.getEmail("email");
-    console.log("currentEmail :", currentEmail)
+		axios.get("http://localhost:3001/users").then(response => {
+			let usersArr = response.data;
+			usersArr.forEach(user => {
+				if (user.email == currentEmail) {
+					this.setState({
+						currentUser: user,
+						center: { lat: user.geo_tag.x, lng: user.geo_tag.y }
+					});
+					console.log("state :", this.state);
+				}
+			});
+		});
+	}
 
-    axios.get('http://localhost:3001/users')
-    .then(response => {
-      let usersArr = response.data;
-      usersArr.forEach(user => {
-        if (user.email == currentEmail) {
-          this.setState({ currentUser: user })
-          console.log("state :", this.state.currentUser)
-        }
-      });
-    });
+	createPostList = () => {
+		let that = this;
+		let postsArr = [];
+		axios
+			.get("http://localhost:3001/api/posts")
+			.then(response => {
+				postsArr = response.data;
+				this.setState({ posts: [...that.state.posts, ...postsArr] });
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
 
-    Geocode.fromAddress("1275 Avenue des Canadiens-de-Montreal").then(
-      response => {
-        const { lat, lng } = response.results[0].geometry.location;
-        this.setState({ center: { lat: lat, lng: lng} })
-      },
-      error => {
-        console.error(error);
-      }
-    );
-  }
+	render() {
+		return (
+			<div className="App">
+				<NavBar username={this.state.currentUser.username} />
+				<Switch>
+					<Route exact path="/login" component={LoginForm} />
+					<Route exact path="/register" component={RegisterForm} />
 
-  createPostList = () => {
-    let that = this;
-    let postsArr = [];
-    axios.get('http://localhost:3001/api/posts')
-    .then(response => {
-      postsArr = response.data;
-      this.setState({ posts: [...that.state.posts, ...postsArr] })
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  }
+					<Route
+						exact
+						path="/upload"
+						render={() => (
+							<NewPost
+								trashUploadHandler={this.trashUploadHandler}
+								addPost={this.addPost}
+							/>
+						)}
+					/>
 
-  render() {
-    return (
-      <div className="App">
-        <NavBar user={this.state.currentUser}/>
-        <Switch>
-          <Route exact path='/login' component={ LoginForm }/>
-          <Route exact path='/register' component={ RegisterForm }/>
+					<Route
+						exact
+						path="/"
+						render={() => (
+							<div>
+								<Home />
+								<div style={{ width: "100%", height: "600px" }}>
+									<MapContainer
+										center={this.state.center}
+										zoom={this.state.zoom}
+										posts={this.state.posts}
+										createPostList={this.createPostList}
+									/>
+								</div>
+							</div>
+						)}
+					/>
 
-					<Route exact path='/upload' render={() => (
-						<NewPost trashUploadHandler={this.trashUploadHandler} addPost={this.addPost} />
-					)}/>
-
-					<Route exact path="/" render={() => (
-            <div>
-              <Home />
-  						 <div style={{width: '100%', height: '600px'}}>
-                <MapContainer center={this.state.center} zoom={this.state.zoom} posts={this.state.posts} createPostList={this.createPostList} />
-              </div>
-            </div>
-          )}/>
-
-          <Route exact path="/posts" render={() => (
-            <PostList posts={this.state.posts} createPostList={this.createPostList} />
-          )}/>
-        </Switch>
-      </div>
-    );
-  }
+					<Route
+						exact
+						path="/posts"
+						render={() => (
+							<PostList
+								posts={this.state.posts}
+								createPostList={this.createPostList}
+							/>
+						)}
+					/>
+				</Switch>
+			</div>
+		);
+	}
 }
 
-export default App
+export default App;
