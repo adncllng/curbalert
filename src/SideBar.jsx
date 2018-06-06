@@ -4,8 +4,8 @@ import "./styles/scss/SideBar.css";
 class SideBar extends Component {
 	constructor(props) {
 		super(props);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleFormSubmit = this.handleFormSubmit.bind(this);
+		// this.handleChange = this.handleChange.bind(this);
+		// this.handleFormSubmit = this.handleFormSubmit.bind(this);
 		this.state = {
 			posts: this.props.posts
 		};
@@ -18,14 +18,14 @@ class SideBar extends Component {
 		});
 	}
 
-	handleFormSubmit(e) {
-		e.preventDefault();
-			this.props.getItem();
-		})
-		.catch(err => {
-			alert(err);
-		});
-	}
+	// handleFormSubmit(e) {
+	// 	e.preventDefault();
+	// 		this.props.getItem();
+	// 	})
+	// 	.catch(err => {
+	// 		alert(err);
+	// 	});
+	// }
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({ posts: nextProps.posts });

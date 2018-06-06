@@ -35,15 +35,6 @@ class App extends Component {
 	}
 
 
-  constructor(props) {
-    super(props);
-  	this.state = {
-  		posts: [],
-      center: {lat: 0, lng: 0},
-      zoom: 11
-      };
-  	}
-
   getUser = () => {
     let currentEmail = this.Auth.getEmail("email");
     axios.get("http://localhost:3001/users").then(response => {
@@ -95,9 +86,10 @@ class App extends Component {
     .catch(error => {
       console.log(error);
     });
+	}
 
   closeModal() {
-    this.setState({modalVisible: false, modalParams: {}})
+    this.setState({modalVisible: false, modalParams: {}});
   }
 	addPost = (post) => {
 		this.setState({ posts: [...this.state.posts, post] })
