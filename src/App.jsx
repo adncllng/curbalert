@@ -1,10 +1,4 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import axios from 'axios';
-import Geocode from 'react-geocode';
-import './styles/scss/App.css';
-=======
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import axios from "axios";
 import "./styles/scss/NavBar.css";
@@ -12,7 +6,6 @@ import "./styles/scss/App.css";
 import "./styles/scss/Map.css";
 import "./styles/scss/Home.css";
 import "./styles/scss/SideBar.css";
->>>>>>> 48d4c8c339a16c766671fdc8da71446183fb02b9
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
 import SideBar from "./SideBar.jsx";
@@ -41,7 +34,7 @@ class App extends Component {
     this.closeModal = this.closeModal.bind(this)
 	}
 
-<<<<<<< HEAD
+
   constructor(props) {
     super(props);
   	this.state = {
@@ -50,7 +43,7 @@ class App extends Component {
       zoom: 11
       };
   	}
-=======
+
   getUser = () => {
     let currentEmail = this.Auth.getEmail("email");
     axios.get("http://localhost:3001/users").then(response => {
@@ -65,7 +58,7 @@ class App extends Component {
       });
     });
   }
->>>>>>> 48d4c8c339a16c766671fdc8da71446183fb02b9
+
 
 	componentDidMount() {
     console.log('did mount');
@@ -91,7 +84,7 @@ class App extends Component {
     this.setState({modalVisible: true, modalParams: params})
   }
 
-<<<<<<< HEAD
+
   createPostList = () => {
     let postsArr = [];
     axios.get('http://localhost:3001/api/posts')
@@ -102,10 +95,9 @@ class App extends Component {
     .catch(error => {
       console.log(error);
     });
-=======
+
   closeModal() {
     this.setState({modalVisible: false, modalParams: {}})
->>>>>>> 48d4c8c339a16c766671fdc8da71446183fb02b9
   }
 	addPost = (post) => {
 		this.setState({ posts: [...this.state.posts, post] })
@@ -128,11 +120,6 @@ class App extends Component {
             )}
           />
 
-<<<<<<< HEAD
-					<Route path='/posts/new' render={() => (
-						<NewPost trashUploadHandler={this.trashUploadHandler} addPost={this.addPost} />
-					)}/>
-=======
 					<Route exact path="/register" component={RegisterForm} />
 					<Route
 						exact path="/upload"
@@ -143,7 +130,6 @@ class App extends Component {
 							/>
 						)}
 					/>
->>>>>>> 48d4c8c339a16c766671fdc8da71446183fb02b9
 
 					<Route
 						exact path="/" render={() => (
