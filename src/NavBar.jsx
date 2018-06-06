@@ -65,10 +65,10 @@ class NavBar extends Component {
 						<a className="navbar-item" href="/">
 							<p className="brand-text">Curb Alert</p>
 						</a>
-						<div className="navbar-burger burger" data-target="navMenu">
-							<span />
-							<span />
-							<span />
+						<div className="navbar-burger burger" data-target="navMenu" onClick={this.toggleNav}>
+							<span></span>
+							<span></span>
+							<span></span>
 						</div>
 					</div>
 					<div id="navMenu" className="navbar-menu">

@@ -88,6 +88,10 @@ class App extends Component {
 			});
 	};
 
+  showModal(params) {
+    this.setState({modalVisible: true, modalParams: params})
+  }
+
 	closeModal() {
 		this.setState({ modalVisible: false, modalParams: {} });
 	}
@@ -156,8 +160,7 @@ class App extends Component {
 					/>
 
 					<Route
-						exact
-						path="/posts"
+						exact path="/posts"
 						render={() => (
 							<PostList
 								posts={this.state.posts}
