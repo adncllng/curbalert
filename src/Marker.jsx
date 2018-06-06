@@ -16,20 +16,13 @@ class Marker extends Component {
 
   render() {
     return (
-    <div
-      onClick={this.handleClick.bind(this)}
-      style={{
-      color: 'white',
-      background: 'grey',
-      padding: '15px 10px',
-      display: 'inline-flex',
-      textAlign: 'center',
-      alignItems: 'center',
-      justifyContent: 'center',
-      transform: 'translate(-50%, -50%)'
-    }}>
-      { this.props.text }
-    </div>
+      <img
+        src={'http://res.cloudinary.com/ninayujiri/image/upload/v1528293527/pin-red.svg'}
+        onClick={this.handleClick.bind(this)}
+        style={{
+          width: '30px'
+        }}
+      />
     );
   }
 }
