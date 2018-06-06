@@ -15,6 +15,25 @@ class LoginForm extends Component {
     if (this.Auth.loggedIn())window.location.assign('/');
   }
 
+  handleChange(e) {
+    // need to move this to action.js eventually
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleFormSubmit(e) {
+    e.preventDefault();
+    this.Auth.login(this.state.email, this.state.password)
+    .then(res => {
+      this.props.getUser();
+      window.location.assign('/');
+    })
+    .catch(err => {
+      alert(err);
+    });
+  }
+  
   render() {
     return (
       <div className="column is-4 is-offset-4">
@@ -57,24 +76,6 @@ class LoginForm extends Component {
     );
   }
 
-  handleChange(e) {
-    // need to move this to action.js eventually
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  handleFormSubmit(e) {
-    e.preventDefault();
-    this.Auth.login(this.state.email, this.state.password)
-      .then(res => {
-        this.props.getUser();
-        window.location.assign('/');
-      })
-      .catch(err => {
-        alert(err);
-      });
-  }
 }
 
 export default LoginForm;
