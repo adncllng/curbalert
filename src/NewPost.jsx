@@ -12,7 +12,7 @@ class NewPost extends Component {
       trashPicUrl: null,
       trashTags: [],
       trashTitle: null,
-      trashTag: null,
+      trashTag: "",
     };
     //this.handleChange = this.handleChange.bind(this);
     //this.addTag = this.addTag.bind(this);
@@ -143,7 +143,7 @@ class NewPost extends Component {
           trashPicUrl: null,
           trashTags: [],
           trashTitle: null,
-          trashTag: null,
+          trashTag: "",
         });
       })
       .catch(err => {
@@ -177,7 +177,7 @@ class NewPost extends Component {
               <p className="modal-card-title">make a curb alert</p>
               <br />
 
-              <div class="field is-grouped">
+              <div className="field is-grouped">
                 <p className="control is-expanded">
                   <input
                     name="trashTag"
