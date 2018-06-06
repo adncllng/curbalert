@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import Geocode from 'react-geocode';
 import './styles/scss/App.css';
@@ -22,8 +22,8 @@ class App extends Component {
   		posts: [],
       center: {lat: 0, lng: 0},
       zoom: 11
-    }
-  }
+      };
+  	}
 
   componentDidMount() {
     Geocode.fromAddress("1275 Avenue des Canadiens-de-Montreal").then(
@@ -38,17 +38,19 @@ class App extends Component {
   }
 
   createPostList = () => {
-    let that = this;
     let postsArr = [];
     axios.get('http://localhost:3001/api/posts')
     .then(response => {
       postsArr = response.data;
-      this.setState({ posts: [...that.state.posts, ...postsArr] })
+      this.setState({ posts: [...this.state.posts, ...postsArr] })
     })
     .catch(error => {
       console.log(error);
     });
   }
+	addPost = (post) => {
+		this.setState({ posts: [...this.state.posts, post] })
+	}
 
   render() {
     return (
@@ -58,7 +60,7 @@ class App extends Component {
           <Route exact path='/login' component={ LoginForm }/>
           <Route exact path='/register' component={ RegisterForm }/>
 
-					<Route exact path='/upload' render={() => (
+					<Route path='/posts/new' render={() => (
 						<NewPost trashUploadHandler={this.trashUploadHandler} addPost={this.addPost} />
 					)}/>
 
