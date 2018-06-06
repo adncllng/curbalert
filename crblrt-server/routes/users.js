@@ -35,12 +35,10 @@ module.exports = (knex) => {
       .returning('id')
       .then((id) => {
         const token = jwt.sign({ id: id[0] }, process.env.SECRET_TOKEN, { expiresIn: 129600 }); // Signing the token
-        console.log('token', token);
         res.json({ token: token });
       })
     })
   });
-
 
   // Login route
   router.post('/login', (req, res) => {

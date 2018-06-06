@@ -117,7 +117,7 @@ class NewPost extends Component {
       title: this.state.trashTitle,
       content: "hello", // need to get the content
       image_url: this.state.trashPicUrl,
-      geo_tag: { // need to get the location 
+      geo_tag: { // need to get the location
         x: 45.4548,
         y: -73.5699,
       },
