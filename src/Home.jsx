@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import axios from 'axios';
-import './styles/scss/App.css';
-
+import SideBar from "./SideBar.jsx"
+import './styles/scss/Home.css';
+import './styles/scss/NavBar.css';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (
+      <div className="homepage">
+        <section className="sidebar columns is-fullheight">
+          <SideBar posts={this.props.posts}/>
+        </section>
       <section className="hero is-light is-medium header-image">
         <div className="hero-body">
           <div className="container">
@@ -20,6 +28,7 @@ class Home extends Component {
           </div>
         </div>
       </section>
+    </div>
     );
   }
 }
