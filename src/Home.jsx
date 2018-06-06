@@ -13,9 +13,9 @@ class Home extends Component {
   render() {
     return (
       <div className="homepage">
-        <section className="sidebar columns is-fullheight">
-          <SideBar posts={this.props.posts}/>
-        </section>
+      <section className="sidebar columns is-fullheight">
+        <SideBar posts={this.props.posts}/>
+      </section>
       <section className="hero is-light is-medium header-image">
         <div className="hero-body">
           <div className="container">

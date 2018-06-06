@@ -50,7 +50,7 @@ class RegisterForm extends Component {
 						geo_tag: this.state.geo_tag
 					})
 					.then(res => {
-						localStorage.setItem("token_id", res.data.token);
+						localStorage.setItem("id_token", res.data.token);
 						this.props.history.replace("/");
 					});
 			},
