@@ -15,7 +15,7 @@ class PostList extends Component {
         return (<div className="card">
           <div className="card-image">
             <figure className="image">
-              <img src={post.image_url} style={{ maxWidth: 100000000, maxHeight: 100000000 }}/>
+              <img src={post.image_url} style={{ maxWidth: '100%' }}/>
             </figure>
           </div>
           <div className="card-content">

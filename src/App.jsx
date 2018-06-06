@@ -29,6 +29,7 @@ class App extends Component {
       };
 
     this.showModal = this.showModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
 
   	}
 
@@ -58,14 +59,18 @@ class App extends Component {
   }
 
   showModal(params) {
-    console.log(params);
+    // console.log(params);
     this.setState({modalVisible: true})
+  }
+
+  closeModal(params) {
+    this.setState({modalVisible: false})
   }
 
 
   render() {
     let postmodal;
-    postmodal = (this.state.modalVisible) ? <PostModal /> : '';
+    postmodal = (this.state.modalVisible) ? <PostModal posts={this.state.posts} closeModal={this.closeModal} /> : '';
 
     return (
       <div className="App">

@@ -28,7 +28,7 @@ class Marker extends Component {
       justifyContent: 'center',
       transform: 'translate(-50%, -50%)'
     }}>
-      { this.props.$dimensionKey }
+      { this.props.text }
     </div>
     );
   }
