@@ -50,7 +50,6 @@ class App extends Component {
   }
 
 	componentDidMount() {
-    console.log('did mount');
 		this.getUser();
 	}
 
@@ -69,7 +68,6 @@ class App extends Component {
 	};
 
   showModal(params) {
-    console.log(params);
     this.setState({modalVisible: true, modalParams: params})
   }
 
@@ -124,8 +122,7 @@ class App extends Component {
 					/>
 
 					<Route
-						exact
-						path="/posts"
+						exact path="/posts"
 						render={() => (
 							<PostList
 								posts={this.state.posts}
