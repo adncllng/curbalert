@@ -3,7 +3,8 @@
   width: 200px;
   position: fixed;
   background-color: white;
-  z-index: 1000; }
+  z-index: 1000;
+  overflow-y: scroll; }
   .sidebar .trash-icon {
     margin-left: 1.3em;
     margin-right: 0.7em; }
