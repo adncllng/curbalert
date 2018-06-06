@@ -10,6 +10,8 @@ import NewPost from "./NewPost.jsx"
 import MapContainer from './MapContainer.jsx'
 import LoginForm from './LoginForm.jsx';
 import RegisterForm from './RegisterForm.jsx';
+import PostModal from "./PostModal.jsx";
+
 require('dotenv').config()
 
 Geocode.setApiKey(process.env.GOOGLE_API_KEY);
@@ -21,8 +23,13 @@ class App extends Component {
   	this.state = {
   		posts: [],
       center: {lat: 0, lng: 0},
-      zoom: 11
+      zoom: 11,
+
+      modalVisible: false
       };
+
+    this.showModal = this.showModal.bind(this)
+
   	}
 
   componentDidMount() {
@@ -50,7 +57,16 @@ class App extends Component {
     });
   }
 
+  showModal(params) {
+    console.log(params);
+    this.setState({modalVisible: true})
+  }
+
+
   render() {
+    let postmodal;
+    postmodal = (this.state.modalVisible) ? <PostModal /> : '';
+
     return (
       <div className="App">
         <NavBar />
@@ -66,7 +82,8 @@ class App extends Component {
             <div>
               <Home />
   						 <div style={{width: '100%', height: '600px'}}>
-                <MapContainer center={this.state.center} zoom={this.state.zoom} posts={this.state.posts} createPostList={this.createPostList} />
+               {postmodal}
+                <MapContainer showModal={this.showModal} center={this.state.center} zoom={this.state.zoom} posts={this.state.posts} createPostList={this.createPostList} />
               </div>
             </div>
           )}/>

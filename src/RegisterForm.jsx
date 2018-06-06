@@ -44,7 +44,7 @@ class RegisterForm extends Component {
       country: this.state.country
     })
     .then(res => {
-      localStorage.setItem('secret', res.data.token);
+      localStorage.setItem('id_token', res.data.token);
       console.log(res.data.token);
 
       this.props.history.replace("/");

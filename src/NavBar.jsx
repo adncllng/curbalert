@@ -82,7 +82,6 @@ class NavBar extends Component {
 
                 { navEnd }
 
-
             </div>
         </div>
       </nav>

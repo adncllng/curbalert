@@ -2,28 +2,17 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import GoogleMapReact from 'google-map-react';
 import Geocode from 'react-geocode';
+import Marker from "./Marker.jsx";
+import PostModal from "./PostModal.jsx";
 
-const Marker = ({ text }) => (
-  <div style={{
-    color: 'white',
-    background: 'grey',
-    padding: '15px 10px',
-    display: 'inline-flex',
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transform: 'translate(-50%, -50%)'
-  }}>
-    {text}
-  </div>
-);
 
 class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: this.props.posts
-    }
+      posts: this.props.posts,
+    };
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   componentDidMount() {
@@ -34,18 +23,24 @@ class MapContainer extends Component {
     this.setState({ posts: nextProps.posts })
   }
 
+  toggleModal(key) {
+    // do a loop to find the post that matches the key
+    this.props.showModal(this.state.posts[0])
+  }
+
   render() {
-      const markers = this.state.posts.map(marker =>
-        <Marker
-          key={marker.id}
-          lat={marker ? marker.geo_tag.x : ''}
-          lng={marker ? marker.geo_tag.y : ''}
-          text={marker ? marker.title : ''}
-        />
-      )
+    const markers = this.state.posts.map(marker =>
+      <Marker
+        key={marker.id}
+        lat={marker ? marker.geo_tag.x : ''}
+        lng={marker ? marker.geo_tag.y : ''}
+        text={marker ? marker.title : ''}
+        toggleModal={this.toggleModal}
+      />
+    )
     return (
-       <GoogleMapReact defaultCenter={this.props.center} defaultZoom={this.props.zoom}>
-          {markers}
+      <GoogleMapReact defaultCenter={this.props.center} defaultZoom={this.props.zoom}>
+        {markers}
       </GoogleMapReact>
     );
   }
