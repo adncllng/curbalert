@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import axios from 'axios';
 import moment from 'moment';
-import './styles/scss/NavBar.css';
+import './styles/scss/PostList.css';
 
 class PostList extends Component {
  componentDidMount() {
@@ -30,8 +30,6 @@ class PostList extends Component {
               <div className="content">
                 {post.content}
                 <br/>
-                <br/>
-                <small>({post.geo_tag.x}, {post.geo_tag.y})</small>
                 <br/>
                 <small>Posted {moment(post.created_at).fromNow()}</small>
               </div>
