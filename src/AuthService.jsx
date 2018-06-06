@@ -10,6 +10,7 @@ export default class AuthService {
   }
 
   login(email, password) {
+    this.setEmail(email);
     // Get a token from api server using the fetch api
     return this.fetch(`${this.domain}/users/login`, {
       method: "POST",
@@ -18,7 +19,6 @@ export default class AuthService {
         password
       })
     }).then(res => {
-      // console.log(res.token);
       this.setToken(res.token); // Setting the token in localStorage
       return Promise.resolve(res);
     });
@@ -42,6 +42,14 @@ export default class AuthService {
     }
   }
 
+  setEmail(email) {
+    localStorage.setItem("email", email);
+  }
+
+  getEmail(email) {
+    return localStorage.getItem("email");
+  }
+
   setToken(idToken) {
     // Saves user token to localStorage
     localStorage.setItem("id_token", idToken);
@@ -54,7 +62,7 @@ export default class AuthService {
 
   logout() {
     // Clear user token and profile data from localStorage
-    localStorage.removeItem("id_token");
+    localStorage.clear();
   }
 
   getProfile() {

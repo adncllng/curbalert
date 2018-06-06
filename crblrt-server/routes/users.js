@@ -22,9 +22,7 @@ module.exports = (knex) => {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
-    const city = req.body.city;
-    const prov = req.body.prov;
-    const country = req.body.country;
+    const geo_tag = req.body.geo_tag;
     const hashedPassword = bcrypt.hashSync(password, 10);
 
     knex.transaction(() => {
@@ -32,19 +30,15 @@ module.exports = (knex) => {
         email,
         username,
         password_digest: hashedPassword,
-        city,
-        prov,
-        country
+        geo_tag
       })
       .returning('id')
       .then((id) => {
         const token = jwt.sign({ id: id[0] }, process.env.SECRET_TOKEN, { expiresIn: 129600 }); // Signing the token
-        console.log('token', token);
         res.json({ token: token });
       })
     })
   });
-
 
   // Login route
   router.post('/login', (req, res) => {
