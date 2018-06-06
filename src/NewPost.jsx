@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
+import Geocode from 'react-geocode';
 
 const vision = require('node-cloud-vision-api');
 vision.init({ auth: process.env.REACT_APP_GOOGLE_API_KEY });
@@ -111,44 +112,39 @@ class NewPost extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    const that = this;
-    const data = {
-      user_id: 2, //need to get the user id
-      title: this.state.trashTitle,
-      content: "hello", // need to get the content
-      image_url: this.state.trashPicUrl,
-      geo_tag: { // need to get the location 
-        x: 45.4548,
-        y: -73.5699,
-      },
-      point_value: 6,
-      tags: this.state.trashTags,
-      visible: true,
-      // user_id: 1,
-      // title: this.state.trashTitle,
-      // content: "ANYTHING",
-      // image_url: this.state.trashPicUrl,
-      // geo_tag: '45.4768, -73.5842',
-      // point_value: 10,
-      // visible: true,
-      // tags: this.state.trashTags
-    };
+    Geocode.fromAddress(this.state.address).then(response => {
 
-    axios
-      .post('http://localhost:3001/api/posts', data)
-      .then(res => {
-        console.log(res);
+      const { lat, lng } = response.results[0].geometry.location;
+      this.setState({ geo_tag: `${lat}, ${lng}` });
 
-        that.setState({
-          trashPicUrl: null,
-          trashTags: [],
-          trashTitle: null,
-          trashTag: null,
+      const data = {
+        user_id: 2, //need to get the user id
+        title: this.state.trashTitle,
+        content: 'hello', // need to get the content
+        image_url: this.state.trashPicUrl,
+        geo_tag: this.state.geo_tag,
+        point_value: 6,
+        tags: this.state.trashTags,
+        visible: true,
+      };
+
+
+      axios
+        .post('http://localhost:3001/api/posts', data)
+        .then(res => {
+          console.log(res);
+          this.props.addPost(data)
+          this.setState({
+            trashPicUrl: null,
+            trashTags: [],
+            trashTitle: null,
+            trashTag: null,
+          });
+        })
+        .catch(err => {
+          console.log();
         });
-      })
-      .catch(err => {
-        console.log();
-      });
+    });
   };
 
   render() {
@@ -199,8 +195,8 @@ class NewPost extends Component {
                 <input
                   className="input"
                   type="text"
-                  placeholder="Montreal"
-                  name="location"
+                  placeholder="123 Montreal ave Montreal"
+                  name="address"
                   onChange={this.handleChange}
                 />
               </div>
