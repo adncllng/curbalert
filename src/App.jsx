@@ -14,6 +14,7 @@ import NewPost from "./NewPost.jsx";
 import MapContainer from "./MapContainer.jsx";
 import LoginForm from "./LoginForm.jsx";
 import RegisterForm from "./RegisterForm.jsx";
+import PostModal from "./PostModal.jsx";
 import AuthService from "./AuthService.jsx";
 require("dotenv").config();
 
@@ -25,24 +26,32 @@ class App extends Component {
 			posts: [],
 			center: { lat: 45.5, lng: -73.57 }, // defaults to dt mtl
 			zoom: 11,
-			currentUser: {}
+			currentUser: {},
+      modalVisible: false,
+      modalParams: {}
 		};
+    this.showModal = this.showModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
 	}
 
-	componentDidMount() {
-		let currentEmail = this.Auth.getEmail("email");
+  getUser = () => {
+    let currentEmail = this.Auth.getEmail("email");
+    axios.get("http://localhost:3001/users").then(response => {
+      let usersArr = response.data;
+      usersArr.forEach(user => {
+        if (user.email == currentEmail) {
+          this.setState({
+            currentUser: user,
+            center: { lat: user.geo_tag.x, lng: user.geo_tag.y }
+          });
+        }
+      });
+    });
+  }
 
-		axios.get("http://localhost:3001/users").then(response => {
-			let usersArr = response.data;
-			usersArr.forEach(user => {
-				if (user.email == currentEmail) {
-					this.setState({
-						currentUser: user,
-						center: { lat: user.geo_tag.x, lng: user.geo_tag.y }
-					});
-				}
-			});
-		});
+	componentDidMount() {
+    console.log('did mount');
+		this.getUser();
 	}
 
 	createPostList = () => {
@@ -59,19 +68,35 @@ class App extends Component {
 			});
 	};
 
-	render() {
-		console.log("app :", this.state)
-		return (
+  showModal(params) {
+    console.log(params);
+    this.setState({modalVisible: true, modalParams: params})
+  }
 
+  closeModal() {
+    this.setState({modalVisible: false, modalParams: {}})
+  }
+
+  render() {
+    let postmodal;
+    postmodal = (this.state.modalVisible) ? <PostModal modalParams={this.state.modalParams} posts={this.state.posts} closeModal={this.closeModal} /> : '';
+
+    return (
 			<div className="App">
 				<NavBar username={this.state.currentUser.username} />
 				<Switch>
-					<Route exact path="/login" component={LoginForm} />
-					<Route exact path="/register" component={RegisterForm} />
+          <Route
+            exact path='/login'
+            render={() => (
+              <LoginForm
+                getUser={this.getUser}
+              />
+            )}
+          />
 
+					<Route exact path="/register" component={RegisterForm} />
 					<Route
-						exact
-						path="/upload"
+						exact path="/upload"
 						render={() => (
 							<NewPost
 								trashUploadHandler={this.trashUploadHandler}
@@ -81,17 +106,17 @@ class App extends Component {
 					/>
 
 					<Route
-						exact
-						path="/"
-						render={() => (
+						exact path="/" render={() => (
 							<div className="home">
 								<Home posts={this.state.posts} createPostList={this.createPostList}/>
 								<div className="map" style={{ width: "100%", height: "600px" }}>
+                  {postmodal}
 									<MapContainer
 										center={this.state.center}
 										zoom={this.state.zoom}
 										posts={this.state.posts}
 										createPostList={this.createPostList}
+                    showModal={this.showModal}
 									/>
 								</div>
 							</div>

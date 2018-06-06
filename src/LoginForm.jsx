@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { browserHistory, useRouterHistory } from 'react-router';
 import AuthService from "./AuthService.jsx";
 import axios from "axios";
 
@@ -11,13 +12,11 @@ class LoginForm extends Component {
   }
 
   componentWillMount() {
-    if (this.Auth.loggedIn()) this.props.history.replace("/");
+    if (this.Auth.loggedIn())window.location.assign('/');
   }
 
   render() {
-
     return (
-
       <div className="column is-4 is-offset-4">
         <form onSubmit={this.handleFormSubmit}>
         <section className="modal-card-body">
@@ -69,7 +68,8 @@ class LoginForm extends Component {
     e.preventDefault();
     this.Auth.login(this.state.email, this.state.password)
       .then(res => {
-        this.props.history.replace("/");
+        this.props.getUser();
+        window.location.assign('/');
       })
       .catch(err => {
         alert(err);

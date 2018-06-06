@@ -63,7 +63,6 @@ class NavBar extends Component {
 				<div className="container">
 					<div className="navbar-brand">
 						<a className="navbar-item" href="/">
-							<i className="home fa fa-home"></i>
 							<p className="brand-text">Curb Alert</p>
 						</a>
 						<div className="navbar-burger burger" data-target="navMenu">
@@ -82,12 +81,13 @@ class NavBar extends Component {
 							</a>
 						</div>
 
-						{navEnd}
-					</div>
-				</div>
-			</nav>
-		);
-	}
+              { navEnd }
+
+            </div>
+        </div>
+      </nav>
+    )
+  }
 }
 
 export default NavBar;
