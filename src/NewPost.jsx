@@ -14,6 +14,7 @@ class NewPost extends Component {
       trashTags: [],
       trashTitle: null,
       trashTag: null,
+      content: null,
     };
     //this.handleChange = this.handleChange.bind(this);
     //this.addTag = this.addTag.bind(this);
@@ -30,13 +31,14 @@ class NewPost extends Component {
       trashTag: '',
     });
   };
-  // removeTag = event => {
-  //   event.preventDefault()
-  //   let index = his.state.trashTags.indexOf(event.taget.name)
-  //   this.setState({
-  //     trashTags: [...this.state.trashTags, ,
-  //     trashTag: ""
-  //   })
+
+   removeTag = event => {
+     event.preventDefault()
+     let newtags = this.state.trashTags.filter(tag => tag != event.target.name);
+     this.setState({
+       trashTags: newtags
+    })
+  }
 
   componentDidMount() {
     axios
@@ -113,14 +115,13 @@ class NewPost extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     Geocode.fromAddress(this.state.address).then(response => {
-
       const { lat, lng } = response.results[0].geometry.location;
       this.setState({ geo_tag: `${lat}, ${lng}` });
 
       const data = {
-        user_id: 2, //need to get the user id
+        user_id: this.props.currentUser.id, //need to get the user id
         title: this.state.trashTitle,
-        content: 'hello', // need to get the content
+        content: this.state.content, // need to get the content
         image_url: this.state.trashPicUrl,
         geo_tag: this.state.geo_tag,
         point_value: 6,
@@ -128,12 +129,11 @@ class NewPost extends Component {
         visible: true,
       };
 
-
       axios
         .post('http://localhost:3001/api/posts', data)
         .then(res => {
           console.log(res);
-          this.props.addPost(data)
+          this.props.addPost(data);
           this.setState({
             trashPicUrl: null,
             trashTags: [],
@@ -152,60 +152,87 @@ class NewPost extends Component {
     let trashPic = null;
     let tags = null;
     if (trashPicUrl) {
-      trashPic = <img src={trashPicUrl} />;
+      trashPic = <img style={{ minWidth: '100%', minHeight: '100%' }} src={trashPicUrl} />;
     } else {
       trashPic = null;
     }
 
     if (trashTags) {
       tags = trashTags.map(tag => {
-        return <span className="tag">{tag}</span>;
+        return (
+          <div className="control">
+            <div className="tags has-addons">
+              <a className="tag is-link">{tag}</a>
+              <a className="tag is-delete" name={tag} onClick={this.removeTag} />
+            </div>
+          </div>
+        );
       });
     }
 
     return (
-      <div>
-        {trashPic}
-        <div className="modal-card">
-          <form onSubmit={this.handleFormSubmit}>
-            <section className="modal-card-body">
-              <Dropzone onDrop={this.handleDrop} multiple accept="image/*" />
-              <p className="modal-card-title">make a curb alert</p>
-              <br />
-
-              <div class="field is-grouped">
-                <p className="control is-expanded">
-                  <input
-                    name="trashTag"
+      <div className='upload-form'>
+        <div className="box" style={{ maxWidth: '40%', minHeight: '200px' }}>
+          <article className="media">
+            <div className="media-left">
+              <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
+                {trashPic || 'click or drag and drop an image'}
+              </Dropzone>
+            </div>
+            <div className="media-content">
+              <form onSubmit={this.handleFormSubmit}>
+                <div className="field">
+                  <textarea
                     onChange={this.handleChange}
+                    className="textarea"
+                    name="content"
+                    placeholder="Description"
+                  />
+                </div>
+                <div className="field">
+                  <input
                     className="input"
                     type="text"
-                    value={this.state.trashTag}
+                    placeholder="address"
+                    name="address"
+                    onChange={this.handleChange}
                   />
-                </p>
-                <p className="control">
-                  <a className="button is-info" onClick={this.addTag}>
-                    + tag
-                  </a>
-                </p>
-              </div>
-
-              <div className="field">
-                <label className="label">Location</label>
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="123 Montreal ave Montreal"
-                  name="address"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <button className="button is-light">Submit</button>
-            </section>
-          </form>
+                </div>
+                <div className="field is-grouped">
+                  <p className="control is-expanded">
+                    <input
+                      name="trashTag"
+                      placeholder="add tags"
+                      onChange={this.handleChange}
+                      className="input"
+                      type="text"
+                      value={this.state.trashTag}
+                    />
+                  </p>
+                  <p className="control">
+                    <a className="button is-info" onClick={this.addTag}>
+                      + tag
+                    </a>
+                  </p>
+                </div>
+                <nav className="level is-mobile">
+                  <button className="button is-light">Submit</button>
+                </nav>
+                <nav className="level is-mobile">
+                  <div className="level-left">
+                    <div
+                      style={{ width: '350px' }}
+                      className="field is-grouped is-grouped-multiline"
+                    >
+                      {tags}
+                    </div>
+                  </div>
+                </nav>
+              </form>
+            </div>
+          </article>
         </div>
-        {tags}
-      </div>
+</div>
     );
   }
 }

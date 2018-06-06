@@ -6,6 +6,7 @@ import "./styles/scss/App.css";
 import "./styles/scss/Map.css";
 import "./styles/scss/Home.css";
 import "./styles/scss/SideBar.css";
+import "./styles/scss/NewPost.css";
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
 import SideBar from "./SideBar.jsx";
@@ -119,6 +120,7 @@ class App extends Component {
 							<NewPost
 								trashUploadHandler={this.trashUploadHandler}
 								addPost={this.addPost}
+								currentUser={this.state.currentUser}
 							/>
 						)}
 					/>
