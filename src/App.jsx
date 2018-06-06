@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import axios from "axios";
+import "./styles/scss/NavBar.css";
 import "./styles/scss/App.css";
+import "./styles/scss/Map.css";
+import "./styles/scss/Home.css";
+import "./styles/scss/SideBar.css";
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
+import SideBar from "./SideBar.jsx";
 import PostList from "./PostList.jsx";
 import NewPost from "./NewPost.jsx";
 import MapContainer from "./MapContainer.jsx";
@@ -26,7 +31,6 @@ class App extends Component {
 
 	componentDidMount() {
 		let currentEmail = this.Auth.getEmail("email");
-		console.log("currentEmail :", currentEmail);
 
 		axios.get("http://localhost:3001/users").then(response => {
 			let usersArr = response.data;
@@ -36,7 +40,6 @@ class App extends Component {
 						currentUser: user,
 						center: { lat: user.geo_tag.x, lng: user.geo_tag.y }
 					});
-					console.log("state :", this.state);
 				}
 			});
 		});
@@ -57,7 +60,9 @@ class App extends Component {
 	};
 
 	render() {
+		console.log("app :", this.state)
 		return (
+
 			<div className="App">
 				<NavBar username={this.state.currentUser.username} />
 				<Switch>
@@ -79,9 +84,9 @@ class App extends Component {
 						exact
 						path="/"
 						render={() => (
-							<div>
-								<Home />
-								<div style={{ width: "100%", height: "600px" }}>
+							<div className="home">
+								<Home posts={this.state.posts} createPostList={this.createPostList}/>
+								<div className="map" style={{ width: "100%", height: "600px" }}>
 									<MapContainer
 										center={this.state.center}
 										zoom={this.state.zoom}

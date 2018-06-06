@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import AuthService from "./AuthService.jsx";
-import "./styles/scss/App.css";
 
 class NavBar extends Component {
 	constructor(props) {
@@ -63,8 +62,9 @@ class NavBar extends Component {
 			<nav className="navbar has-shadow">
 				<div className="container">
 					<div className="navbar-brand">
-						<a className="navbar-item brand-text" href="/">
-							Curb Alert
+						<a className="navbar-item" href="/">
+							<i className="home fa fa-home"></i>
+							<p className="brand-text">Curb Alert</p>
 						</a>
 						<div className="navbar-burger burger" data-target="navMenu">
 							<span />

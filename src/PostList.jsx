@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import axios from 'axios';
-import './styles/scss/App.css';
+import './styles/scss/NavBar.css';
 
 class PostList extends Component {
  componentDidMount() {
