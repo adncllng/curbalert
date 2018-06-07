@@ -10,13 +10,11 @@ module.exports = (knex) => {
       user_id, title, content, image_url, geo_tag, point_value, visible, tags,
     } = req.body;
     let postId = null;
-
-    console.log(req.body);
     knex('posts')
       .returning('id')
       .insert({
         user_id,
-        title,
+        title: title.substring(0,10),
         content,
         image_url,
         geo_tag,
