@@ -27,6 +27,7 @@ class Home extends Component {
 						filterPosts={this.props.filterPosts}
             resetPosts={this.props.resetPosts}
            	showPostModal={this.showPostModal}
+						clearSearchForm={this.props.clearSearchForm}
 					/>
 				</section>
 			</div>

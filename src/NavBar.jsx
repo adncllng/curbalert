@@ -25,6 +25,18 @@ class NavBar extends Component {
 		}));
 	};
 
+	toggleBurger = () => {
+		const burger = this.refs.burger;
+		const menu = this.refs.menu;
+		if (burger.className.includes("is-active")) {
+			burger.className = "navbar-burger";
+			menu.className = "navbar-menu";
+		} else {
+			burger.className += " is-active";
+			menu.className += " is-active";
+		}
+	}
+
 	render() {
 		let navEnd;
 		if (this.Auth.loggedIn()) {
@@ -49,8 +61,12 @@ class NavBar extends Component {
 		} else {
 			navEnd = (
 				<div className="navbar-end">
-          <Link to={'/login'} className="navbar-item">Login</Link>
-          <Link to={'/register'} className="navbar-item">Register</Link>
+					<Link to={"/login"} className="navbar-item" onClick={this.toggleBurger}>
+						Login
+					</Link>
+					<Link to={"/register"} className="navbar-item" onClick={this.toggleBurger}>
+						Register
+					</Link>
 				</div>
 			);
 		}
@@ -63,28 +79,32 @@ class NavBar extends Component {
 					<Link to={'/'} className="navbar-item">
 							<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528405871/curb-alert.png" className="logo"/>
 					</Link>
-						<div className="navbar-burger burger" data-target="navMenu" onClick={this.toggleNav}>
-							<span></span>
-							<span></span>
-							<span></span>
-						</div>
-
+					<a
+						role="button"
+						className="navbar-burger"
+						data-target="navMenu"
+						ref="burger"
+						onClick={this.toggleBurger}
+						>
+						<span />
+						<span />
+						<span />
+					</a>
+				</div>
+				<div id="navMenu" className="navbar-menu" ref="menu">
+					<div className="navbar-start">
+						<Link to={"/posts/new"} className="navbar-item" onClick={this.toggleBurger}>
+							Add Post
+						</Link>
+						<Link to={"/posts"} className="navbar-item" onClick={this.toggleBurger}>
+							All Posts
+						</Link>
 					</div>
-					<div id="navMenu" className="navbar-menu">
-						<div className="navbar-start">
-            <Link to={'/posts/new'} className="navbar-item">Add Post</Link>
-              <Link to={'/posts'} className="navbar-item">All Posts</Link>
-
-
-						</div>
-
-              { navEnd }
-
-            </div>
-        </div>
-      </nav>
-    )
-  }
+					{navEnd}
+				</div>
+			</nav>
+		);
+	}
 }
 
 export default NavBar;

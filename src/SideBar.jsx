@@ -16,16 +16,18 @@ class SideBar extends Component {
 		});
 	}
 
+	handleClear = () => {
+		this.setState({
+			searchTag: ''
+		});
+	}
+
 	handleFormSubmit = e => {
 		e.preventDefault();
 		let foundPosts = this.props.posts.filter(post => {
 			return post.tags.indexOf(this.state.searchTag) > -1;
 		});
 		this.props.filterPosts(foundPosts);
-	}
-
-	clearForm = () => {
-	  this.searchForm.reset();
 	}
 
 	toggleModal = key => {
@@ -43,6 +45,8 @@ class SideBar extends Component {
 	}
 
 	render() {
+		const searchForm = this.refs.searchForm;
+
 		let posts = null;
 		if (this.state.posts.length) {
 			posts = this.state.posts.map(post => {
@@ -59,7 +63,7 @@ class SideBar extends Component {
 			return (
 				<aside className="menu column is-fullheight has-shadow">
 					<div className="column">
-						<form onSubmit={this.handleFormSubmit} ref={(el) => this.searchForm = el}>
+						<form onSubmit={this.handleFormSubmit} ref="searchForm">
 								<br/>
 								<div className="field">
 									<p className="control has-icons-left">
@@ -79,7 +83,7 @@ class SideBar extends Component {
 								<button style={{width: '100%'}} className="button is-link is-focused">Submit</button>
 						</form>
 					<br/>
-					<button style={{width: '100%'}} className="button is-outlined" onClick={this.props.resetPosts}>New Search</button>
+					<button style={{width: '100%'}} className="button is-outlined" onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm); this.handleClear();}}>New Search</button>
 					</div>
 						{posts}
 				</aside>

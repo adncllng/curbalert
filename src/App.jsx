@@ -72,6 +72,10 @@ class App extends Component {
 			});
 	};
 
+	clearSearchForm = form => {
+		form.reset();
+	}
+
 	resetPosts = () => {
 		let postsArr = [];
 		axios
@@ -146,6 +150,7 @@ class App extends Component {
 									filterPosts={this.filterPosts}
 									resetPosts={this.resetPosts}
 									showModal={this.showModal}
+									clearSearchForm={this.clearSearchForm}
 								/>
 								<div className="map">
 									{postmodal}
@@ -169,6 +174,7 @@ class App extends Component {
 								createPostList={this.createPostList}
 								filterPosts={this.filterPosts}
 								resetPosts={this.resetPosts}
+								clearSearchForm={this.clearSearchForm}
 							/>
 						)}
 					/>
