@@ -62,15 +62,16 @@ class NavBar extends Component {
 					<Link to={'/'} className="navbar-item">
 							<p className="brand-text">Curb Alert</p>
 						</Link>
-						<div className="navbar-burger burger" data-target="navMenu">
-							<span />
-							<span />
-							<span />
+						<div className="navbar-burger burger" data-target="navMenu" onClick={this.toggleNav}>
+							<span></span>
+							<span></span>
+							<span></span>
 						</div>
+
 					</div>
 					<div id="navMenu" className="navbar-menu">
 						<div className="navbar-start">
-            <Link to={'/upload'} className="navbar-item">Post Trash</Link>
+            <Link to={'/posts/new'} className="navbar-item">Post Trash</Link>
               <Link to={'/posts'} className="navbar-item">All Posts</Link>
 
 
