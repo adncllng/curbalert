@@ -7,6 +7,7 @@ import "./styles/scss/Map.css";
 import "./styles/scss/Home.css";
 import "./styles/scss/SideBar.css";
 import "./styles/scss/Login.css";
+import "./styles/scss/NewPost.css";
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
 import Footer from "./Footer.jsx";
@@ -64,7 +65,7 @@ class App extends Component {
 			.get("http://localhost:3001/api/posts")
 			.then(response => {
 				postsArr = response.data;
-				this.setState({ posts: [...this.state.posts, ...postsArr] });
+				this.setState({ posts: [...postsArr] });
 			})
 			.catch(error => {
 				console.log(error);
@@ -84,6 +85,17 @@ class App extends Component {
 			});
 	};
 
+<<<<<<< HEAD
+=======
+  showModal(params) {
+    this.setState({modalVisible: true, modalParams: params})
+  }
+
+	closeModal() {
+		this.setState({ modalVisible: false, modalParams: {} });
+	}
+
+>>>>>>> production
 	addPost = post => {
 		this.setState({ posts: [...this.state.posts, post] });
 	};
@@ -130,6 +142,7 @@ class App extends Component {
 							<NewPost
 								trashUploadHandler={this.trashUploadHandler}
 								addPost={this.addPost}
+								currentUser={this.state.currentUser}
 							/>
 						)}
 					/>
@@ -164,6 +177,8 @@ class App extends Component {
 							<PostList
 								posts={this.state.posts}
 								createPostList={this.createPostList}
+								filterPosts={this.filterPosts}
+								resetPosts={this.resetPosts}
 							/>
 						)}
 					/>

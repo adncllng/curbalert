@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "./AuthService.jsx";
+import { Link} from "react-router-dom";
 
 class NavBar extends Component {
 	constructor(props) {
@@ -48,12 +49,8 @@ class NavBar extends Component {
 		} else {
 			navEnd = (
 				<div className="navbar-end">
-					<a className="navbar-item" href="/login">
-						Login
-					</a>
-					<a type="button" className="navbar-item" href="/register">
-						Register
-					</a>
+          <Link to={'/login'} className="navbar-item">Login</Link>
+          <Link to={'/register'} className="navbar-item">Register</Link>
 				</div>
 			);
 		}
@@ -62,23 +59,23 @@ class NavBar extends Component {
 			<nav className="navbar has-shadow fixed">
 				<div className="container">
 					<div className="navbar-brand">
-						<a className="navbar-item" href="/">
+
+					<Link to={'/'} className="navbar-item">
 							<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528381939/logo.png" className="logo"/>
-						</a>
+					</Link>
 						<div className="navbar-burger burger" data-target="navMenu" onClick={this.toggleNav}>
 							<span></span>
 							<span></span>
 							<span></span>
 						</div>
+
 					</div>
 					<div id="navMenu" className="navbar-menu">
 						<div className="navbar-start">
-							<a className="navbar-item" href="/posts/new">
-								New Post
-							</a>
-							<a className="navbar-item" href="/posts">
-								All Posts
-							</a>
+            <Link to={'/posts/new'} className="navbar-item">Add Post</Link>
+              <Link to={'/posts'} className="navbar-item">All Posts</Link>
+
+
 						</div>
 
               { navEnd }
