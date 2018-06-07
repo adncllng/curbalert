@@ -21,6 +21,12 @@ class PostList extends Component {
     });
   }
 
+  handleClear = () => {
+    this.setState({
+      searchTag: ''
+    });
+  }
+
   handleFormSubmit(e) {
     e.preventDefault();
     let foundPosts = this.props.posts.filter(post => {
@@ -34,6 +40,7 @@ class PostList extends Component {
 	}
 
 	render() {
+    const searchForm = this.refs.searchForm;
 		let posts = null;
 		if (this.props.posts.length) {
 			posts = this.props.posts.map(post => {
@@ -80,7 +87,7 @@ class PostList extends Component {
     }
 		return (
 			<div className="container">
-				<form onSubmit={this.handleFormSubmit}>
+				<form onSubmit={this.handleFormSubmit} ref="searchForm">
 					<section className="modal-card-body">
 						<br />
 						<div className="field">
@@ -100,7 +107,7 @@ class PostList extends Component {
 						<button className="button is-light">Submit</button>
 					</section>
 				</form>
-				<button onClick={this.props.resetPosts}>Clear</button>
+				<button onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm); this.handleClear();}}>New Search</button>
 				<div className="section">
 					<div className="columns is-multiline is-mobile">{posts}</div>
 				</div>

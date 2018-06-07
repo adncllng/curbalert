@@ -23,6 +23,7 @@ import AuthService from './AuthService.jsx';
 require('dotenv').config();
 
 class App extends Component {
+<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.Auth = new AuthService();
@@ -208,6 +209,166 @@ class App extends Component {
       </div>
     );
   }
+=======
+	constructor(props) {
+		super(props);
+		this.Auth = new AuthService();
+		this.state = {
+			posts: [],
+			center: { lat: 45.5, lng: -73.57 }, // defaults to dt mtl
+			zoom: 11,
+			currentUser: {},
+			modalVisible: false,
+			modalParams: {}
+		};
+	}
+
+	componentDidMount() {
+		this.getUser();
+	}
+
+	filterPosts = foundPosts => {
+		this.setState({ posts: foundPosts });
+	};
+
+	getUser = () => {
+		let currentEmail = this.Auth.getEmail("email");
+		axios.get("http://localhost:3001/users").then(response => {
+			let usersArr = response.data;
+			usersArr.forEach(user => {
+				if (user.email == currentEmail) {
+					this.setState({
+						currentUser: user,
+						center: { lat: user.geo_tag.x, lng: user.geo_tag.y }
+					});
+				}
+			});
+		});
+	};
+
+	createPostList = () => {
+		let postsArr = [];
+		axios
+			.get("http://localhost:3001/api/posts")
+			.then(response => {
+				postsArr = response.data;
+				this.setState({ posts: [...postsArr] });
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+
+	clearSearchForm = (form) => {
+		form.reset();
+	}
+
+	resetPosts = () => {
+		let postsArr = [];
+		axios
+			.get("http://localhost:3001/api/posts")
+			.then(response => {
+				postsArr = response.data;
+				this.setState({ posts: postsArr });
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+
+	addPost = post => {
+		this.setState({ posts: [...this.state.posts, post] });
+	};
+
+	showModal = params => {
+		this.setState({ modalVisible: true, modalParams: params });
+	}
+
+	closeModal = () => {
+		this.setState({ modalVisible: false, modalParams: {} });
+	}
+
+	render() {
+		let postmodal;
+		postmodal = this.state.modalVisible ? (
+			<PostModal
+				modalParams={this.state.modalParams}
+				posts={this.state.posts}
+				closeModal={this.closeModal}
+			/>
+		) : (
+			""
+		);
+
+		return (
+			<div className="App">
+				<NavBar username={this.state.currentUser.username} />
+				<Switch>
+					<Route
+						exact path ="/welcome"
+						render={() => <LandingPage/>}
+					/>
+
+					<Route
+						exact path="/login"
+						render={() => <LoginForm getUser={this.getUser} />}
+					/>
+
+					<Route exact path="/register" component={RegisterForm} />
+					<Route
+						exact
+						path="/posts/new"
+						render={() => (
+							<NewPost
+								trashUploadHandler={this.trashUploadHandler}
+								addPost={this.addPost}
+								currentUser={this.state.currentUser}
+							/>
+						)}
+					/>
+
+					<Route
+						exact path="/"
+						render={() => (
+							<div className="home">
+								<Home
+									posts={this.state.posts}
+									createPostList={this.createPostList}
+									filterPosts={this.filterPosts}
+									resetPosts={this.resetPosts}
+									clearSearchForm={this.clearSearchForm}
+								/>
+								<div className="map">
+									{postmodal}
+									<MapContainer
+										center={this.state.center}
+										zoom={this.state.zoom}
+										posts={this.state.posts}
+										createPostList={this.createPostList}
+										showModal={this.showModal}
+									/>
+								</div>
+							</div>
+						)}
+					/>
+
+					<Route
+						exact path="/posts"
+						render={() => (
+							<PostList
+								posts={this.state.posts}
+								createPostList={this.createPostList}
+								filterPosts={this.filterPosts}
+								resetPosts={this.resetPosts}
+								clearSearchForm={this.clearSearchForm}
+							/>
+						)}
+					/>
+				</Switch>
+			</div>
+		);
+	}
+>>>>>>> 6f31be8153bde4e870ddb00dee84b27a5374fe52
 }
 
 export default App;
