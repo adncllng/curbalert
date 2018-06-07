@@ -63,7 +63,7 @@ class NavBar extends Component {
 				<div className="container">
 					<div className="navbar-brand">
 						<a className="navbar-item" href="/">
-							<p className="brand-text">Curb Alert</p>
+							<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528381939/logo.png" className="logo"/>
 						</a>
 						<div className="navbar-burger burger" data-target="navMenu" onClick={this.toggleNav}>
 							<span></span>

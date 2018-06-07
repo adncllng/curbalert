@@ -48,7 +48,7 @@ class SideBar extends Component {
 			});
 
 			return (
-				<aside className="column is-fullheight has-shadow fixed">
+				<aside className="menu column is-fullheight has-shadow fixed">
 					<div className="column">
 						<form onSubmit={this.handleFormSubmit} ref={(el) => this.searchForm = el}>
 								<br/>

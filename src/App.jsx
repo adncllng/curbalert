@@ -17,6 +17,7 @@ import MapContainer from "./MapContainer.jsx";
 import LoginForm from "./LoginForm.jsx";
 import RegisterForm from "./RegisterForm.jsx";
 import PostModal from "./PostModal.jsx";
+import LandingPage from "./LandingPage.jsx";
 import AuthService from "./AuthService.jsx";
 require("dotenv").config();
 
@@ -111,6 +112,11 @@ class App extends Component {
 			<div className="App">
 				<NavBar username={this.state.currentUser.username} />
 				<Switch>
+					<Route
+						exact path ="/welcome"
+						render={() => <LandingPage/>}
+					/>
+
 					<Route
 						exact path="/login"
 						render={() => <LoginForm getUser={this.getUser} />}

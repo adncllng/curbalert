@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import AuthService from "./AuthService.jsx";
 import Geocode from "react-geocode";
+import { Link } from "react-router-dom";
+
 
 Geocode.setApiKey(process.env.GOOGLE_API_KEY);
 
@@ -156,6 +158,9 @@ class RegisterForm extends Component {
 						<button className="button is-light wide">Register</button>
 					</section>
 				</form>
+					<div>
+						<p>Already have an account?<Link to={'/login'}> Login</Link></p>
+					</div>
 			</div>
 		);
 	}

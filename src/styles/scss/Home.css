@@ -1,9 +1,11 @@
-.home .hero {
+.landing-page .hero {
   margin-top: 54px;
-  text-align: center; }
+  text-align: center;
+  padding-top: 60px;
+  height: 700px; }
 
-.home .header-image {
-  background-image: url("http://res.cloudinary.com/ninayujiri/image/upload/v1528216125/joel-stylis-573185-unsplash.jpg");
+.landing-page .header-image {
+  background-image: url("http://res.cloudinary.com/ninayujiri/image/upload/v1528382296/chair2.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
