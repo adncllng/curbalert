@@ -65,6 +65,9 @@ class PostList extends Component {
 								<a href="#" className="card-footer-item">
 									View Map
 								</a>
+                <a href="#" className="card-footer-item">
+                  <i className="fas fa-heart"></i>
+                </a>
 							</footer>
 						</div>
 					</div>

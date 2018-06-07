@@ -50,18 +50,19 @@ class NavBar extends Component {
 			navEnd = (
 				<div className="navbar-end">
           <Link to={'/login'} className="navbar-item">Login</Link>
-          <Link to={'/register'} className="navbar-item">register</Link>
+          <Link to={'/register'} className="navbar-item">Register</Link>
 				</div>
 			);
 		}
 
 		return (
-			<nav className="navbar has-shadow">
+			<nav className="navbar has-shadow fixed">
 				<div className="container">
 					<div className="navbar-brand">
+
 					<Link to={'/'} className="navbar-item">
-							<p className="brand-text">Curb Alert</p>
-						</Link>
+							<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528381939/logo.png" className="logo"/>
+					</Link>
 						<div className="navbar-burger burger" data-target="navMenu" onClick={this.toggleNav}>
 							<span></span>
 							<span></span>
@@ -71,7 +72,7 @@ class NavBar extends Component {
 					</div>
 					<div id="navMenu" className="navbar-menu">
 						<div className="navbar-start">
-            <Link to={'/posts/new'} className="navbar-item">Post Trash</Link>
+            <Link to={'/posts/new'} className="navbar-item">Add Post</Link>
               <Link to={'/posts'} className="navbar-item">All Posts</Link>
 
 

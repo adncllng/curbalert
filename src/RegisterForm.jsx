@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import AuthService from "./AuthService.jsx";
 import Geocode from "react-geocode";
+import { Link } from "react-router-dom";
+
 
 Geocode.setApiKey(process.env.GOOGLE_API_KEY);
 
@@ -136,21 +138,29 @@ class RegisterForm extends Component {
 							</div>
 
 							<div className="column">
-								<input
-									className="input"
-									type="address"
-									placeholder="Address"
-									autoComplete="address-level2"
-									name="address"
-									value={this.state.address}
-									onChange={e => this.handleChange(e)}
-								/>
+								<p className="control has-icons-left">
+									<input
+										className="input"
+										type="address"
+										placeholder="Address (i.e. H4C 1J7 or 1234 Example St.)"
+										autoComplete="address-level2"
+										name="address"
+										value={this.state.address}
+										onChange={e => this.handleChange(e)}
+									/>
+									<span className="icon is-small is-left">
+										<i className="fas fa-home"></i>
+									</span>
+								</p>
 							</div>
 						</div>
 
 						<button className="button is-light wide">Register</button>
 					</section>
 				</form>
+					<div>
+						<p>Already have an account?<Link to={'/login'}> Login</Link></p>
+					</div>
 			</div>
 		);
 	}
