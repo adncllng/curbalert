@@ -69,7 +69,7 @@ class App extends Component {
 			.get("http://localhost:3001/api/posts")
 			.then(response => {
 				postsArr = response.data;
-				this.setState({ posts: [...this.state.posts, ...postsArr] });
+				this.setState({ posts: [...postsArr] });
 			})
 			.catch(error => {
 				console.log(error);
