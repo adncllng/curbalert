@@ -17,6 +17,12 @@ class SideBar extends Component {
 		});
 	}
 
+	handleClear = () => {
+		this.setState({
+			searchTag: ''
+		});
+	}
+
 	handleFormSubmit(e) {
 		e.preventDefault();
 		let foundPosts = this.props.posts.filter(post => {
@@ -68,7 +74,7 @@ class SideBar extends Component {
 								<button style={{width: '100%'}} className="button is-link is-focused">Submit</button>
 						</form>
 					<br/>
-					<button style={{width: '100%'}} className="button is-outlined" onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm);}}>New Search</button>
+					<button style={{width: '100%'}} className="button is-outlined" onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm); this.handleClear();}}>New Search</button>
 					</div>
 					<ul className="menu-list">{posts}</ul>
 				</aside>

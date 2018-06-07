@@ -173,6 +173,7 @@ class App extends Component {
 								createPostList={this.createPostList}
 								filterPosts={this.filterPosts}
 								resetPosts={this.resetPosts}
+								clearSearchForm={this.clearSearchForm}
 							/>
 						)}
 					/>
