@@ -13,7 +13,7 @@ class NewPost extends Component {
       trashPicUrl: null,
       trashTags: [],
       title: null,
-      trashTag: null,
+      trashTag: "",
       content: null,
     };
     //this.handleChange = this.handleChange.bind(this);
