@@ -89,12 +89,12 @@ class NavBar extends Component {
 							All Posts
 						</Link>
 						<div className="navbar-start">
-							<a onClick={this.props.showAddPostModal} className="navbar-item">
+							<a onClick={(event) => {this.props.showAddPostModal(); this.toggleBurger();}} className="navbar-item">
 								Add Post
 							</a>
 						</div>
-						{navEnd}
 					</div>
+					{navEnd}
 				</div>
 			</nav>
 		);
