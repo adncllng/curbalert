@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
-import axios from 'axios';
 import './styles/scss/App.css';
-import PostModal from "./PostModal.jsx";
 
 
 class Marker extends Component {

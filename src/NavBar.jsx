@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "./AuthService.jsx";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class NavBar extends Component {
 	constructor(props) {
