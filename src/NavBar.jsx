@@ -50,7 +50,7 @@ class NavBar extends Component {
 			navEnd = (
 				<div className="navbar-end">
           <Link to={'/login'} className="navbar-item">Login</Link>
-          <Link to={'/register'} className="navbar-item">register</Link>
+          <Link to={'/register'} className="navbar-item">Register</Link>
 				</div>
 			);
 		}
@@ -71,7 +71,7 @@ class NavBar extends Component {
 					</div>
 					<div id="navMenu" className="navbar-menu">
 						<div className="navbar-start">
-            <Link to={'/posts/new'} className="navbar-item">Post Trash</Link>
+            <Link to={'/posts/new'} className="navbar-item">Add Post</Link>
               <Link to={'/posts'} className="navbar-item">All Posts</Link>
 
 
