@@ -1,10 +1,13 @@
 .sidebar {
+  margin-top: 40px;
+  top: 0;
+  bottom: 0;
   height: 100%;
-  width: 250px;
+  width: 275px;
+  overflow-y: scroll;
   position: fixed;
-  background-color: white;
-  z-index: 1000;
-  overflow-y: scroll; }
+  background-color: #f9f9f9;
+  z-index: 100; }
   .sidebar .trash-icon {
     margin-left: 1.3em;
     margin-right: 0.7em; }

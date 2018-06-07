@@ -12,7 +12,6 @@ class SideBar extends Component {
 	}
 
 	handleChange(e) {
-		// need to move this to action.js eventually
 		this.setState({
 			[e.target.name]: e.target.value
 		});
@@ -24,6 +23,10 @@ class SideBar extends Component {
 			return post.tags.indexOf(this.state.searchTag) > -1;
 		});
 		this.props.filterPosts(foundPosts);
+	}
+
+	clearForm = () => {
+	  this.searchForm.reset();
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -43,21 +46,16 @@ class SideBar extends Component {
 					</li>
 				);
 			});
+
 			return (
-				<aside className="column is-fullheight">
-					<a href="/posts" className="menu-label">
-						<span className="allposts">
-							<i className="trash-icon fa fa-trash" />
-							All Posts
-						</span>
-					</a>
+				<aside className="column is-fullheight has-shadow fixed">
 					<div className="column">
-						<form onSubmit={this.handleFormSubmit}>
-							<section className="modal-card-body">
-								<br />
+						<form onSubmit={this.handleFormSubmit} ref={(el) => this.searchForm = el}>
+								<br/>
 								<div className="field">
 									<p className="control has-icons-left">
 										<input
+											style={{width: '100%'}}
 											className="input"
 											type="search"
 											placeholder="Search"
@@ -69,16 +67,22 @@ class SideBar extends Component {
 										</span>
 									</p>
 								</div>
-								<button className="button is-light">Submit</button>
-							</section>
+								<button style={{width: '100%'}} className="button is-link is-focused">Submit</button>
 						</form>
-						<button onClick={this.props.resetPosts}>Clear</button>
+					<br/>
+					<button style={{width: '100%'}} className="button is-outlined" onClick={this.props.resetPosts}>New Search</button>
 					</div>
 					<ul className="menu-list">{posts}</ul>
 				</aside>
 			);
 		} else {
-			return <div>loading...</div>;
+			return (
+				<div style={{margin: '30px'}}>
+					<p>No results found  ¯\_(ツ)_/¯</p>
+					<br/>
+					<button style={{width: '100%'}} className="button is-outlined" onClick={this.props.resetPosts}>New Search</button>
+				</div>
+			)
 		}
 	}
 }

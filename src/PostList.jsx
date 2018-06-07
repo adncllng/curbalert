@@ -14,7 +14,7 @@ class PostList extends Component {
     if (this.props.posts.length) {
       posts = this.props.posts.map(post => {
         return (
-          <div className="column is-one-third">
+          <div className="column is-one-third is-mobile">
             <div className="card">
               <div className="card-image">
               <figure className="image">
@@ -37,6 +37,9 @@ class PostList extends Component {
             <footer className="card-footer">
               <a href="#" className="card-footer-item">Claim Item</a>
               <a href="#" className="card-footer-item">View Map</a>
+              <a href="#" className="card-footer-item">
+                <i className="fas fa-heart"></i>
+              </a>
             </footer>
           </div>
         </div>
