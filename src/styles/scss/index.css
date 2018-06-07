@@ -1,11 +1,14 @@
 .App {
   position: relative; }
 
-.home .hero {
-  text-align: center; }
+.landing-page .hero {
+  margin-top: 54px;
+  text-align: center;
+  padding-top: 60px;
+  height: 700px; }
 
-.home .header-image {
-  background-image: url("http://res.cloudinary.com/ninayujiri/image/upload/v1528216125/joel-stylis-573185-unsplash.jpg");
+.landing-page .header-image {
+  background-image: url("http://res.cloudinary.com/ninayujiri/image/upload/v1528382296/chair2.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -13,8 +16,15 @@
   background-color: #999; }
 
 .map {
-  width: "100%";
-  height: "900px"; }
+  width: 100%;
+  height: 750px; }
+
+.navbar {
+  z-index: 1000;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0; }
 
 .nav.is-dark {
   background-color: #232B2D;
@@ -52,12 +62,19 @@
   padding: 5px; }
 
 .sidebar {
+  margin-top: 40px;
+  top: 0;
+  bottom: 0;
   height: 100%;
-  width: 250px;
+  padding: 10px;
+  width: 275px;
+  overflow-y: scroll;
   position: fixed;
-  background-color: white;
-  z-index: 1000;
-  overflow-y: scroll; }
+  background-color: #f9f9f9;
+  z-index: 100; }
   .sidebar .trash-icon {
     margin-left: 1.3em;
     margin-right: 0.7em; }
+
+body {
+  margin-top: 54px; }

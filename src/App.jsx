@@ -6,9 +6,11 @@ import "./styles/scss/App.css";
 import "./styles/scss/Map.css";
 import "./styles/scss/Home.css";
 import "./styles/scss/SideBar.css";
+import "./styles/scss/Login.css";
 import "./styles/scss/NewPost.css";
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
+import Footer from "./Footer.jsx";
 import SideBar from "./SideBar.jsx";
 import PostList from "./PostList.jsx";
 import NewPost from "./NewPost.jsx";
@@ -16,6 +18,7 @@ import MapContainer from "./MapContainer.jsx";
 import LoginForm from "./LoginForm.jsx";
 import RegisterForm from "./RegisterForm.jsx";
 import PostModal from "./PostModal.jsx";
+import LandingPage from "./LandingPage.jsx";
 import AuthService from "./AuthService.jsx";
 require("dotenv").config();
 
@@ -31,8 +34,10 @@ class App extends Component {
 			modalVisible: false,
 			modalParams: {}
 		};
-		this.showModal = this.showModal.bind(this);
-		this.closeModal = this.closeModal.bind(this);
+	}
+
+	componentDidMount() {
+		this.getUser();
 	}
 
 	filterPosts = foundPosts => {
@@ -54,22 +59,13 @@ class App extends Component {
 		});
 	};
 
-	componentDidMount() {
-		this.getUser();
-	}
-
-	showModal(params) {
-		console.log(params);
-		this.setState({ modalVisible: true, modalParams: params });
-	}
-
 	createPostList = () => {
 		let postsArr = [];
 		axios
 			.get("http://localhost:3001/api/posts")
 			.then(response => {
 				postsArr = response.data;
-				this.setState({ posts: [...this.state.posts, ...postsArr] });
+				this.setState({ posts: [...postsArr] });
 			})
 			.catch(error => {
 				console.log(error);
@@ -89,17 +85,17 @@ class App extends Component {
 			});
 	};
 
-  showModal(params) {
-    this.setState({modalVisible: true, modalParams: params})
-  }
-
-	closeModal() {
-		this.setState({ modalVisible: false, modalParams: {} });
-	}
-
 	addPost = post => {
 		this.setState({ posts: [...this.state.posts, post] });
 	};
+
+	showModal = params => {
+		this.setState({ modalVisible: true, modalParams: params });
+	}
+
+	closeModal = () => {
+		this.setState({ modalVisible: false, modalParams: {} });
+	}
 
 	render() {
 		let postmodal;
@@ -118,8 +114,12 @@ class App extends Component {
 				<NavBar username={this.state.currentUser.username} />
 				<Switch>
 					<Route
-						exact
-						path="/login"
+						exact path ="/welcome"
+						render={() => <LandingPage/>}
+					/>
+
+					<Route
+						exact path="/login"
 						render={() => <LoginForm getUser={this.getUser} />}
 					/>
 
@@ -137,8 +137,7 @@ class App extends Component {
 					/>
 
 					<Route
-						exact
-						path="/"
+						exact path="/"
 						render={() => (
 							<div className="home">
 								<Home
@@ -147,7 +146,7 @@ class App extends Component {
 									filterPosts={this.filterPosts}
 									resetPosts={this.resetPosts}
 								/>
-								<div className="map" style={{ width: "100%", height: "600px" }}>
+								<div className="map">
 									{postmodal}
 									<MapContainer
 										center={this.state.center}

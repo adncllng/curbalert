@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { browserHistory, useRouterHistory } from 'react-router';
 import AuthService from "./AuthService.jsx";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 class LoginForm extends Component {
   constructor() {
@@ -33,7 +35,7 @@ class LoginForm extends Component {
       alert(err);
     });
   }
-  
+
   render() {
     return (
       <div className="column is-4 is-offset-4">
@@ -72,6 +74,7 @@ class LoginForm extends Component {
           <button className="button is-light">Submit</button>
         </section>
         </form>
+          <p>Don't have an account yet?<Link to={'/register'}> Register</Link></p>
       </div>
     );
   }

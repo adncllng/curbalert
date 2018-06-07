@@ -1,14 +1,22 @@
+.navbar {
+  z-index: 1000;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 .nav.is-dark {
   background-color: #232B2D;
   color: #F6F7F7;
 }
 .nav.is-dark .nav-item a, .nav.is-dark a.nav-item {
-    color: #F6F7F7;
+  color: #F6F7F7;
 }
 .nav.is-dark .nav-item a.button.is-default {
-    color: #F6F7F7;
-    background-color: transparent;
-    border-width: 2px;
+  color: #F6F7F7;
+  background-color: transparent;
+  border-width: 2px;
 }
 .nav.menu {
   border-bottom: 1px solid #e1e1e1;
