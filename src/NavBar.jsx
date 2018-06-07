@@ -72,7 +72,7 @@ class NavBar extends Component {
 					</div>
 					<div id="navMenu" className="navbar-menu">
 						<div className="navbar-start">
-            <Link to={'/posts/new'} className="navbar-item">Add Post</Link>
+            <a onClick={this.props.showAddPostModal} className="navbar-item">Add Post</a>
               <Link to={'/posts'} className="navbar-item">All Posts</Link>
 
 
