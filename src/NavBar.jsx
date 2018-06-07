@@ -61,10 +61,10 @@ class NavBar extends Component {
 		} else {
 			navEnd = (
 				<div className="navbar-end">
-					<Link to={"/login"} className="navbar-item">
+					<Link to={"/login"} className="navbar-item" onClick={this.toggleBurger}>
 						Login
 					</Link>
-					<Link to={"/register"} className="navbar-item">
+					<Link to={"/register"} className="navbar-item" onClick={this.toggleBurger}>
 						Register
 					</Link>
 				</div>
@@ -94,10 +94,10 @@ class NavBar extends Component {
 				</div>
 				<div id="navMenu" className="navbar-menu" ref="menu">
 					<div className="navbar-start">
-						<Link to={"/posts/new"} className="navbar-item">
+						<Link to={"/posts/new"} className="navbar-item" onClick={this.toggleBurger}>
 							Add Post
 						</Link>
-						<Link to={"/posts"} className="navbar-item">
+						<Link to={"/posts"} className="navbar-item" onClick={this.toggleBurger}>
 							All Posts
 						</Link>
 					</div>
