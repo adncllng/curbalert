@@ -12,7 +12,7 @@ class NewPost extends Component {
     this.state = {
       trashPicUrl: null,
       trashTags: [],
-      trashTitle: null,
+      title: null,
       trashTag: null,
       content: null,
     };
@@ -32,13 +32,13 @@ class NewPost extends Component {
     });
   };
 
-   removeTag = event => {
-     event.preventDefault()
-     let newtags = this.state.trashTags.filter(tag => tag != event.target.name);
-     this.setState({
-       trashTags: newtags
-    })
-  }
+  removeTag = event => {
+    event.preventDefault();
+    let newtags = this.state.trashTags.filter(tag => tag != event.target.name);
+    this.setState({
+      trashTags: newtags,
+    });
+  };
 
   componentDidMount() {
     axios
@@ -120,7 +120,7 @@ class NewPost extends Component {
 
       const data = {
         user_id: this.props.currentUser.id, //need to get the user id
-        title: this.state.trashTitle,
+        title: this.state.title,
         content: this.state.content, // need to get the content
         image_url: this.state.trashPicUrl,
         geo_tag: this.state.geo_tag,
@@ -133,7 +133,9 @@ class NewPost extends Component {
         .post('http://localhost:3001/api/posts', data)
         .then(res => {
           console.log(res);
+          console.log(data)
           this.props.addPost(data);
+          this.props.closeAddPostModal();
           this.setState({
             trashPicUrl: null,
             trashTags: [],
@@ -144,7 +146,11 @@ class NewPost extends Component {
         .catch(err => {
           console.log();
         });
-    });
+    }).catch(err =>{
+      this.setState({
+        flash: err.message
+      })
+    })
   };
 
   render() {
@@ -171,16 +177,33 @@ class NewPost extends Component {
     }
 
     return (
-      <div className='upload-form'>
-        <div className="box" style={{ maxWidth: '40%', minHeight: '200px' }}>
-          <article className="media">
-            <div className="media-left">
-              <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
-                {trashPic || 'click or drag and drop an image'}
-              </Dropzone>
-            </div>
+      <div className="modal is-active" style={{ zIndex: '101' }}>
+      <form onSubmit={this.handleFormSubmit}>
+        <div className="modal-background" />
+        <div className="modal-card">
+          <header className="modal-card-head">
+            <p className="modal-card-title">Modal title</p>
+            <button className="delete" onClick={this.props.closeAddPostModal} aria-label="close" />
+          </header>
+
+          <section className="modal-card-body">
             <div className="media-content">
-              <form onSubmit={this.handleFormSubmit}>
+              <div className="columns">
+                <div className="media-left column is-one-third">
+                  <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
+                    {trashPic || 'click or drag and drop an image'}
+                  </Dropzone>
+                </div>
+                <div className="column is-two-thirds">
+                <div className="field">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder={this.state.title || "Title"}
+                    name="title"
+                    onChange={this.handleChange}
+                  />
+                </div>
                 <div className="field">
                   <textarea
                     onChange={this.handleChange}
@@ -216,9 +239,6 @@ class NewPost extends Component {
                   </p>
                 </div>
                 <nav className="level is-mobile">
-                  <button className="button is-light">Submit</button>
-                </nav>
-                <nav className="level is-mobile">
                   <div className="level-left">
                     <div
                       style={{ width: '350px' }}
@@ -228,12 +248,87 @@ class NewPost extends Component {
                     </div>
                   </div>
                 </nav>
-              </form>
+                </div>
+                </div>
             </div>
-          </article>
+          </section>
+          <footer className="modal-card-foot">
+            <button className="button is-success">Upload</button>
+            <p>{this.state.flash}</p>
+          </footer>
         </div>
-</div>
+        </form>
+      </div>
     );
   }
 }
 export default NewPost;
+
+// (
+//   <div className="modal is-active">
+//   <div className='upload-form'>
+//     <div className="box" style={{ maxWidth: '40%', minHeight: '200px' }}>
+//       <article className="media">
+//         <div className="media-left">
+//         <button className="delete media-right" onClick={this.props.closeAddPostModal} />
+//           <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
+//             {trashPic || 'click or drag and drop an image'}
+//           </Dropzone>
+
+//         </div>
+//         <div className="media-content">
+//           <form onSubmit={this.handleFormSubmit}>
+//             <div className="field">
+//               <textarea
+//                 onChange={this.handleChange}
+//                 className="textarea"
+//                 name="content"
+//                 placeholder="Description"
+//               />
+//             </div>
+//             <div className="field">
+//               <input
+//                 className="input"
+//                 type="text"
+//                 placeholder="address"
+//                 name="address"
+//                 onChange={this.handleChange}
+//               />
+//             </div>
+//             <div className="field is-grouped">
+//               <p className="control is-expanded">
+//                 <input
+//                   name="trashTag"
+//                   placeholder="add tags"
+//                   onChange={this.handleChange}
+//                   className="input"
+//                   type="text"
+//                   value={this.state.trashTag}
+//                 />
+//               </p>
+//               <p className="control">
+//                 <a className="button is-info" onClick={this.addTag}>
+//                   + tag
+//                 </a>
+//               </p>
+//             </div>
+//             <nav className="level is-mobile">
+//               <button className="button is-light">Submit</button>
+//             </nav>
+//             <nav className="level is-mobile">
+//               <div className="level-left">
+//                 <div
+//                   style={{ width: '350px' }}
+//                   className="field is-grouped is-grouped-multiline"
+//                 >
+//                   {tags}
+//                 </div>
+//               </div>
+//             </nav>
+//           </form>
+//         </div>
+//       </article>
+//     </div>
+// </div>
+// </div>
+// );

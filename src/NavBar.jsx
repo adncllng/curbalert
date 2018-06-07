@@ -84,11 +84,29 @@ class NavBar extends Component {
 							All Posts
 						</Link>
 					</div>
+<<<<<<< HEAD
+					<div id="navMenu" className="navbar-menu">
+						<div className="navbar-start">
+            <a onClick={this.props.showAddPostModal} className="navbar-item">Add Post</a>
+              <Link to={'/posts'} className="navbar-item">All Posts</Link>
+
+
+						</div>
+
+              { navEnd }
+
+            </div>
+        </div>
+      </nav>
+    )
+  }
+=======
 					{navEnd}
 				</div>
 			</nav>
 		);
 	}
+>>>>>>> 6f31be8153bde4e870ddb00dee84b27a5374fe52
 }
 
 export default NavBar;
