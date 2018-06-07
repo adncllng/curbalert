@@ -25,15 +25,13 @@ class SideBar extends Component {
 		this.props.filterPosts(foundPosts);
 	}
 
-	clearForm = () => {
-	  this.searchForm.reset();
-	}
-
 	componentWillReceiveProps(nextProps) {
 		this.setState({ posts: nextProps.posts });
 	}
 
 	render() {
+		const searchForm = this.refs.searchForm;
+
 		let posts = null;
 		if (this.state.posts.length) {
 			posts = this.state.posts.map(post => {
@@ -50,7 +48,7 @@ class SideBar extends Component {
 			return (
 				<aside className="menu column is-fullheight has-shadow">
 					<div className="column">
-						<form onSubmit={this.handleFormSubmit} ref={(el) => this.searchForm = el}>
+						<form onSubmit={this.handleFormSubmit} ref="searchForm">
 								<br/>
 								<div className="field">
 									<p className="control has-icons-left">
@@ -70,7 +68,7 @@ class SideBar extends Component {
 								<button style={{width: '100%'}} className="button is-link is-focused">Submit</button>
 						</form>
 					<br/>
-					<button style={{width: '100%'}} className="button is-outlined" onClick={this.props.resetPosts}>New Search</button>
+					<button style={{width: '100%'}} className="button is-outlined" onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm);}}>New Search</button>
 					</div>
 					<ul className="menu-list">{posts}</ul>
 				</aside>
