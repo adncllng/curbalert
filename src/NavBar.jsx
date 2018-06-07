@@ -8,23 +8,6 @@ class NavBar extends Component {
 		this.Auth = new AuthService();
 	}
 
-	state = {
-		isActive: false,
-		isLoggedOut: false
-	};
-
-	toggleNav = () => {
-		this.setState(prevState => ({
-			isActive: !prevState.isActive
-		}));
-	};
-
-	renderNav = () => {
-		this.setState(prevState => ({
-			isLoggedOut: true
-		}));
-	};
-
 	toggleBurger = () => {
 		const burger = this.refs.burger;
 		const menu = this.refs.menu;
@@ -51,7 +34,7 @@ class NavBar extends Component {
 							className="is-dark"
 							onClick={() => {
 								this.Auth.logout();
-								this.renderNav();
+								this.props.logout();
 							}}>
 							Logout
 						</a>

@@ -27,7 +27,7 @@ class RegisterForm extends Component {
 	}
 
 	componentWillMount() {
-		if (this.Auth.loggedIn()) this.props.history.replace("/");
+		if (this.Auth.loggedIn()) window.location.assign('/');
 	}
 
 	handleChange(e) {
@@ -54,7 +54,9 @@ class RegisterForm extends Component {
 					})
 					.then(res => {
 						localStorage.setItem("id_token", res.data.token);
-						this.props.history.replace("/");
+						localStorage.setItem("email", this.state.email);
+						this.props.getUser();
+						window.location.assign('/');
 					});
 			},
 			error => {

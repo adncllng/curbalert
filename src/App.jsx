@@ -50,7 +50,7 @@ class App extends Component {
 			let usersArr = response.data;
 			usersArr.forEach(user => {
 				if (user.email == currentEmail) {
-					this.setState({
+						this.setState({
 						currentUser: user,
 						center: { lat: user.geo_tag.x, lng: user.geo_tag.y }
 					});
@@ -101,6 +101,13 @@ class App extends Component {
 		this.setState({ modalVisible: false, modalParams: {} });
 	}
 
+	logout = () => {
+		this.setState({
+			currentUser: {}
+		})
+		window.location.assign('/');
+	}
+
 	render() {
 		let postmodal;
 		postmodal = this.state.modalVisible ? (
@@ -115,7 +122,7 @@ class App extends Component {
 
 		return (
 			<div className="App">
-				<NavBar username={this.state.currentUser.username} />
+				<NavBar username={this.state.currentUser.username} logout={this.logout} />
 				<Switch>
 					<Route
 						exact path ="/welcome"
@@ -127,7 +134,11 @@ class App extends Component {
 						render={() => <LoginForm getUser={this.getUser} />}
 					/>
 
-					<Route exact path="/register" component={RegisterForm} />
+					<Route
+						exact path="/register"
+						render={() => <RegisterForm getUser={this.getUser} />}
+					/>
+
 					<Route
 						exact
 						path="/posts/new"
