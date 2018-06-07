@@ -4,6 +4,8 @@ import axios from 'axios';
 import moment from 'moment';
 import Geocode from "react-geocode";
 import './styles/scss/App.css';
+import './styles/scss/PostModal.css';
+
 
 class PostModal extends Component {
   constructor(props) {
@@ -34,13 +36,13 @@ class PostModal extends Component {
 
     return (
       <div className="modal is-active">
-        <div className="modal-card">
+        <div className="modal-content-width">
           <header className="modal-card-head">
             <p className="modal-card-title">{this.props.modalParams.title}</p>
             <button className="delete" onClick={this.handleClick} />
           </header>
           <section className="modal-card-body">
-            <img src={this.props.modalParams.image_url} style={{ maxWidth: '200px' }} alt={'Post image'}/>
+            <img src={this.props.modalParams.image_url} className="modal-image" />
             <div className="content">
               {this.props.modalParams.content}
             </div>

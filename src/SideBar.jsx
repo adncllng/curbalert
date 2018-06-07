@@ -35,7 +35,7 @@ class SideBar extends Component {
        thisPost = post
       }
     })
-    this.props.showModal(thisPost)
+    this.props.showPostModal(thisPost)
   }
 
 	componentWillReceiveProps(nextProps) {
@@ -48,7 +48,7 @@ class SideBar extends Component {
 			posts = this.state.posts.map(post => {
 				return (
 					<SideBarItem
-						key={post.id}
+						id={post.id}
 						title={post.title}
 						image={post.image_url}
 						toggleModal={this.toggleModal}

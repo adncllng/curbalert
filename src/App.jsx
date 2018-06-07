@@ -145,6 +145,7 @@ class App extends Component {
 									createPostList={this.createPostList}
 									filterPosts={this.filterPosts}
 									resetPosts={this.resetPosts}
+									showModal={this.showModal}
 								/>
 								<div className="map">
 									{postmodal}
