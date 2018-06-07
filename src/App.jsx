@@ -85,17 +85,6 @@ class App extends Component {
 			});
 	};
 
-<<<<<<< HEAD
-=======
-  showModal(params) {
-    this.setState({modalVisible: true, modalParams: params})
-  }
-
-	closeModal() {
-		this.setState({ modalVisible: false, modalParams: {} });
-	}
-
->>>>>>> production
 	addPost = post => {
 		this.setState({ posts: [...this.state.posts, post] });
 	};

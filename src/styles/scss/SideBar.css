@@ -3,6 +3,7 @@
   top: 0;
   bottom: 0;
   height: 100%;
+  padding: 10px;
   width: 275px;
   overflow-y: scroll;
   position: fixed;
