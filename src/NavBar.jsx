@@ -102,6 +102,7 @@ class NavBar extends Component {
 					</div>
 					{navEnd}
 				</div>
+				</div>
 			</nav>
 		);
 	}
