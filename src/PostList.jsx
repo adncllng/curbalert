@@ -7,15 +7,12 @@ import "./styles/scss/PostList.css";
 class PostList extends Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
       posts: this.props.posts
     };
   }
 
-  handleChange(e) {
-    // need to move this to action.js eventually
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -27,7 +24,7 @@ class PostList extends Component {
     });
   }
 
-  handleFormSubmit(e) {
+  handleFormSubmit= e => {
     e.preventDefault();
     let foundPosts = this.props.posts.filter(post => {
       return post.tags.indexOf(this.state.searchTag) > -1;
@@ -116,4 +113,4 @@ class PostList extends Component {
 	}
 }
 
-export default PostList;
+export default PostList
