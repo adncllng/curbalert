@@ -28,6 +28,12 @@ class NavBar extends Component {
 					<div className="navbar-item">
 						<p>Hi, {this.props.username}</p>
 					</div>
+					<Link
+						to={"/profile"}
+						className="navbar-item"
+					>
+					Profile
+					</Link>
 					<div className="navbar-item">
 						<a
 							type="button"
