@@ -22,7 +22,7 @@ exports.down = function(knex, Promise) {
   return Promise.all([
     knex.schema
       .dropTable("posts")
-      .createTable("users", function(table) {
+      .createTable("posts", function(table) {
           table.increments('id');
           table.integer('user_id').references('users');
           table.string('title');
