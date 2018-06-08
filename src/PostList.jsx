@@ -61,6 +61,7 @@ class PostList extends Component {
 								<div className="content">
 									{post.content}
 									<br />
+                  {post.address}
 									<br />
 									<small>Posted {moment(post.created_at).fromNow()}</small>
 								</div>
