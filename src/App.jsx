@@ -8,7 +8,7 @@ import './styles/scss/Home.css';
 import './styles/scss/SideBar.css';
 import './styles/scss/Login.css';
 import './styles/scss/NewPost.css';
-import Home from './Home.jsx';
+
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import SideBar from './SideBar.jsx';
@@ -177,12 +177,15 @@ class App extends Component {
             render={() =>
               this.Auth.loggedIn() ? (
                 <div className="home">
-                  <Home
-                    posts={this.state.posts}
-                    createPostList={this.createPostList}
-                    filterPosts={this.filterPosts}
-                    resetPosts={this.resetPosts}
-                  />
+								<section className="sidebar columns is-fullheight">
+									<SideBar
+										posts={this.state.posts}
+										createPostList={this.createPostList}
+										filterPosts={this.filterPosts}
+										resetPosts={this.resetPosts}
+										clearSearchForm={this.clearSearchForm}
+									/>
+								</section>
                   <div className="map">
                     {postmodal}
                     <MapContainer
