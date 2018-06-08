@@ -95,6 +95,7 @@ class App extends Component {
 	showAddPostModal = () => {
 		this.setState({ addPostModalVisable: true });
 	};
+
 	closeAddPostModal = () => {
 		this.setState({ addPostModalVisable: false });
 	};
@@ -193,6 +194,7 @@ class App extends Component {
 										filterPosts={this.filterPosts}
 										resetPosts={this.resetPosts}
 										clearSearchForm={this.clearSearchForm}
+										showModal={this.showModal}
 									/>
 									<div className="map">
 										{postmodal}

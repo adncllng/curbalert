@@ -21,8 +21,6 @@ class RegisterForm extends Component {
 			geo_tag: ""
 		};
 
-		this.handleChange = this.handleChange.bind(this);
-		this.handleFormSubmit = this.handleFormSubmit.bind(this);
 		this.Auth = new AuthService();
 	}
 
@@ -30,13 +28,13 @@ class RegisterForm extends Component {
 		if (this.Auth.loggedIn()) window.location.assign('/');
 	}
 
-	handleChange(e) {
+	handleChange = e => {
 		this.setState({
 			[e.target.name]: e.target.value
 		});
 	}
 
-	handleFormSubmit(e) {
+	handleFormSubmit = e => {
 		e.preventDefault();
 
 		Geocode.fromAddress(this.state.address).then(

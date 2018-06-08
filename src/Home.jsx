@@ -8,7 +8,14 @@ import "./styles/scss/NavBar.css";
 class Home extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			posts: this.props.posts
+		};
 	}
+
+	showPostModal = key => {
+    this.props.showModal(key)
+  }
 
 	render() {
 		return (
@@ -19,6 +26,7 @@ class Home extends Component {
 						createPostList={this.props.createPostList}
 						filterPosts={this.props.filterPosts}
             resetPosts={this.props.resetPosts}
+           	showPostModal={this.showPostModal}
 						clearSearchForm={this.props.clearSearchForm}
 					/>
 				</section>

@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import ReactDOM from "react-dom";
-import axios from "axios";
-import SideBar from "./SideBar.jsx";
 import "./styles/scss/Home.css";
 
 class LandingPage extends Component {

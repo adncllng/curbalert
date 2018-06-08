@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { browserHistory, useRouterHistory } from 'react-router';
 import AuthService from "./AuthService.jsx";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 
