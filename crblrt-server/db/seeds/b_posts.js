@@ -13,7 +13,8 @@ exports.seed = function(knex, Promise) {
           image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/1.jpg',
           geo_tag: knex.raw(`point(45.4768, -73.5842)`),
           point_value: faker.random.number({min:5, max:10}),
-          visible: faker.random.boolean()
+          visible: faker.random.boolean(),
+          claimed_by: faker.random.number({min:1, max:5})
         },
         {
           user_id: faker.random.number({min:1, max:5}),
@@ -22,7 +23,8 @@ exports.seed = function(knex, Promise) {
           image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/2.jpg',
           geo_tag: knex.raw(`point(45.4548, -73.5699)`),
           point_value: faker.random.number({min:5, max:10}),
-          visible: faker.random.boolean()
+          visible: faker.random.boolean(),
+          claimed_by: faker.random.number({min:1, max:5})
         },
         {
           user_id: faker.random.number({min:1, max:5}),
@@ -31,7 +33,8 @@ exports.seed = function(knex, Promise) {
           image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/3.jpg',
           geo_tag: knex.raw(`point(45.4914, -73.5605)`),
           point_value: faker.random.number({min:5, max:10}),
-          visible: faker.random.boolean()
+          visible: faker.random.boolean(),
+          claimed_by: faker.random.number({min:1, max:5})
         },
         {
           user_id: faker.random.number({min:1, max:5}),
@@ -40,7 +43,8 @@ exports.seed = function(knex, Promise) {
           image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/4.jpg',
           geo_tag: knex.raw(`point(45.5017, -73.5673)`),
           point_value: faker.random.number({min:5, max:10}),
-          visible: faker.random.boolean()
+          visible: faker.random.boolean(),
+          claimed_by: faker.random.number({min:1, max:5})
         },
         {
           user_id: faker.random.number({min:1, max:5}),
@@ -49,7 +53,8 @@ exports.seed = function(knex, Promise) {
           image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/5.jpg',
           geo_tag: knex.raw(`point(45.5232, -73.5870)`),
           point_value: faker.random.number({min:5, max:10}),
-          visible: faker.random.boolean()
+          visible: faker.random.boolean(),
+          claimed_by: faker.random.number({min:1, max:5})
         }
       ]);
     });
