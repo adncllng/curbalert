@@ -37,7 +37,7 @@ class SideBar extends Component {
        thisPost = post
       }
     })
-    this.props.showPostModal(thisPost)
+    this.props.showModal(thisPost)
   }
 
 	componentWillReceiveProps(nextProps) {
