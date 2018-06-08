@@ -62,6 +62,9 @@ class App extends Component {
 
   createPostList = () => {
     let postsArr = [];
+		this.setState({
+			posts:[]
+		})
     axios
       .get('http://localhost:3001/api/posts')
       .then(response => {

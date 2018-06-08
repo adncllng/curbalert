@@ -31,7 +31,9 @@ class PostList extends Component {
   }
 
 	componentDidMount() {
-		this.props.createPostList();
+    if(!this.props.posts.length){
+      	this.props.createPostList();
+    }
 	}
 
 	render() {
