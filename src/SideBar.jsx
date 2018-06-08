@@ -85,7 +85,7 @@ class SideBar extends Component {
 					<br/>
 					<button style={{width: '100%'}} className="button is-outlined" onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm); this.handleClear();}}>New Search</button>
 					</div>
-						{posts}
+						{posts.reverse()}
 				</aside>
 			);
 		} else {
