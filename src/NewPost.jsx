@@ -24,6 +24,7 @@ class NewPost extends Component {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
   };
+
   addTag = event => {
     event.preventDefault();
     this.setState({

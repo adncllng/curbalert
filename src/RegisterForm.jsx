@@ -20,7 +20,6 @@ class RegisterForm extends Component {
 			address: "",
 			geo_tag: ""
 		};
-
 		this.Auth = new AuthService();
 	}
 

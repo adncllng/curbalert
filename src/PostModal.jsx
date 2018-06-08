@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
-import axios from 'axios';
 import moment from 'moment';
 import Geocode from "react-geocode";
 import './styles/scss/App.css';
@@ -24,7 +22,7 @@ class PostModal extends Component {
   getAddress = (lat, lng) => {
     Geocode.fromLatLng(lat, lng).then(
       response => {
-        const address = response.results[0].formatted_address.slice(0, -30);
+        const address = response.results[0].formatted_address;
         this.setState({ address: address });
       }
     );
