@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
         table.string('title');
         table.string('content');
         table.string('image_url');
-        table.string('geo_tag');
+        table.specificType('geo_tag', 'POINT');
         table.integer('point_value');
         table.boolean('visible');
         table.integer('claimed_by').references('users');
@@ -28,7 +28,7 @@ exports.down = function(knex, Promise) {
           table.string('title');
           table.string('content');
           table.string('image_url');
-          table.string('geo_tag');
+          table.specificType('geo_tag', 'POINT');
           table.integer('point_value');
           table.boolean('visible');
           table.timestamp('created_at').defaultTo(knex.fn.now());
