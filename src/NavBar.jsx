@@ -8,23 +8,6 @@ class NavBar extends Component {
 		this.Auth = new AuthService();
 	}
 
-	state = {
-		isActive: false,
-		isLoggedOut: false
-	};
-
-	toggleNav = () => {
-		this.setState(prevState => ({
-			isActive: !prevState.isActive
-		}));
-	};
-
-	renderNav = () => {
-		this.setState(prevState => ({
-			isLoggedOut: true
-		}));
-	};
-
 	toggleBurger = () => {
 		const burger = this.refs.burger;
 		const menu = this.refs.menu;
@@ -35,7 +18,7 @@ class NavBar extends Component {
 			burger.className += " is-active";
 			menu.className += " is-active";
 		}
-	}
+	};
 
 	render() {
 		let navEnd;
@@ -51,7 +34,7 @@ class NavBar extends Component {
 							className="is-dark"
 							onClick={() => {
 								this.Auth.logout();
-								this.renderNav();
+								this.props.logout();
 							}}>
 							Logout
 						</a>
@@ -61,10 +44,16 @@ class NavBar extends Component {
 		} else {
 			navEnd = (
 				<div className="navbar-end">
-					<Link to={"/login"} className="navbar-item" onClick={this.toggleBurger}>
+					<Link
+						to={"/login"}
+						className="navbar-item"
+						onClick={this.toggleBurger}>
 						Login
 					</Link>
-					<Link to={"/register"} className="navbar-item" onClick={this.toggleBurger}>
+					<Link
+						to={"/register"}
+						className="navbar-item"
+						onClick={this.toggleBurger}>
 						Register
 					</Link>
 				</div>
@@ -84,8 +73,7 @@ class NavBar extends Component {
 						className="navbar-burger"
 						data-target="navMenu"
 						ref="burger"
-						onClick={this.toggleBurger}
-						>
+						onClick={this.toggleBurger}>
 						<span />
 						<span />
 						<span />
@@ -93,12 +81,17 @@ class NavBar extends Component {
 				</div>
 				<div id="navMenu" className="navbar-menu" ref="menu">
 					<div className="navbar-start">
-						<Link to={"/posts/new"} className="navbar-item" onClick={this.toggleBurger}>
-							Add Post
-						</Link>
-						<Link to={"/posts"} className="navbar-item" onClick={this.toggleBurger}>
+						<Link
+							to={"/posts"}
+							className="navbar-item"
+							onClick={this.toggleBurger}>
 							All Posts
 						</Link>
+						<div className="navbar-start">
+							<a onClick={(event) => {this.props.showAddPostModal(); this.toggleBurger();}} className="navbar-item">
+								Add Post
+							</a>
+						</div>
 					</div>
 					{navEnd}
 				</div>

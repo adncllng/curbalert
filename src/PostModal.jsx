@@ -24,7 +24,7 @@ class PostModal extends Component {
   getAddress = (lat, lng) => {
     Geocode.fromLatLng(lat, lng).then(
       response => {
-        const address = response.results[0].formatted_address;
+        const address = response.results[0].formatted_address.slice(0, -30);
         this.setState({ address: address });
       }
     );

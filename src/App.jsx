@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./styles/scss/NavBar.css";
 import "./styles/scss/App.css";
@@ -32,7 +32,8 @@ class App extends Component {
 			zoom: 11,
 			currentUser: {},
 			modalVisible: false,
-			modalParams: {}
+			modalParams: {},
+			addPostModalVisable: false
 		};
 	}
 
@@ -64,7 +65,7 @@ class App extends Component {
 		axios
 			.get("http://localhost:3001/api/posts")
 			.then(response => {
-				postsArr = response.data;
+				postsArr = response.data.reverse();
 				this.setState({ posts: [...postsArr] });
 			})
 			.catch(error => {
@@ -73,8 +74,10 @@ class App extends Component {
 	};
 
 	clearSearchForm = form => {
-		form.reset();
-	}
+		if (form) {
+			form.reset();
+		}
+	};
 
 	resetPosts = () => {
 		let postsArr = [];
@@ -89,19 +92,45 @@ class App extends Component {
 			});
 	};
 
+	showAddPostModal = () => {
+		this.setState({ addPostModalVisable: true });
+	};
+	closeAddPostModal = () => {
+		this.setState({ addPostModalVisable: false });
+	};
+
 	addPost = post => {
-		this.setState({ posts: [...this.state.posts, post] });
+		this.setState({ posts: [post, ...this.state.posts] });
 	};
 
 	showModal = params => {
 		this.setState({ modalVisible: true, modalParams: params });
-	}
+	};
 
 	closeModal = () => {
 		this.setState({ modalVisible: false, modalParams: {} });
-	}
+	};
+
+	logout = () => {
+		this.setState({
+			currentUser: {}
+		});
+		window.location.assign("/");
+	};
 
 	render() {
+		let addPostModal = null;
+		addPostModal = this.state.addPostModalVisable ? (
+			<NewPost
+				trashUploadHandler={this.trashUploadHandler}
+				addPost={this.addPost}
+				currentUser={this.state.currentUser}
+				closeAddPostModal={this.closeAddPostModal}
+			/>
+		) : (
+			""
+		);
+
 		let postmodal;
 		postmodal = this.state.modalVisible ? (
 			<PostModal
@@ -115,68 +144,89 @@ class App extends Component {
 
 		return (
 			<div className="App">
-				<NavBar username={this.state.currentUser.username} />
+				{addPostModal}
+				<NavBar
+					username={this.state.currentUser.username}
+					showAddPostModal={this.showAddPostModal}
+					logout={this.logout}
+				/>
 				<Switch>
-					<Route
-						exact path ="/welcome"
-						render={() => <LandingPage/>}
-					/>
+					<Route exact path="/welcome" render={() => <LandingPage />} />
 
 					<Route
-						exact path="/login"
+						exact
+						path="/login"
 						render={() => <LoginForm getUser={this.getUser} />}
 					/>
 
-					<Route exact path="/register" component={RegisterForm} />
 					<Route
 						exact
-						path="/posts/new"
-						render={() => (
-							<NewPost
-								trashUploadHandler={this.trashUploadHandler}
-								addPost={this.addPost}
-								currentUser={this.state.currentUser}
-							/>
-						)}
+						path="/register"
+						render={() => <RegisterForm getUser={this.getUser} />}
 					/>
 
 					<Route
-						exact path="/"
-						render={() => (
-							<div className="home">
-								<Home
+						exact
+						path="/posts/new"
+						render={() =>
+							this.Auth.loggedIn() ? (
+								<NewPost
+									trashUploadHandler={this.trashUploadHandler}
+									addPost={this.addPost}
+									currentUser={this.state.currentUser}
+								/>
+							) : (
+								<Redirect to="/welcome" />
+							)
+						}
+					/>
+
+					<Route
+						exact
+						path="/"
+						render={() =>
+							this.Auth.loggedIn() ? (
+								<div className="home">
+									<Home
+										posts={this.state.posts}
+										createPostList={this.createPostList}
+										filterPosts={this.filterPosts}
+										resetPosts={this.resetPosts}
+										clearSearchForm={this.clearSearchForm}
+									/>
+									<div className="map">
+										{postmodal}
+										<MapContainer
+											center={this.state.center}
+											zoom={this.state.zoom}
+											posts={this.state.posts}
+											createPostList={this.createPostList}
+											showModal={this.showModal}
+										/>
+									</div>
+								</div>
+							) : (
+								<Redirect to="/welcome" />
+							)
+						}
+					/>
+
+					<Route
+						exact
+						path="/posts"
+						render={() =>
+							this.Auth.loggedIn() ? (
+								<PostList
 									posts={this.state.posts}
 									createPostList={this.createPostList}
 									filterPosts={this.filterPosts}
 									resetPosts={this.resetPosts}
-									showModal={this.showModal}
 									clearSearchForm={this.clearSearchForm}
 								/>
-								<div className="map">
-									{postmodal}
-									<MapContainer
-										center={this.state.center}
-										zoom={this.state.zoom}
-										posts={this.state.posts}
-										createPostList={this.createPostList}
-										showModal={this.showModal}
-									/>
-								</div>
-							</div>
-						)}
-					/>
-
-					<Route
-						exact path="/posts"
-						render={() => (
-							<PostList
-								posts={this.state.posts}
-								createPostList={this.createPostList}
-								filterPosts={this.filterPosts}
-								resetPosts={this.resetPosts}
-								clearSearchForm={this.clearSearchForm}
-							/>
-						)}
+							) : (
+								<Redirect to="/welcome" />
+							)
+						}
 					/>
 				</Switch>
 			</div>
