@@ -47,7 +47,7 @@ class App extends Component {
 
   getUser = () => {
     let currentEmail = this.Auth.getEmail('email');
-    axios.get('http://localhost:3001/users').then(response => {
+    axios.get('http://localhost:3001/api/users').then(response => {
       let usersArr = response.data;
       usersArr.forEach(user => {
         if (user.email == currentEmail) {
