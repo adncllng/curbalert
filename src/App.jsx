@@ -153,6 +153,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        {postmodal}
         {addPostModal}
         <NavBar
 					logout={this.logout}
@@ -173,7 +174,8 @@ class App extends Component {
 						path="/register"
 						render={() => <RegisterForm getUser={this.getUser} />}
 					/>
-          <Route
+
+      {/*  <Route
             exact
             path="/posts/new"
             render={() =>
@@ -187,7 +189,7 @@ class App extends Component {
                 <Redirect to="/welcome" />
               )
             }
-          />
+          />     */}
 
           <Route
             exact
@@ -195,18 +197,17 @@ class App extends Component {
             render={() =>
               this.Auth.loggedIn() ? (
                 <div className="home">
-								<section className="sidebar columns is-fullheight">
-									<SideBar
-										posts={this.state.posts}
-										createPostList={this.createPostList}
-										filterPosts={this.filterPosts}
-										resetPosts={this.resetPosts}
-										clearSearchForm={this.clearSearchForm}
-										showModal={this.showModal}
-									/>
-								</section>
+                <section className="sidebar columns is-fullheight">
+                  <SideBar
+                    posts={this.state.posts}
+                    createPostList={this.createPostList}
+                    filterPosts={this.filterPosts}
+                    resetPosts={this.resetPosts}
+                    clearSearchForm={this.clearSearchForm}
+                    showModal={this.showModal}
+                  />
+                </section>
                   <div className="map">
-                    {postmodal}
                     <MapContainer
                       center={this.state.center}
                       zoom={this.state.zoom}

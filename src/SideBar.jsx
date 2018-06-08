@@ -80,7 +80,7 @@ class SideBar extends Component {
 										</span>
 									</p>
 								</div>
-								<button style={{width: '100%'}} className="button is-link is-focused">Submit</button>
+								<button style={{width: '100%'}} className="button is-light">Submit</button>
 						</form>
 					<br/>
 					<button style={{width: '100%'}} className="button is-outlined" onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm); this.handleClear();}}>New Search</button>

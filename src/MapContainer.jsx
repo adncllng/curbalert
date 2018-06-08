@@ -6,22 +6,15 @@ import Marker from "./Marker.jsx";
 class MapContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      posts: this.props.posts,
-    };
   }
 
   componentDidMount() {
     this.props.createPostList();
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ posts: nextProps.posts })
-  }
-
   toggleModal = key => {
     let thisPost = null;
-      this.state.posts.forEach((post, i) => {
+      this.props.posts.forEach((post, i) => {
       if (post.id == key) {
        thisPost = post
       }
@@ -30,7 +23,7 @@ class MapContainer extends Component {
   }
 
   render() {
-    const markers = this.state.posts.map(marker =>
+    const markers = this.props.posts.map(marker =>
       <Marker
         key={marker.id}
         lat={marker ? marker.geo_tag.x : ''}
