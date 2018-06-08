@@ -1,14 +1,22 @@
 import React, { Component } from "react";
 import moment from "moment";
-import "./styles/scss/PostList.css";
+import "./styles/scss/Profile.css";
 
 class Profile extends Component {
+
+  componentDidMount() {
+    if(!this.props.posts.length) {
+      this.props.createPostList();
+    }
+  }
+
 	render() {
 		let posts = null;
 		if (this.props.posts.length) {
 			posts = this.props.posts.map(post => {
+        if (post.user_id == this.props.currentUser.id) {
 				return (
-					<div className="column is-one-third">
+					<div className="column is-one-fourth is-mobile">
 						<div className="card">
 							<div className="card-image">
 								<figure className="image">
@@ -33,20 +41,20 @@ class Profile extends Component {
 							</div>
 							<footer className="card-footer">
 								<a href="#" className="card-footer-item">
-									Claim Item
+									Delete
 								</a>
 							</footer>
 						</div>
 					</div>
 				);
+        }
 			});
 		} else {
       return (
         <div className="hero is-centered">
           <div className="hero-content">
-            <p>No results found 👀</p>
+            <p>No posts to display 👀</p>
             <br/>
-            <button className="button is-outlined" onClick={this.props.resetPosts}>New Search</button>
           </div>
         </div>
       )
@@ -54,8 +62,12 @@ class Profile extends Component {
 		return (
 			<div className="container">
 				<div className="section">
-					<div className="row columns is-multiline">{posts.reverse()}</div>
+					<div className="row columns is-multiline user-posts">{posts.reverse()}</div>
 				</div>
+        <hr/>
+        <div className="section">
+          <div className="row columns is-multiline claimed-items"></div>
+        </div>
 			</div>
 		);
 	}
