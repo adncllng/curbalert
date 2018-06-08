@@ -12,7 +12,7 @@ export default class AuthService {
   login(email, password) {
     this.setEmail(email);
     // Get a token from api server using the fetch api
-    return this.fetch(`${this.domain}/users/login`, {
+    return this.fetch(`${this.domain}/api/users/login`, {
       method: "POST",
       body: JSON.stringify({
         email,

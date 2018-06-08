@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import axios from 'axios';
-import './styles/scss/NavBar.css';
-import './styles/scss/App.css';
-import './styles/scss/Map.css';
-import './styles/scss/Home.css';
-import './styles/scss/SideBar.css';
-import './styles/scss/Login.css';
-import './styles/scss/NewPost.css';
-
-import NavBar from './NavBar.jsx';
-import SideBar from './SideBar.jsx';
-import PostList from './PostList.jsx';
-import NewPost from './NewPost.jsx';
-import MapContainer from './MapContainer.jsx';
-import LoginForm from './LoginForm.jsx';
-import RegisterForm from './RegisterForm.jsx';
-import PostModal from './PostModal.jsx';
-import LandingPage from './LandingPage.jsx';
-import AuthService from './AuthService.jsx';
-import Geocode from 'react-geocode';
-require('dotenv').config();
+import React, { Component } from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import axios from "axios";
+import "./styles/scss/NavBar.css";
+import "./styles/scss/App.css";
+import "./styles/scss/Map.css";
+import "./styles/scss/Home.css";
+import "./styles/scss/SideBar.css";
+import "./styles/scss/Login.css";
+import "./styles/scss/NewPost.css";
+import Profile from "./Profile.jsx";
+import NavBar from "./NavBar.jsx";
+import SideBar from "./SideBar.jsx";
+import PostList from "./PostList.jsx";
+import NewPost from "./NewPost.jsx";
+import MapContainer from "./MapContainer.jsx";
+import LoginForm from "./LoginForm.jsx";
+import RegisterForm from "./RegisterForm.jsx";
+import PostModal from "./PostModal.jsx";
+import LandingPage from "./LandingPage.jsx";
+import AuthService from "./AuthService.jsx";
+import Geocode from "react-geocode";
+require("dotenv").config();
 
 class App extends Component {
   constructor(props) {
@@ -62,6 +62,9 @@ class App extends Component {
 
   createPostList = () => {
     let postsArr = [];
+		this.setState({
+			posts:[]
+		})
     axios
       .get('http://localhost:3001/api/posts')
       .then(response => {
@@ -87,38 +90,38 @@ class App extends Component {
 		}
 	};
 
-  resetPosts = () => {
-    let postsArr = [];
-    axios
-      .get('http://localhost:3001/api/posts')
-      .then(response => {
-        postsArr = response.data;
-        this.setState({ posts: postsArr });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
+	resetPosts = () => {
+		let postsArr = [];
+		axios
+			.get("http://localhost:3001/api/posts")
+			.then(response => {
+				postsArr = response.data;
+				this.setState({ posts: postsArr });
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
 
-  showAddPostModal = () => {
-    this.setState({ addPostModalVisable: true });
-  };
+	showAddPostModal = () => {
+		this.setState({ addPostModalVisable: true });
+	};
 
-  closeAddPostModal = () => {
-    this.setState({ addPostModalVisable: false });
-  };
+	closeAddPostModal = () => {
+		this.setState({ addPostModalVisable: false });
+	};
 
-  addPost = post => {
-    this.setState({ posts: [post, ...this.state.posts] });
-  };
+	addPost = post => {
+		this.setState({ posts: [post, ...this.state.posts] });
+	};
 
-  showModal = params => {
-    this.setState({ modalVisible: true, modalParams: params });
-  };
+	showModal = params => {
+		this.setState({ modalVisible: true, modalParams: params });
+	};
 
-  closeModal = () => {
-    this.setState({ modalVisible: false, modalParams: {} });
-  };
+	closeModal = () => {
+		this.setState({ modalVisible: false, modalParams: {} });
+	};
 
 	logout = () => {
 		this.setState({
@@ -137,7 +140,7 @@ class App extends Component {
         closeAddPostModal={this.closeAddPostModal}
       />
     ) : (
-      ''
+      ""
     );
 
     let postmodal;
@@ -148,7 +151,7 @@ class App extends Component {
         closeModal={this.closeModal}
       />
     ) : (
-      ''
+      ""
     );
 
     return (
@@ -157,9 +160,9 @@ class App extends Component {
         {addPostModal}
         <NavBar
 					logout={this.logout}
-          username={this.state.currentUser.username}
-          showAddPostModal={this.showAddPostModal}
-        />
+					username={this.state.currentUser.username}
+					showAddPostModal={this.showAddPostModal}
+				/>
 				<Switch>
 					<Route exact path="/welcome" render={() => <LandingPage />} />
 
@@ -175,7 +178,13 @@ class App extends Component {
 						render={() => <RegisterForm getUser={this.getUser} />}
 					/>
 
-      {/*  <Route
+					<Route
+						exact
+						path="/profile"
+						render={() => <Profile posts={this.state.posts} currentUser={this.state.currentUser}/>}
+					/>
+
+      {/* <Route
             exact
             path="/posts/new"
             render={() =>
@@ -191,59 +200,59 @@ class App extends Component {
             }
           />     */}
 
-          <Route
-            exact
-            path="/"
-            render={() =>
-              this.Auth.loggedIn() ? (
-                <div className="home">
-                <section className="sidebar columns is-fullheight">
-                  <SideBar
-                    posts={this.state.posts}
-                    createPostList={this.createPostList}
-                    filterPosts={this.filterPosts}
-                    resetPosts={this.resetPosts}
-                    clearSearchForm={this.clearSearchForm}
-                    showModal={this.showModal}
-                  />
-                </section>
-                  <div className="map">
-                    <MapContainer
-                      center={this.state.center}
-                      zoom={this.state.zoom}
-                      posts={this.state.posts}
-                      createPostList={this.createPostList}
-                      showModal={this.showModal}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <Redirect to="/welcome" />
-              )
-            }
-          />
+					<Route
+						exact
+						path="/"
+						render={() =>
+							this.Auth.loggedIn() ? (
+								<div className="home">
+									<section className="sidebar columns is-fullheight">
+										<SideBar
+											posts={this.state.posts}
+											createPostList={this.createPostList}
+											filterPosts={this.filterPosts}
+											resetPosts={this.resetPosts}
+											clearSearchForm={this.clearSearchForm}
+											showModal={this.showModal}
+										/>
+									</section>
+									<div className="map">
+										<MapContainer
+											center={this.state.center}
+											zoom={this.state.zoom}
+											posts={this.state.posts}
+											createPostList={this.createPostList}
+											showModal={this.showModal}
+										/>
+									</div>
+								</div>
+							) : (
+								<Redirect to="/welcome" />
+							)
+						}
+					/>
 
-          <Route
-            exact
-            path="/posts"
-            render={() =>
-              this.Auth.loggedIn() ? (
-                <PostList
-                  posts={this.state.posts}
-                  createPostList={this.createPostList}
-                  filterPosts={this.filterPosts}
-                  resetPosts={this.resetPosts}
+					<Route
+						exact
+						path="/posts"
+						render={() =>
+							this.Auth.loggedIn() ? (
+								<PostList
+									posts={this.state.posts}
+									createPostList={this.createPostList}
+									filterPosts={this.filterPosts}
+									resetPosts={this.resetPosts}
 									clearSearchForm={this.clearSearchForm}
-                />
-              ) : (
-                <Redirect to="/welcome" />
-              )
-            }
-          />
-        </Switch>
-      </div>
-    );
-  }
+								/>
+							) : (
+								<Redirect to="/welcome" />
+							)
+						}
+					/>
+				</Switch>
+			</div>
+		);
+	}
 }
 
 export default App;

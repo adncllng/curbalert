@@ -42,7 +42,7 @@ class RegisterForm extends Component {
 				this.setState({ geo_tag: `${lat}, ${lng}` });
 
 				axios
-					.post("http://localhost:3001/users/register", {
+					.post("http://localhost:3001/api/users/register", {
 						email: this.state.email,
 						username: this.state.username,
 						password: this.state.password,

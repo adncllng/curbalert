@@ -2,42 +2,8 @@ import React, { Component } from "react";
 import moment from "moment";
 import "./styles/scss/PostList.css";
 
-class PostList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: this.props.posts
-    };
-  }
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  handleClear = () => {
-    this.setState({
-      searchTag: ''
-    });
-  }
-
-  handleFormSubmit = e => {
-    e.preventDefault();
-    let foundPosts = this.props.posts.filter(post => {
-      return post.tags.indexOf(this.state.searchTag) > -1;
-    });
-    this.props.filterPosts(foundPosts);
-  }
-
-	componentDidMount() {
-    if(!this.props.posts.length){
-      	this.props.createPostList();
-    }
-	}
-
+class Profile extends Component {
 	render() {
-    const searchForm = this.refs.searchForm;
 		let posts = null;
 		if (this.props.posts.length) {
 			posts = this.props.posts.map(post => {
@@ -87,32 +53,6 @@ class PostList extends Component {
     }
 		return (
 			<div className="container">
-        <div className="box">
-          <section className="modal-card-body">
-    				<form onSubmit={this.handleFormSubmit} ref="searchForm">
-  						<div className="field is-three-quarters is-grouped">
-  							<p className="control has-icons-left is-expanded">
-  								<input
-  									className="input"
-  									type="search"
-  									placeholder="Search"
-  									name="searchTag"
-  									onChange={this.handleChange}
-  								/>
-  								<span className="icon is-small is-left">
-  									<i className="fa fa-search" />
-  								</span>
-  							</p>
-  						</div>
-  						<button className="button is-warning">Submit</button>
-    				</form>
-          </section>
-  				<button
-            className="button is-outlined search"
-            onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm); this.handleClear();}}>
-            New Search
-          </button>
-        </div>
 				<div className="section">
 					<div className="row columns is-multiline">{posts.reverse()}</div>
 				</div>
@@ -121,4 +61,4 @@ class PostList extends Component {
 	}
 }
 
-export default PostList
+export default Profile;
