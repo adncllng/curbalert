@@ -22,7 +22,7 @@ class PostList extends Component {
     });
   }
 
-  handleFormSubmit= e => {
+  handleFormSubmit = e => {
     e.preventDefault();
     let foundPosts = this.props.posts.filter(post => {
       return post.tags.indexOf(this.state.searchTag) > -1;
@@ -58,17 +58,16 @@ class PostList extends Component {
 								<div className="content">
 									{post.content}
 									<br />
-                  {post.address}
 									<br />
-									<small>Posted {moment(post.created_at).fromNow()}</small>
+                  <i className="fas fa-map-pin"></i> {post.address}
+                  <br />
+                  <br />
+                  <small>(Posted {moment(post.created_at).fromNow()})</small>
 								</div>
 							</div>
 							<footer className="card-footer">
 								<a href="#" className="card-footer-item">
 									Claim Item
-								</a>
-								<a href="#" className="card-footer-item">
-									View Map
 								</a>
 							</footer>
 						</div>
@@ -115,7 +114,7 @@ class PostList extends Component {
           </button>
         </div>
 				<div className="section">
-					<div className="row columns is-multiline">{posts}</div>
+					<div className="row columns is-multiline">{posts.reverse()}</div>
 				</div>
 			</div>
 		);
