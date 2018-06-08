@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 import GoogleMapReact from 'google-map-react';
-import Geocode from 'react-geocode';
 import Marker from "./Marker.jsx";
-import PostModal from "./PostModal.jsx";
 
 
 class MapContainer extends Component {

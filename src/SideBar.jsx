@@ -91,7 +91,7 @@ class SideBar extends Component {
 		} else {
 			return (
 				<div style={{margin: '30px'}}>
-					<p>No results found</p>
+					<p>No results found 👀</p>
 					<br/>
 					<button style={{width: '100%'}} className="button is-outlined" onClick={this.props.resetPosts}>New Search</button>
 				</div>

@@ -10,8 +10,6 @@ import "./styles/scss/Login.css";
 import "./styles/scss/NewPost.css";
 import Home from "./Home.jsx";
 import NavBar from "./NavBar.jsx";
-import Footer from "./Footer.jsx";
-import SideBar from "./SideBar.jsx";
 import PostList from "./PostList.jsx";
 import NewPost from "./NewPost.jsx";
 import MapContainer from "./MapContainer.jsx";

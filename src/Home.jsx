@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import axios from "axios";
 import SideBar from "./SideBar.jsx";
 import "./styles/scss/Home.css";
 import "./styles/scss/NavBar.css";

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import "./styles/scss/App.css";
 
 class Footer extends Component {
