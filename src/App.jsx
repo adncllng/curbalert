@@ -20,7 +20,6 @@ import RegisterForm from './RegisterForm.jsx';
 import PostModal from './PostModal.jsx';
 import LandingPage from './LandingPage.jsx';
 import AuthService from './AuthService.jsx';
-import Profile from './Profile.jsx';
 import Geocode from 'react-geocode';
 require('dotenv').config();
 
