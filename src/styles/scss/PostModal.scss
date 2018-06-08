@@ -1,16 +1,21 @@
 .modal is-active {
-  width: 350px;
+  width: 300px;
 
 }
 
 .modal-image {
-  width: 400px;
+  width: 300px;
   top: 0;
   left: 0;
   right: 0;
 }
 
 .content {
-  max-width: 375px;
+  max-width: 300px;
+  overflow-wrap: break-word;
+}
+
+.modal-address {
+  max-width: 300px;
   overflow-wrap: break-word;
 }

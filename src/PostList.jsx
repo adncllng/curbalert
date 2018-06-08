@@ -67,9 +67,6 @@ class PostList extends Component {
 								<a href="#" className="card-footer-item">
 									View Map
 								</a>
-                <a href="#" className="card-footer-item">
-                  <i className="fas fa-heart"></i>
-                </a>
 							</footer>
 						</div>
 					</div>
@@ -77,34 +74,45 @@ class PostList extends Component {
 			});
 		} else {
       return (
-        <div>Loading...</div>
+        <div className="hero is-centered">
+          <div className="hero-content">
+            <p>No results found 👀</p>
+            <br/>
+            <button className="button is-outlined" onClick={this.props.resetPosts}>New Search</button>
+          </div>
+        </div>
       )
     }
 		return (
 			<div className="container">
-				<form onSubmit={this.handleFormSubmit} ref="searchForm">
-					<section className="modal-card-body">
-						<br />
-						<div className="field">
-							<p className="control has-icons-left">
-								<input
-									className="input"
-									type="search"
-									placeholder="Search"
-									name="searchTag"
-									onChange={this.handleChange}
-								/>
-								<span className="icon is-small is-left">
-									<i className="fa fa-search" />
-								</span>
-							</p>
-						</div>
-						<button className="button is-light">Submit</button>
-					</section>
-				</form>
-				<button onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm); this.handleClear();}}>New Search</button>
+        <div className="box">
+          <section className="modal-card-body">
+    				<form onSubmit={this.handleFormSubmit} ref="searchForm">
+  						<div className="field is-three-quarters is-grouped">
+  							<p className="control has-icons-left is-expanded">
+  								<input
+  									className="input"
+  									type="search"
+  									placeholder="Search"
+  									name="searchTag"
+  									onChange={this.handleChange}
+  								/>
+  								<span className="icon is-small is-left">
+  									<i className="fa fa-search" />
+  								</span>
+  							</p>
+  						</div>
+  						<button className="button is-warning">Submit</button>
+    				</form>
+          </section>
+  				<button
+            className="button is-outlined search"
+            onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm); this.handleClear();}}>
+            New Search
+          </button>
+        </div>
 				<div className="section">
-					<div className="columns is-multiline is-mobile">{posts}</div>
+					<div className="row columns is-multiline">{posts}</div>
 				</div>
 			</div>
 		);

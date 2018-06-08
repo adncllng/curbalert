@@ -190,9 +190,9 @@ class NewPost extends Component {
           <section className="modal-card-body">
             <div className="media-content">
               <div className="columns">
-                <div className="media-left column is-one-third">
+                <div className="media-left column is-one-third" style={{textAlign: 'center', marginRight:'10px'}}>
                   <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
-                    {trashPic || 'click or drag and drop an image'}
+                    {trashPic || 'Click or drag & drop an image here'}
                   </Dropzone>
                 </div>
                 <div className="column is-two-thirds">
