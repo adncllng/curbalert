@@ -74,7 +74,9 @@ class App extends Component {
 	};
 
 	clearSearchForm = form => {
-		form.reset();
+		if (form) {
+			form.reset();
+		}
 	};
 
 	resetPosts = () => {
