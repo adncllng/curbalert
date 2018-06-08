@@ -20,6 +20,8 @@ import RegisterForm from './RegisterForm.jsx';
 import PostModal from './PostModal.jsx';
 import LandingPage from './LandingPage.jsx';
 import AuthService from './AuthService.jsx';
+import Profile from './Profile.jsx';
+import Geocode from 'react-geocode';
 require('dotenv').config();
 
 class App extends Component {
@@ -66,16 +68,24 @@ class App extends Component {
       .get('http://localhost:3001/api/posts')
       .then(response => {
         postsArr = response.data.reverse();
-        this.setState({ posts: [...postsArr] });
+        postsArr.forEach(post => {
+          Geocode.fromLatLng(post.geo_tag.x, post.geo_tag.y).then(response => {
+            const address = response.results[0].formatted_address;
+            let addressPost = { ...post, address };
+            this.setState({
+              posts: [addressPost, ...this.state.posts],
+            });
+          });
+        });
       })
       .catch(error => {
         console.log(error);
       });
   };
 
-	clearSearchForm = (form) => {
-	  form.reset();
-	}
+  clearSearchForm = form => {
+    form.reset();
+  };
 
   resetPosts = () => {
     let postsArr = [];
