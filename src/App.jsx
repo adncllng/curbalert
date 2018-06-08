@@ -10,7 +10,6 @@ import './styles/scss/Login.css';
 import './styles/scss/NewPost.css';
 
 import NavBar from './NavBar.jsx';
-import Footer from './Footer.jsx';
 import SideBar from './SideBar.jsx';
 import PostList from './PostList.jsx';
 import NewPost from './NewPost.jsx';
@@ -82,9 +81,11 @@ class App extends Component {
       });
   };
 
-  clearSearchForm = form => {
-    form.reset();
-  };
+	clearSearchForm = form => {
+		if (form) {
+			form.reset();
+		}
+	};
 
   resetPosts = () => {
     let postsArr = [];
@@ -102,6 +103,7 @@ class App extends Component {
   showAddPostModal = () => {
     this.setState({ addPostModalVisable: true });
   };
+
   closeAddPostModal = () => {
     this.setState({ addPostModalVisable: false });
   };
@@ -117,6 +119,13 @@ class App extends Component {
   closeModal = () => {
     this.setState({ modalVisible: false, modalParams: {} });
   };
+
+	logout = () => {
+		this.setState({
+			currentUser: {}
+		});
+		window.location.assign("/");
+	};
 
   render() {
     let addPostModal = null;
@@ -146,15 +155,24 @@ class App extends Component {
       <div className="App">
         {addPostModal}
         <NavBar
+					logout={this.logout}
           username={this.state.currentUser.username}
           showAddPostModal={this.showAddPostModal}
         />
-        <Switch>
-          <Route exact path="/welcome" render={() => <LandingPage />} />
+				<Switch>
+					<Route exact path="/welcome" render={() => <LandingPage />} />
 
-          <Route exact path="/login" render={() => <LoginForm getUser={this.getUser} />} />
+					<Route
+						exact
+						path="/login"
+						render={() => <LoginForm getUser={this.getUser} />}
+					/>
 
-          <Route exact path="/register" component={RegisterForm} />
+					<Route
+						exact
+						path="/register"
+						render={() => <RegisterForm getUser={this.getUser} />}
+					/>
           <Route
             exact
             path="/posts/new"
@@ -184,6 +202,7 @@ class App extends Component {
 										filterPosts={this.filterPosts}
 										resetPosts={this.resetPosts}
 										clearSearchForm={this.clearSearchForm}
+										showModal={this.showModal}
 									/>
 								</section>
                   <div className="map">
@@ -213,6 +232,7 @@ class App extends Component {
                   createPostList={this.createPostList}
                   filterPosts={this.filterPosts}
                   resetPosts={this.resetPosts}
+									clearSearchForm={this.clearSearchForm}
                 />
               ) : (
                 <Redirect to="/welcome" />

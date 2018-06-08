@@ -1,17 +1,16 @@
 import React, { Component } from "react";
+import SideBarItem from "./SideBarItem.jsx";
 import "./styles/scss/SideBar.css";
 
 class SideBar extends Component {
 	constructor(props) {
 		super(props);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleFormSubmit = this.handleFormSubmit.bind(this);
 		this.state = {
 			posts: this.props.posts
 		};
 	}
 
-	handleChange(e) {
+	handleChange = e => {
 		this.setState({
 			[e.target.name]: e.target.value
 		});
@@ -23,13 +22,23 @@ class SideBar extends Component {
 		});
 	}
 
-	handleFormSubmit(e) {
+	handleFormSubmit = e => {
 		e.preventDefault();
 		let foundPosts = this.props.posts.filter(post => {
 			return post.tags.indexOf(this.state.searchTag) > -1;
 		});
 		this.props.filterPosts(foundPosts);
 	}
+
+	toggleModal = key => {
+    let thisPost = null;
+      this.state.posts.forEach((post, i) => {
+      if (post.id == key) {
+       thisPost = post
+      }
+    })
+    this.props.showPostModal(thisPost)
+  }
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({ posts: nextProps.posts });
@@ -42,12 +51,12 @@ class SideBar extends Component {
 		if (this.state.posts.length) {
 			posts = this.state.posts.map(post => {
 				return (
-					<li>
-						<a href="#">
-							{post.title}
-							<img src={post.image_url} style={{ maxWidth: "100%" }} />
-						</a>
-					</li>
+					<SideBarItem
+						id={post.id}
+						title={post.title}
+						image={post.image_url}
+						toggleModal={this.toggleModal}
+					/>
 				);
 			});
 
@@ -76,13 +85,13 @@ class SideBar extends Component {
 					<br/>
 					<button style={{width: '100%'}} className="button is-outlined" onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm); this.handleClear();}}>New Search</button>
 					</div>
-					<ul className="menu-list">{posts}</ul>
+						{posts}
 				</aside>
 			);
 		} else {
 			return (
 				<div style={{margin: '30px'}}>
-					<p>No results found  ¯\_(ツ)_/¯</p>
+					<p>No results found 👀</p>
 					<br/>
 					<button style={{width: '100%'}} className="button is-outlined" onClick={this.props.resetPosts}>New Search</button>
 				</div>

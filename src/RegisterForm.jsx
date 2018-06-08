@@ -20,23 +20,20 @@ class RegisterForm extends Component {
 			address: "",
 			geo_tag: ""
 		};
-
-		this.handleChange = this.handleChange.bind(this);
-		this.handleFormSubmit = this.handleFormSubmit.bind(this);
 		this.Auth = new AuthService();
 	}
 
 	componentWillMount() {
-		if (this.Auth.loggedIn()) this.props.history.replace("/");
+		if (this.Auth.loggedIn()) window.location.assign('/');
 	}
 
-	handleChange(e) {
+	handleChange = e => {
 		this.setState({
 			[e.target.name]: e.target.value
 		});
 	}
 
-	handleFormSubmit(e) {
+	handleFormSubmit = e => {
 		e.preventDefault();
 
 		Geocode.fromAddress(this.state.address).then(
@@ -54,7 +51,9 @@ class RegisterForm extends Component {
 					})
 					.then(res => {
 						localStorage.setItem("id_token", res.data.token);
-						this.props.history.replace("/");
+						localStorage.setItem("email", this.state.email);
+						this.props.getUser();
+						window.location.assign('/');
 					});
 			},
 			error => {

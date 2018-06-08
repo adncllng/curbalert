@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 import GoogleMapReact from 'google-map-react';
-import Geocode from 'react-geocode';
 import Marker from "./Marker.jsx";
-import PostModal from "./PostModal.jsx";
 
 
 class MapContainer extends Component {
@@ -12,7 +9,6 @@ class MapContainer extends Component {
     this.state = {
       posts: this.props.posts,
     };
-    this.toggleModal = this.toggleModal.bind(this)
   }
 
   componentDidMount() {
@@ -23,10 +19,10 @@ class MapContainer extends Component {
     this.setState({ posts: nextProps.posts })
   }
 
-  toggleModal(key) {
+  toggleModal = key => {
     let thisPost = null;
       this.state.posts.forEach((post, i) => {
-      if (post.id == key){
+      if (post.id == key) {
        thisPost = post
       }
     })
