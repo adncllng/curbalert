@@ -1,5 +1,6 @@
 .modal is-active {
   width: 350px;
+
 }
 
 .modal-image {
@@ -7,4 +8,9 @@
   top: 0;
   left: 0;
   right: 0;
+}
+
+.content {
+  max-width: 375px;
+  overflow-wrap: break-word;
 }
