@@ -7,7 +7,7 @@ class Marker extends Component {
     super(props);
   }
 
-  handleClick() {
+  handleClick = () => {
     this.props.toggleModal(this.props.$dimensionKey)
   }
 
@@ -15,7 +15,7 @@ class Marker extends Component {
     return (
       <img
         src={'http://res.cloudinary.com/ninayujiri/image/upload/v1528293527/pin-red.svg'}
-        onClick={this.handleClick.bind(this)}
+        onClick={this.handleClick}
         style={{
           width: '30px',
         }}

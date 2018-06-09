@@ -33,6 +33,9 @@ class SideBar extends Component {
     this.props.showModal(thisPost)
   }
 
+
+
+
 	render() {
 		const searchForm = this.refs.searchForm;
 

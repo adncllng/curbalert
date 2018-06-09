@@ -11,6 +11,9 @@ class SideBarItem extends Component {
     this.props.toggleModal(this.props.id)
   }
 
+  handleMouseOver = () => {
+  }
+
   render() {
     return (
       <ul className="menu-list">
@@ -19,6 +22,7 @@ class SideBarItem extends Component {
           <a onClick={this.handlePostClick}>
           {this.props.title}
           <button
+            onMouseOver={this.handleMouseOver}
             style={{marginBottom: '10px'}}
             className="button is-small is-outlined is-pulled-right"
           >Details</button>

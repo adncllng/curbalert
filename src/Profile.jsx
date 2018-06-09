@@ -50,11 +50,41 @@ class Profile extends Component {
 				);
         }
 			});
-		} else if (this.props.posts.length) {
+		}
+    if (this.props.posts.length) {
         claimedPosts = this.props.posts.map(post => {
           if (post.claimed_by == this.props.currentUser.id) {
             return (
-              <div>{post.title}</div>
+              <div className="column is-one-quarter is-mobile">
+                <div className="card">
+                  <div className="card-image">
+                    <figure className="image">
+                      <img src={post.image_url} style={{ maxWidth: "100%" }} />
+                    </figure>
+                  </div>
+                  <div className="card-content">
+                    <div className="media">
+                      <div className="media-content">
+                        <p className="title is-4">{post.title}</p>
+                      </div>
+                    </div>
+                    <div className="content">
+                      {post.content}
+                      <br />
+                      <br />
+                      <i className="fas fa-map-pin"></i> {post.address}
+                      <br />
+                      <br />
+                      <small>(Posted {moment(post.created_at).fromNow()})</small>
+                    </div>
+                  </div>
+                  <footer className="card-footer">
+                    <a href="#" className="card-footer-item">
+                      Delete
+                    </a>
+                  </footer>
+                </div>
+              </div>
             )
           }
         })
@@ -72,10 +102,11 @@ class Profile extends Component {
 			<div className="container">
         <div className="section">
           <div className="is-size-5">
-            <h1>Your Points:</h1>
-            <h1>{this.props.currentUser.points}</h1>
+            <h1>Hi, {this.props.currentUser.username}.</h1>
+            <h1>You have <span className="tag is-warning is-medium is-rounded">{this.props.currentUser.points}</span> point(s).</h1>
           </div>
         </div>
+        <hr/>
         <div className="section">
           <div className="is-size-5">
             <h1>Your Claimed Items</h1>
