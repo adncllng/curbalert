@@ -40,9 +40,10 @@ class Profile extends Component {
 				</div>
 			);
 		}
+
 		if (this.props.posts.length) {
 			claimedPosts = this.props.posts.map(post => {
-				if (post.claimed_by == this.props.currentUser.id) {
+				if (post.claimed_by === this.props.currentUser.id) {
 					return (
 						<div className="column is-one-quarter is-mobile">
 							<div className="card">
@@ -112,4 +113,5 @@ class Profile extends Component {
 		);
 	}
 }
+
 export default Profile;
