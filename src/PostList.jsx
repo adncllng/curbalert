@@ -33,7 +33,7 @@ class PostList extends Component {
     const searchForm = this.refs.searchForm;
 		let posts = null;
 		if (this.props.posts.length) {
-			posts = this.props.posts.map(post => {
+			posts = this.props.posts.filter(x => x.visible).map(post => {
 				return (
 					<div className="column is-one-third">
 						<div className="card">

@@ -23,6 +23,7 @@ module.exports = (knex) => {
     const username = req.body.username;
     const password = req.body.password;
     const geo_tag = req.body.geo_tag;
+    const points = req.body.points;
     const hashedPassword = bcrypt.hashSync(password, 10);
 
     knex.transaction(() => {
@@ -31,7 +32,7 @@ module.exports = (knex) => {
         username,
         password_digest: hashedPassword,
         geo_tag,
-        points:5
+        points
       })
       .returning('id')
       .then((id) => {

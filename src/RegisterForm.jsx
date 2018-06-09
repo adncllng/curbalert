@@ -47,7 +47,8 @@ class RegisterForm extends Component {
 						username: this.state.username,
 						password: this.state.password,
 						passwordConfirm: this.state.passwordConfirm,
-						geo_tag: this.state.geo_tag
+						geo_tag: this.state.geo_tag,
+						points: 1
 					})
 					.then(res => {
 						localStorage.setItem("id_token", res.data.token);

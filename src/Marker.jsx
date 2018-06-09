@@ -17,7 +17,7 @@ class Marker extends Component {
         src={'http://res.cloudinary.com/ninayujiri/image/upload/v1528293527/pin-red.svg'}
         onClick={this.handleClick.bind(this)}
         style={{
-          width: '30px'
+          width: '30px',
         }}
       />
     );
