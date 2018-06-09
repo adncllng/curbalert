@@ -59,7 +59,7 @@ class PostList extends Component {
 								</div>
 							</div>
 							<footer className="card-footer">
-								<a href="#" className="card-footer-item">
+								<a href="#" onClick={this.props.claimItem} id={post.id} className="card-footer-item">
 									Claim Item
 								</a>
 							</footer>

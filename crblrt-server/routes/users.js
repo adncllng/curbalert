@@ -30,7 +30,8 @@ module.exports = (knex) => {
         email,
         username,
         password_digest: hashedPassword,
-        geo_tag
+        geo_tag,
+        points:5
       })
       .returning('id')
       .then((id) => {
