@@ -45,6 +45,8 @@ class SideBar extends Component {
 						title={post.title}
 						image={post.image_url}
 						toggleModal={this.toggleModal}
+						centerZoom= {this.props.centerZoom}
+						post = {post}
 					/>
 				);
 			});
