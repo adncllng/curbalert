@@ -72,6 +72,14 @@ class Profile extends Component {
 			<div className="container">
         <div className="section">
           <div>
+            <h1>Your Points</h1>
+          </div>
+          <div>
+            {this.props.currentUser.points}
+          </div>
+        </div>
+        <div className="section">
+          <div>
             <h1>Your Claimed Items</h1>
           </div>
           <div className="row columns is-multiline claimed-items">
