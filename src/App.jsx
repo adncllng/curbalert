@@ -128,7 +128,7 @@ class App extends Component {
 	addPost = post => {
 		this.setState({
 			posts: [...this.state.posts, post],
-			center: {lat:post.geo_tag.x, lng:post.geo_tag.y}
+			center: { lat: post.geo_tag.x, lng: post.geo_tag.y }
 		});
 	};
 
@@ -145,6 +145,22 @@ class App extends Component {
 			currentUser: {}
 		});
 		window.location.assign("/");
+	};
+
+	deletePost = targetPostId => {
+		let posts = [...this.state.posts];
+		console.log("posts :", posts);
+		for (let post of posts) {
+			if (post.id === targetPostId) {
+				let index = posts.indexOf(post);
+				posts.splice(index, 1);
+				this.setState({ posts: posts })
+			}
+		}
+		axios.delete(`http://localhost:3001/api/posts/${targetPostId}`)
+		.then(res => {
+			console.log(res.data)
+		});
 	};
 
 	render() {
@@ -203,6 +219,8 @@ class App extends Component {
 								createPostList={this.createPostList}
 								posts={this.state.posts}
 								currentUser={this.state.currentUser}
+								deletePost={this.deletePost}
+								getUser={this.getUser}
 							/>
 						)}
 					/>
