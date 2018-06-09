@@ -59,6 +59,20 @@ class App extends Component {
 			});
 		});
 	};
+  claimItem = (event) => {
+		let id = event.target.id
+		event.preventDefault()
+		axios.post(`http://localhost:3001/api/posts/${event.target.id}/${this.state.currentUser.id}`)
+		.then(response => {
+			this.getUser()
+			console.log(this.state.currentUser)
+			let postWithPostToggledVisible = this.state.posts.map(post=>{
+				return post.id == id? {...post, visible:false} : post
+			})
+			this.setState({posts:postWithPostToggledVisible})
+		})
+	}
+
 
 	createPostList = () => {
 		let postsArr = [];
@@ -252,6 +266,7 @@ class App extends Component {
 									filterPosts={this.filterPosts}
 									resetPosts={this.resetPosts}
 									clearSearchForm={this.clearSearchForm}
+									claimItem={this.claimItem}
 								/>
 							) : (
 								<Redirect to="/welcome" />
