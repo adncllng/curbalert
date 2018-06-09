@@ -18,7 +18,10 @@ class SideBarItem extends Component {
         <li>
           <a onClick={this.handlePostClick}>
           {this.props.title}
-          <button style={{marginBottom: '10px'}} className="button is-small is-outlined is-pulled-right">Details</button>
+          <button
+            style={{marginBottom: '10px'}}
+            className="button is-small is-outlined is-pulled-right"
+          >Details</button>
             <img src={this.props.image} style={{ maxWidth: "100%" }} />
           </a>
         </li>

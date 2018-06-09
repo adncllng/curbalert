@@ -32,7 +32,6 @@ class PostModal extends Component {
             </div>
             <div className="modal-address">
               <small>
-                {this.props.modalParams.address}
                 <i className="fas fa-map-pin"></i> {this.props.modalParams.address}
               </small>
             </div>
