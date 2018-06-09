@@ -24,7 +24,6 @@ class NewPost extends Component {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
   };
-
   addTag = event => {
     event.preventDefault();
     this.setState({
@@ -116,6 +115,7 @@ class NewPost extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     Geocode.fromAddress(this.state.address).then(response => {
+
       const { lat, lng } = response.results[0].geometry.location;
       this.setState({ geo_tag: `${lat}, ${lng}` });
 
@@ -128,14 +128,17 @@ class NewPost extends Component {
         point_value: 6,
         tags: this.state.trashTags,
         visible: true,
+        address: this.state.address
       };
 
       axios
         .post('http://localhost:3001/api/posts', data)
         .then(res => {
-          console.log(res);
-          console.log(data)
-          this.props.addPost(data);
+          let newPost = res.data[0];
+          let newPostWithAddress = {...newPost, address: this.state.address}
+
+          this.props.addPost(newPostWithAddress);
+
           this.props.closeAddPostModal();
           this.setState({
             trashPicUrl: null,
@@ -145,7 +148,9 @@ class NewPost extends Component {
           });
         })
         .catch(err => {
-          console.log();
+          this.setState({
+            flash: err.message
+          })
         });
     }).catch(err =>{
       this.setState({
@@ -190,9 +195,9 @@ class NewPost extends Component {
           <section className="modal-card-body">
             <div className="media-content">
               <div className="columns">
-                <div className="media-left column is-one-third" style={{textAlign: 'center', marginRight:'10px'}}>
+                <div className="media-left column is-one-third">
                   <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
-                    {trashPic || 'Click or drag & drop an image here'}
+                    {trashPic || 'click or drag and drop an image'}
                   </Dropzone>
                 </div>
                 <div className="column is-two-thirds">

@@ -8,24 +8,10 @@ import './styles/scss/PostModal.css';
 class PostModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      posts: this.props.posts,
-      address:''
-    };
   }
 
   handleClick = () => {
     this.props.closeModal()
-    this.setState({ address: '' })
-  }
-
-  getAddress = (lat, lng) => {
-    Geocode.fromLatLng(lat, lng).then(
-      response => {
-        const address = response.results[0].formatted_address;
-        this.setState({ address: address });
-      }
-    );
   }
 
   render() {
@@ -46,8 +32,8 @@ class PostModal extends Component {
             </div>
             <div className="modal-address">
               <small>
-                {this.getAddress(lat, lng)}
-                <i className="fas fa-map-pin"></i> {this.state.address}
+                {this.props.modalParams.address}
+                <i className="fas fa-map-pin"></i> {this.props.modalParams.address}
               </small>
             </div>
           </section>

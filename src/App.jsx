@@ -112,7 +112,10 @@ class App extends Component {
 	};
 
 	addPost = post => {
-		this.setState({ posts: [post, ...this.state.posts] });
+		this.setState({
+			posts: [...this.state.posts, post],
+			center: {lat:post.geo_tag.x, lng:post.geo_tag.y}
+		});
 	};
 
 	showModal = params => {
