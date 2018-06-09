@@ -30,9 +30,16 @@ module.exports = (knex) => {
       });
   });
 
-  router.post('/', (req, res) => {
-    console.log();
+  router.delete('/:id', (req, res) => {
+    knex('posts')
+    .where('id', Number(req.params.id))
+    .del()
+    .then(result => {
+        res.send(`Post #${req.params.id} was deleted`)
+      });
+  });
 
+  router.post('/', (req, res) => {
     const {
       user_id, title, content, image_url, geo_tag, point_value, visible, tags,
     } = req.body;
@@ -60,14 +67,15 @@ module.exports = (knex) => {
                 .select('*')
                 .from('posts')
                 .where('id', Number(postId))
-                .then((result) => {
-                  res.send(result);
-                  console.log(result);
-                }));
+                .then(result=>{
+                  res.send(result)
+                })
+              );
           });
       })
       .catch(err => res.status(400).send(JSON.stringify(err)));
   });
+
   router.get('/', (req, res) => {
     knex
       .select('*')
@@ -82,7 +90,6 @@ module.exports = (knex) => {
           .whereNotNull('tags.name')
           .then((postIdsAndTagNames) => {
             res.json(posts.map((post) => {
-              console.log(post);
               const tagsArray = [];
               postIdsAndTagNames.forEach((postIdAndTagName) => {
                 if (post.id == postIdAndTagName.post_id) {
@@ -94,6 +101,5 @@ module.exports = (knex) => {
           });
       });
   });
-
   return router;
 };

@@ -71,15 +71,11 @@ module.exports = (knex) => {
        knex
          .select("*")
          .from("users")
-         .where("id",req.params.user_id)
+         .where("id", req.params.user_id)
          .then((results) => {
            res.send(results)
          });
      });
-
-
-
-
   return router;
 }
 
