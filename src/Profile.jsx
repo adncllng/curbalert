@@ -17,7 +17,7 @@ class Profile extends Component {
 			userPosts = this.props.posts.map(post => {
         if (post.user_id == this.props.currentUser.id) {
 				return (
-					<div className="column is-one-fourth is-mobile">
+					<div className="column is-one-quarter is-mobile">
 						<div className="card">
 							<div className="card-image">
 								<figure className="image">
@@ -71,29 +71,27 @@ class Profile extends Component {
 		return (
 			<div className="container">
         <div className="section">
-          <div>
-            <h1>Your Points</h1>
-          </div>
-          <div>
-            {this.props.currentUser.points}
+          <div className="is-size-5">
+            <h1>Your Points:</h1>
+            <h1>{this.props.currentUser.points}</h1>
           </div>
         </div>
         <div className="section">
-          <div>
+          <div className="is-size-5">
             <h1>Your Claimed Items</h1>
           </div>
-          <div className="row columns is-multiline claimed-items">
-            {claimedPosts}
-          </div>
+            <div className="row columns is-multiline claimed-items">
+              {claimedPosts}
+            </div>
         </div>
         <hr/>
 				<div className="section">
-          <div>
+          <div className="is-size-5">
             <h1>Your Posts</h1>
           </div>
-					<div className="row columns is-multiline user-posts">
-            {userPosts.reverse()}
-          </div>
+  					<div className="row columns is-multiline user-posts">
+              {userPosts.reverse()}
+            </div>
 				</div>
 			</div>
 		);
