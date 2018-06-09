@@ -25,8 +25,9 @@ class MapContainer extends Component {
   }
 
   render() {
-    const markers = this.props.posts.map(marker =>
+    const markers = this.props.posts.filter(x => x.visible).map(marker =>
       <Marker
+        className="marker"
         key={marker.id}
         lat={marker ? marker.geo_tag.x : ''}
         lng={marker ? marker.geo_tag.y : ''}

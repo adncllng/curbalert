@@ -1,12 +1,10 @@
 .sidebar {
-  margin-top: 40px;
   top: 0;
   bottom: 0;
-  height: 100%;
-  padding: 10px;
-  width: 325px;
+  height: 94vh;
+  margin: 10px 10px 0 10px;
+  flex-basis: 400px;
   overflow-y: scroll;
-  position: fixed;
   background-color: white;
   z-index: 50;
 
