@@ -38,7 +38,7 @@ class SideBar extends Component {
 
 		let posts = null;
 		if (this.props.posts.length) {
-			posts = this.props.posts.map(post => {
+			posts = this.props.posts.filter(x => x.visible).map(post => {
 				return (
 					<SideBarItem
 						id={post.id}

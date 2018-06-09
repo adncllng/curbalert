@@ -1,2 +1,5 @@
 .App {
   position: relative; }
+
+.home {
+  display: flex; }

@@ -19,7 +19,7 @@ class PostModal extends Component {
     let lng = this.props.modalParams.geo_tag.y;
 
     return (
-      <div className="modal is-active">
+      <div className="modal is-active is-pulled-right">
         <div className="modal-content-width">
           <header className="modal-card-head">
             <p className="modal-card-title">{this.props.modalParams.title}</p>
@@ -32,7 +32,6 @@ class PostModal extends Component {
             </div>
             <div className="modal-address">
               <small>
-                {this.props.modalParams.address}
                 <i className="fas fa-map-pin"></i> {this.props.modalParams.address}
               </small>
             </div>
