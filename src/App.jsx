@@ -33,7 +33,18 @@ class App extends Component {
 			currentUser: {},
 			modalVisible: false,
 			modalParams: {},
-			addPostModalVisable: false
+			addPostModalVisable: false,
+			userPosts: [{
+				user_id: 10, //need to get the user id
+				title: "sshit",
+				content: "fuck", // need to get the content
+				image_url: "http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/1.jpg",
+				geo_tag: `${45.4768}, ${-73.5842}`,
+				point_value: 1,
+				tags: ["asfd", "asdf"],
+				visible: true,
+				address: "sdfasfff"
+			}]
 		};
 	}
 
@@ -114,7 +125,7 @@ class App extends Component {
 	addPost = post => {
 		this.setState({
 			posts: [...this.state.posts, post],
-			center: {lat:post.geo_tag.x, lng:post.geo_tag.y}
+			center: { lat: post.geo_tag.x, lng: post.geo_tag.y }
 		});
 	};
 
@@ -131,6 +142,44 @@ class App extends Component {
 			currentUser: {}
 		});
 		window.location.assign("/");
+	};
+
+	deletePost = targetPost => {
+		console.log("posts :", this.state.posts)
+		console.log("user :", this.state.currentUser)
+		let posts = this.state.posts;
+		for (let post of posts) {
+			if (post.id == targetPost.id) {
+				let index = posts.indexOf(post);
+				posts.splice(index, 1);
+			}
+		}
+	};
+
+
+	findUserPosts = () => {
+		console.log("user")
+		let userPosts = [{
+			user_id: 10, //need to get the user id
+			title: "sshit",
+			content: "fuck", // need to get the content
+			image_url: "http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/1.jpg",
+			geo_tag: `${45.4768}, ${-73.5842}`,
+			point_value: 1,
+			tags: ["asfd", "asdf"],
+			visible: true,
+			address: "sdfasfff"
+		}];
+		this.setState({
+			userPosts: userPosts
+		})
+
+			for (let post of this.state.posts) {
+				if (post.user_id == this.state.currentUser.id) {
+					console.log("smsafaf")
+					userPosts.push(post);
+				}
+		}
 	};
 
 	render() {
@@ -189,6 +238,9 @@ class App extends Component {
 								createPostList={this.createPostList}
 								posts={this.state.posts}
 								currentUser={this.state.currentUser}
+								deletePost={this.deletePost}
+								findUserPosts={this.findUserPosts}
+								userPosts={this.state.userPosts}
 							/>
 						)}
 					/>
