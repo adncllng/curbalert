@@ -143,6 +143,10 @@ class App extends Component {
 				this.setState({ posts: posts })
 			}
 		}
+		axios.delete(`http://localhost:3001/api/posts/${targetPostId}`)
+		.then(res => {
+			console.log(res.data)
+		});
 	};
 
 	render() {
