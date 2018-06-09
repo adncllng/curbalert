@@ -11,9 +11,10 @@ class Profile extends Component {
   }
 
 	render() {
-		let posts = null;
+		let userPosts = null;
+    let claimedPosts = null;
 		if (this.props.posts.length) {
-			posts = this.props.posts.map(post => {
+			userPosts = this.props.posts.map(post => {
         if (post.user_id == this.props.currentUser.id) {
 				return (
 					<div className="column is-one-fourth is-mobile">
@@ -49,7 +50,15 @@ class Profile extends Component {
 				);
         }
 			});
-		} else {
+		} else if (this.props.posts.length) {
+        claimedPosts = this.props.posts.map(post => {
+          if (post.claimed_by == this.props.currentUser.id) {
+            return (
+              <div>{post.title}</div>
+            )
+          }
+        })
+      } else {
       return (
         <div className="hero is-centered">
           <div className="hero-content">
@@ -61,13 +70,23 @@ class Profile extends Component {
     }
 		return (
 			<div className="container">
-				<div className="section">
-					<div className="row columns is-multiline user-posts">{posts.reverse()}</div>
-				</div>
-        <hr/>
         <div className="section">
-          <div className="row columns is-multiline claimed-items"></div>
+          <div>
+            <h1>Your Claimed Items</h1>
+          </div>
+          <div className="row columns is-multiline claimed-items">
+            {claimedPosts}
+          </div>
         </div>
+        <hr/>
+				<div className="section">
+          <div>
+            <h1>Your Posts</h1>
+          </div>
+					<div className="row columns is-multiline user-posts">
+            {userPosts.reverse()}
+          </div>
+				</div>
 			</div>
 		);
 	}
