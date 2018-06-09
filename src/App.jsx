@@ -67,7 +67,7 @@ class App extends Component {
 			this.getUser()
 			console.log(this.state.currentUser)
 			let postWithPostToggledVisible = this.state.posts.map(post=>{
-				return post.id == id? {...post, visible:false} : post
+				return post.id == id? {...post, visible:false, claimed_by:this.state.currentUser.id} : post
 			})
 			this.setState({posts:postWithPostToggledVisible})
 		})
@@ -104,6 +104,13 @@ class App extends Component {
 		}
 	};
 
+  centerZoom = (x, y, zoom = 18) => {
+		this.setState({
+			center: { lat: x, lng: y },
+			zoom:zoom
+		})
+	}
+
 	resetPosts = () => {
 		let postsArr = [];
 		axios
@@ -126,9 +133,9 @@ class App extends Component {
 	};
 
 	addPost = post => {
+		this.centerZoom(post.geo_tag.x, post.geo_tag.y)
 		this.setState({
-			posts: [...this.state.posts, post],
-			center: {lat:post.geo_tag.x, lng:post.geo_tag.y}
+			posts: [...this.state.posts, post]
 		});
 	};
 
@@ -237,6 +244,7 @@ class App extends Component {
 											resetPosts={this.resetPosts}
 											clearSearchForm={this.clearSearchForm}
 											showModal={this.showModal}
+											centerZoom={this.centerZoom}
 										/>
 									</section>
 									<div className="map">

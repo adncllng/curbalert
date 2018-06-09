@@ -36,7 +36,7 @@ class MapContainer extends Component {
       />
     )
     return (
-      <GoogleMapReact defaultCenter={this.props.center} defaultZoom={this.props.zoom}>
+      <GoogleMapReact center={this.props.center} zoom={this.props.zoom}>
         {markers}
       </GoogleMapReact>
     );
