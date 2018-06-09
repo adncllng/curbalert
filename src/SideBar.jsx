@@ -33,8 +33,19 @@ class SideBar extends Component {
     this.props.showModal(thisPost)
   }
 
+  hoverState = key => {
+  	let thisPost = null;
+    this.props.posts.forEach((post, i) => {
+      if (post.id == key) {
+       	thisPost = post
+      }
+    })
+    this.props.hoverMarker(thisPost)
+  }
 
-
+  clearHoverState = () => {
+  	this.props.clearHover()
+  }
 
 	render() {
 		const searchForm = this.refs.searchForm;
@@ -48,6 +59,8 @@ class SideBar extends Component {
 						title={post.title}
 						image={post.image_url}
 						toggleModal={this.toggleModal}
+						hoverState={this.hoverState}
+						clearHoverState={this.clearHoverState}
 					/>
 				);
 			});

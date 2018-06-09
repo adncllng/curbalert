@@ -33,7 +33,8 @@ class App extends Component {
 			currentUser: {},
 			modalVisible: false,
 			modalParams: {},
-			addPostModalVisable: false
+			addPostModalVisable: false,
+			markerParams: {}
 		};
 	}
 
@@ -59,6 +60,20 @@ class App extends Component {
 			});
 		});
 	};
+
+  claimItem = (event) => {
+		let id = event.target.id
+		event.preventDefault()
+		axios.post(`http://localhost:3001/api/posts/${event.target.id}/${this.state.currentUser.id}`)
+		.then(response => {
+			this.getUser()
+			console.log(this.state.currentUser)
+			let postWithPostToggledVisible = this.state.posts.map(post=>{
+				return post.id == id? {...post, visible:false} : post
+			})
+			this.setState({posts:postWithPostToggledVisible})
+		})
+	}
 
 	createPostList = () => {
 		let postsArr = [];
@@ -125,6 +140,15 @@ class App extends Component {
 	closeModal = () => {
 		this.setState({ modalVisible: false, modalParams: {} });
 	};
+
+	hoverMarker = params => {
+		this.setState({ markerParams: params })
+	}
+
+	clearHover = () => {
+		this.setState({ markerParams: {} });
+		console.log('hello');
+	}
 
 	logout = () => {
 		this.setState({
@@ -223,6 +247,8 @@ class App extends Component {
 											resetPosts={this.resetPosts}
 											clearSearchForm={this.clearSearchForm}
 											showModal={this.showModal}
+											hoverMarker={this.hoverMarker}
+											clearHover={this.clearHover}
 										/>
 									</section>
 									<div className="map">
@@ -232,6 +258,7 @@ class App extends Component {
 											posts={this.state.posts}
 											createPostList={this.createPostList}
 											showModal={this.showModal}
+							        markerParams={this.state.markerParams}
 										/>
 									</div>
 								</div>
@@ -252,6 +279,7 @@ class App extends Component {
 									filterPosts={this.filterPosts}
 									resetPosts={this.resetPosts}
 									clearSearchForm={this.clearSearchForm}
+									claimItem={this.claimItem}
 								/>
 							) : (
 								<Redirect to="/welcome" />

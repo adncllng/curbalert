@@ -11,7 +11,12 @@ class SideBarItem extends Component {
     this.props.toggleModal(this.props.id)
   }
 
-  handleMouseOver = () => {
+  handleMouseEnter = () => {
+    this.props.hoverState(this.props.id)
+  }
+
+  handleMouseLeave = () => {
+    this.props.clearHoverState()
   }
 
   render() {
@@ -19,10 +24,13 @@ class SideBarItem extends Component {
       <ul className="menu-list">
         <br/>
         <li>
-          <a onClick={this.handlePostClick}>
+          <a
+            onClick={this.handlePostClick}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+          >
           {this.props.title}
           <button
-            onMouseOver={this.handleMouseOver}
             style={{marginBottom: '10px'}}
             className="button is-small is-outlined is-pulled-right"
           >Details</button>

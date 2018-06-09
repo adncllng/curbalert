@@ -40,7 +40,6 @@ class PostModal extends Component {
             <button className="button is-warning">Claim Item</button>
             <small>(Posted {moment(this.props.modalParams.created_at).fromNow()})</small>
           </footer>
-
         </div>
       </div>
     );
