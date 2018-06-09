@@ -133,15 +133,17 @@ class App extends Component {
 		window.location.assign("/");
 	};
 
-	// deletePost = targetPost => {
-	// 	let posts = this.state.posts;
-	// 	for (let post of posts) {
-	// 		if (post.id == targetPost.id) {
-	// 			let index = posts.indexOf(post);
-	// 			posts.splice(index, 1);
-	// 		}
-	// 	}
-	// };
+	deletePost = targetPostId => {
+		let posts = [...this.state.posts];
+		console.log("posts :", posts);
+		for (let post of posts) {
+			if (post.id === targetPostId) {
+				let index = posts.indexOf(post);
+				posts.splice(index, 1);
+				this.setState({ posts: posts })
+			}
+		}
+	};
 
 	render() {
 		let addPostModal = null;

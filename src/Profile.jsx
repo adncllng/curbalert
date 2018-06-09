@@ -20,7 +20,7 @@ class Profile extends Component {
 
 		if (this.state.userPosts.length !== 0) {
 			posts = this.state.userPosts
-				.filter(post => post.user_id === this.props.currentUser.id)
+        .filter(post => post.user_id === this.props.currentUser.id)
 				.map(post => {
 					return (
 						<UserPost
@@ -29,7 +29,8 @@ class Profile extends Component {
 							image={post.image_url}
 							content={post.content}
 							address={post.address}
-							toggleModal={this.toggleModal}
+              created_at={post.created_at}
+              deletePost={this.props.deletePost}
 						/>
 					);
 				});
