@@ -28,7 +28,18 @@ module.exports = (knex) => {
           .then((tag_ids) => {
             knex('posts_tags')
               .insert(tag_ids.map(tagId => ({ post_id: Number(postId), tag_id: Number(tagId) })))
-              .then(res.send('hi'));
+              .then(
+                knex
+                .select('*')
+                .from('posts')
+                .where('id', Number(postId))
+                .then(result=>{
+                  res.send(result)
+                  console.log(result)
+
+
+                })
+              );
           });
       })
       .catch(err => res.status(400).send(JSON.stringify(err)));
