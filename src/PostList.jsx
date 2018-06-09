@@ -59,7 +59,7 @@ class PostList extends Component {
 								</div>
 							</div>
 							<footer className="card-footer">
-								<a href="#" className="card-footer-item">
+								<a className="card-footer-item">
 									Claim Item
 								</a>
 							</footer>

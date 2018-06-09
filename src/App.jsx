@@ -215,7 +215,7 @@ class App extends Component {
 						render={() =>
 							this.Auth.loggedIn() ? (
 								<div className="home">
-									<section className="sidebar columns is-fullheight">
+									<section className="sidebar columns is-fullheight is-hidden-mobile">
 										<SideBar
 											posts={this.state.posts}
 											createPostList={this.createPostList}

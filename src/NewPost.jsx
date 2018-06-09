@@ -125,7 +125,7 @@ class NewPost extends Component {
         content: this.state.content, // need to get the content
         image_url: this.state.trashPicUrl,
         geo_tag: this.state.geo_tag,
-        point_value: 6,
+        point_value: 1,
         tags: this.state.trashTags,
         visible: true,
         address: this.state.address
