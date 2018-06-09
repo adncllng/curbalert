@@ -4,9 +4,9 @@ import './styles/scss/userPost.css';
 
 class UserPost extends Component {
 
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   // handlePostClick = () => {
   //   this.props.toggleModal(this.props.id)
