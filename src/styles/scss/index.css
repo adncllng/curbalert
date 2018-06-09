@@ -20,12 +20,11 @@
   height: 750px; }
 
 .navbar {
-  z-index: 1000;
+  z-index: 100;
   position: fixed !important;
   top: 0;
   left: 0;
-  right: 0;
-  padding: 0 15px 0 15px; }
+  right: 0; }
 
 .nav.is-dark {
   background-color: #232B2D;
@@ -68,11 +67,11 @@
   bottom: 0;
   height: 100%;
   padding: 10px;
-  width: 275px;
+  width: 325px;
   overflow-y: scroll;
   position: fixed;
   background-color: white;
-  z-index: 100; }
+  z-index: 50; }
   .sidebar .trash-icon {
     margin-left: 1.3em;
     margin-right: 0.7em; }

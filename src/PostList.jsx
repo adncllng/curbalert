@@ -3,13 +3,6 @@ import moment from "moment";
 import "./styles/scss/PostList.css";
 
 class PostList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: this.props.posts
-    };
-  }
-
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value

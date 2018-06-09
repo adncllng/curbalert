@@ -6,17 +6,12 @@ import Marker from "./Marker.jsx";
 class MapContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      posts: this.props.posts,
-    };
   }
 
   componentDidMount() {
-    this.props.createPostList();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ posts: nextProps.posts })
+    if(!this.props.posts.length) {
+      this.props.createPostList();
+    }
   }
 
   toggleModal = key => {

@@ -23,66 +23,66 @@ import Geocode from "react-geocode";
 require("dotenv").config();
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.Auth = new AuthService();
-    this.state = {
-      posts: [],
-      center: { lat: 45.5, lng: -73.57 }, // defaults to dt mtl
-      zoom: 11,
-      currentUser: {},
-      modalVisible: false,
-      modalParams: {},
-      addPostModalVisable: false,
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.Auth = new AuthService();
+		this.state = {
+			posts: [],
+			center: { lat: 45.5, lng: -73.57 }, // defaults to dt mtl
+			zoom: 11,
+			currentUser: {},
+			modalVisible: false,
+			modalParams: {},
+			addPostModalVisable: false
+		};
+	}
 
-  componentDidMount() {
-    this.getUser();
-  }
+	componentDidMount() {
+		this.getUser();
+	}
 
-  filterPosts = foundPosts => {
-    this.setState({ posts: foundPosts });
-  };
+	filterPosts = foundPosts => {
+		this.setState({ posts: foundPosts });
+	};
 
-  getUser = () => {
-    let currentEmail = this.Auth.getEmail('email');
-    axios.get('http://localhost:3001/users').then(response => {
-      let usersArr = response.data;
-      usersArr.forEach(user => {
-        if (user.email == currentEmail) {
-          this.setState({
-            currentUser: user,
-            center: { lat: user.geo_tag.x, lng: user.geo_tag.y },
-          });
-        }
-      });
-    });
-  };
+	getUser = () => {
+		let currentEmail = this.Auth.getEmail("email");
+		axios.get("http://localhost:3001/api/users").then(response => {
+			let usersArr = response.data;
+			usersArr.forEach(user => {
+				if (user.email == currentEmail) {
+					this.setState({
+						currentUser: user,
+						center: { lat: user.geo_tag.x, lng: user.geo_tag.y }
+					});
+				}
+			});
+		});
+	};
 
-  createPostList = () => {
-    let postsArr = [];
+	createPostList = () => {
+		let postsArr = [];
 		this.setState({
-			posts:[]
-		})
-    axios
-      .get('http://localhost:3001/api/posts')
-      .then(response => {
-        postsArr = response.data.reverse();
-        postsArr.forEach(post => {
-          Geocode.fromLatLng(post.geo_tag.x, post.geo_tag.y).then(response => {
-            const address = response.results[0].formatted_address;
-            let addressPost = { ...post, address };
-            this.setState({
-              posts: [addressPost, ...this.state.posts],
-            });
-          });
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
+			posts: []
+		});
+		axios
+			.get("http://localhost:3001/api/posts")
+			.then(response => {
+				postsArr = response.data.reverse();
+				postsArr.forEach(post => {
+					Geocode.fromLatLng(post.geo_tag.x, post.geo_tag.y).then(response => {
+						const address = response.results[0].formatted_address;
+						let addressPost = { ...post, address };
+						this.setState({
+							posts: [addressPost, ...this.state.posts]
+						});
+					});
+				});
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
 
 	clearSearchForm = form => {
 		if (form) {
@@ -159,6 +159,7 @@ class App extends Component {
 
 		return (
 			<div className="App">
+				{postmodal}
 				{addPostModal}
 				<NavBar
 					logout={this.logout}
@@ -183,24 +184,30 @@ class App extends Component {
 					<Route
 						exact
 						path="/profile"
-						render={() => <Profile posts={this.state.posts} currentUser={this.state.currentUser}/>}
+						render={() => (
+							<Profile
+								createPostList={this.createPostList}
+								posts={this.state.posts}
+								currentUser={this.state.currentUser}
+							/>
+						)}
 					/>
 
-					<Route
-						exact
-						path="/posts/new"
-						render={() =>
-							this.Auth.loggedIn() ? (
-								<NewPost
-									trashUploadHandler={this.trashUploadHandler}
-									addPost={this.addPost}
-									currentUser={this.state.currentUser}
-								/>
-							) : (
-								<Redirect to="/welcome" />
-							)
-						}
-					/>
+					{/* <Route
+            exact
+            path="/posts/new"
+            render={() =>
+              this.Auth.loggedIn() ? (
+                <NewPost
+                  trashUploadHandler={this.trashUploadHandler}
+                  addPost={this.addPost}
+                  currentUser={this.state.currentUser}
+                />
+              ) : (
+                <Redirect to="/welcome" />
+              )
+            }
+          />     */}
 
 					<Route
 						exact
@@ -219,7 +226,6 @@ class App extends Component {
 										/>
 									</section>
 									<div className="map">
-										{postmodal}
 										<MapContainer
 											center={this.state.center}
 											zoom={this.state.zoom}

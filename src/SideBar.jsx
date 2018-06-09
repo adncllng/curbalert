@@ -3,13 +3,6 @@ import SideBarItem from "./SideBarItem.jsx";
 import "./styles/scss/SideBar.css";
 
 class SideBar extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			posts: this.props.posts
-		};
-	}
-
 	handleChange = e => {
 		this.setState({
 			[e.target.name]: e.target.value
@@ -32,7 +25,7 @@ class SideBar extends Component {
 
 	toggleModal = key => {
     let thisPost = null;
-      this.state.posts.forEach((post, i) => {
+      this.props.posts.forEach((post, i) => {
       if (post.id == key) {
        thisPost = post
       }
@@ -40,16 +33,12 @@ class SideBar extends Component {
     this.props.showModal(thisPost)
   }
 
-	componentWillReceiveProps(nextProps) {
-		this.setState({ posts: nextProps.posts });
-	}
-
 	render() {
 		const searchForm = this.refs.searchForm;
 
 		let posts = null;
-		if (this.state.posts.length) {
-			posts = this.state.posts.map(post => {
+		if (this.props.posts.length) {
+			posts = this.props.posts.map(post => {
 				return (
 					<SideBarItem
 						id={post.id}
@@ -80,7 +69,7 @@ class SideBar extends Component {
 										</span>
 									</p>
 								</div>
-								<button style={{width: '100%'}} className="button is-link is-focused">Submit</button>
+								<button style={{width: '100%'}} className="button is-light">Submit</button>
 						</form>
 					<br/>
 					<button style={{width: '100%'}} className="button is-outlined" onClick={(event) => { this.props.resetPosts(); this.props.clearSearchForm(searchForm); this.handleClear();}}>New Search</button>

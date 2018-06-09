@@ -65,15 +65,15 @@ module.exports = (knex) => {
 
      })
 
-       router.get("/:user_id", (req, res) => {
-         knex
-           .select("*")
-           .from("users")
-           .where("id",req.params.user_id)
-           .then((results) => {
-             res.send(results)
-           });
-       });
+     router.get("/:user_id", (req, res) => {
+       knex
+         .select("*")
+         .from("users")
+         .where("id",req.params.user_id)
+         .then((results) => {
+           res.send(results)
+         });
+     });
 
 
 
