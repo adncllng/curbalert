@@ -33,6 +33,7 @@ class MapContainer extends Component {
         lng={marker ? marker.geo_tag.y : ''}
         text={marker ? marker.title : ''}
         toggleModal={this.toggleModal}
+        markerParams={this.props.markerParams}
       />
     )
     return (

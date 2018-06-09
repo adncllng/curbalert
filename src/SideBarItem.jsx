@@ -20,13 +20,25 @@ onMouseExitHandler = () => {
 }
 
 
+  handleMouseEnter = () => {
+    this.props.hoverState(this.props.id)
+  }
+
+  handleMouseLeave = () => {
+    this.props.clearHoverState()
+  }
+
   render() {
     return (
       <ul onMouseEnter={this.onMouseEnterHandler} onMouseLeave={this.onMouseExitHandler}className="menu-list">
 
         <br/>
         <li>
-          <a onClick={this.handlePostClick}>
+          <a
+            onClick={this.handlePostClick}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+          >
           {this.props.title}
           <button
             style={{marginBottom: '10px'}}

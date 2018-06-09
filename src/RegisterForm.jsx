@@ -55,7 +55,7 @@ class RegisterForm extends Component {
 						localStorage.setItem("email", this.state.email);
 						this.props.getUser();
 						window.location.assign('/');
-					});
+					})
 			},
 			error => {
 				console.error(error);

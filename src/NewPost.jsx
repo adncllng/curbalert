@@ -183,24 +183,24 @@ class NewPost extends Component {
     }
 
     return (
-      <div className="modal is-active" style={{ zIndex: '101' }}>
+      <div className="modal is-active is-mobile" style={{ zIndex: '101'}}>
       <form onSubmit={this.handleFormSubmit}>
         <div className="modal-background" />
         <div className="modal-card">
           <header className="modal-card-head">
-            <p className="modal-card-title">Modal title</p>
+            <p className="modal-card-title">Add a post</p>
             <button className="delete" onClick={this.props.closeAddPostModal} aria-label="close" />
           </header>
 
           <section className="modal-card-body">
             <div className="media-content">
               <div className="columns">
-                <div className="media-left column is-one-third">
+                <div className="media-left column is-one-third is-mobile">
                   <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
                     {trashPic || 'click or drag and drop an image'}
                   </Dropzone>
                 </div>
-                <div className="column is-two-thirds">
+                <div className="column is-two-thirds is-mobile">
                 <div className="field">
                   <input
                     className="input"
