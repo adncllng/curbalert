@@ -61,6 +61,8 @@ class SideBar extends Component {
 						toggleModal={this.toggleModal}
 						hoverState={this.hoverState}
 						clearHoverState={this.clearHoverState}
+						centerZoom= {this.props.centerZoom}
+						post = {post}
 					/>
 				);
 			});

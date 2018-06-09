@@ -10,6 +10,15 @@ class SideBarItem extends Component {
   handlePostClick = () => {
     this.props.toggleModal(this.props.id)
   }
+  onMouseEnterHandler = () => {
+    console.log("enter")
+    this.props.centerZoom(this.props.post.geo_tag.x,this.props.post.geo_tag.y)
+}
+onMouseExitHandler = () => {
+  console.log("sxit")
+  this.props.centerZoom(this.props.post.geo_tag.x,this.props.post.geo_tag.y, 14)
+}
+
 
   handleMouseEnter = () => {
     this.props.hoverState(this.props.id)
@@ -21,7 +30,8 @@ class SideBarItem extends Component {
 
   render() {
     return (
-      <ul className="menu-list">
+      <ul onMouseEnter={this.onMouseEnterHandler} onMouseLeave={this.onMouseExitHandler}className="menu-list">
+
         <br/>
         <li>
           <a
