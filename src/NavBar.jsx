@@ -24,26 +24,40 @@ class NavBar extends Component {
 		let navEnd;
 		if (this.Auth.loggedIn()) {
 			navEnd = (
-				<div className="navbar-end">
-					<Link
-						to={"/profile"}
-						className="navbar-item"
-						type="button is-active"
-					>
-					<a>Hi, {this.props.username}</a>
-					</Link>
-					<div className="navbar-item">
-						<a
+
+
+
+
+			<div className="navbar-end" aria-label="dropdown navigation">
+		      <div className="navbar-item has-dropdown is-hoverable">
+		        <a className="navbar-link">
+		          {this.props.username}
+		        </a>
+		        <div className="navbar-dropdown is-right">
+			        <Link
+								className="navbar-item"
+								to={"/profile"}
+								type="button is-active"
+								>
+								Profile
+							</Link>
+							<hr className="navbar-divider"/>
+							<a
+							className="navbar-item"
 							type="button"
-							className="is-dark"
 							onClick={() => {
 								this.Auth.logout();
 								this.props.logout();
 							}}>
 							Logout
 						</a>
-					</div>
-				</div>
+		      </div>
+		    </div>
+		 </div>
+
+
+
+
 			);
 		} else {
 			navEnd = (
