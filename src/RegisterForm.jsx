@@ -66,10 +66,18 @@ class RegisterForm extends Component {
 				localStorage.setItem("email", this.state.email);
 				this.props.getUser();
 				window.location.assign("/");
+			})
+			.catch(err => {
+				this.setState({
+					flash: 'Email or username are already taken'
+				});
+				setTimeout(() => {
+					this.setState({
+						flash: ""
+					});
+				}, 3000);
 			});
-		error => {
-			console.error(error);
-		};
+
 	};
 
 	render() {
@@ -203,6 +211,8 @@ class RegisterForm extends Component {
 						</div>
 
 						<button className="button is-light wide">Register</button>
+						<br/>
+						<small>{this.state.flash}</small>
 					</section>
 				</form>
 				<div>
