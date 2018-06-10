@@ -11,7 +11,6 @@ class Profile extends Component {
 	}
 
 	getUserClaimedPosts = params => {
-		console.log('params', params);
 		let userClaimedPosts = 0;
 		params.map(post => {
 			if (post.claimed_by === this.props.currentUser.id) {
