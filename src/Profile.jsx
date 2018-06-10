@@ -10,6 +10,16 @@ class Profile extends Component {
 		}
 	}
 
+	getUserClaimedPosts = params => {
+		let userClaimedPosts = 0;
+		params.map(post => {
+			if (post.claimed_by === this.props.currentUser.id) {
+				userClaimedPosts += 1
+			}
+		})
+		return userClaimedPosts;
+	}
+
 	render() {
 		let userPosts;
 		let claimedPosts;
@@ -106,7 +116,7 @@ class Profile extends Component {
 				  <div className="level-item has-text-centered">
 				    <div>
 				      <p className="heading">Claimed Items</p>
-				      <p className="title">{claimedPosts.length}</p>
+				      <p className="title">{this.getUserClaimedPosts(this.props.posts)}</p>
 				    </div>
 				  </div>
 				  <div className="level-item has-text-centered">

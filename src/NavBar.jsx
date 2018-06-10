@@ -25,14 +25,12 @@ class NavBar extends Component {
 		if (this.Auth.loggedIn()) {
 			navEnd = (
 				<div className="navbar-end">
-					<div className="navbar-item">
-						<p>Hi, {this.props.username}</p>
-					</div>
 					<Link
 						to={"/profile"}
 						className="navbar-item"
+						type="button is-active"
 					>
-					Profile
+					<a>Hi, {this.props.username}</a>
 					</Link>
 					<div className="navbar-item">
 						<a
