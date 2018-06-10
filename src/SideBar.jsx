@@ -158,24 +158,22 @@ class SideBar extends Component {
 						<p>{this.state.flash}</p>
 						<form onSubmit={this.handleFormSubmit} ref="searchForm">
 						<hr/>
-							<div className="field">
-								<p className="control has-icons-left">
+							<div className="field has-addons">
+								<div className="control" style={{width: '100%'}}>
 									<input
-										style={{ width: "100%" }}
 										className="input"
 										type="search"
 										placeholder="Search for items"
 										name="searchTag"
 										onChange={this.handleChange}
 									/>
-									<span className="icon is-small is-left">
+								</div>
+								<div className="control">
+									<button className="button is-info">
 										<i className="fa fa-search" />
-									</span>
-								</p>
+									</button>
+								</div>
 							</div>
-							<button style={{ width: "100%" }} className="button is-light">
-								Submit
-							</button>
 						</form>
 						<br />
 						<button

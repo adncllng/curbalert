@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import axios from "axios";
 import AuthService from "./AuthService.jsx";
 import Geocode from "react-geocode";
+import PlacesAutocomplete, {
+	geocodeByAddress,
+	getLatLng
+} from "react-places-autocomplete";
 import { Link } from "react-router-dom";
-
 
 Geocode.setApiKey(process.env.GOOGLE_API_KEY);
 
 class RegisterForm extends Component {
-
 	constructor(props) {
 		super(props);
 
@@ -24,44 +26,52 @@ class RegisterForm extends Component {
 	}
 
 	componentWillMount() {
-		if (this.Auth.loggedIn()) window.location.assign('/');
+		if (this.Auth.loggedIn()) window.location.assign("/");
 	}
 
 	handleChange = e => {
 		this.setState({
 			[e.target.name]: e.target.value
 		});
-	}
+	};
+
+	handleDropdown = address => {
+		this.setState({ address });
+	};
+
+	handleSelect = address => {
+		let latLng;
+		geocodeByAddress(address)
+			.then(results => getLatLng(results[0]))
+			.then(coordinates => (latLng = coordinates))
+			.then(() => this.props.centerZoom(latLng.lat, latLng.lng, 11))
+			.then(() => this.setState({ geo_tag: `${latLng.lat}, ${latLng.lng}` }))
+			// .then(() => this.setState({ address: "" }))
+			.catch(error => console.error("Error", error));
+	};
 
 	handleFormSubmit = e => {
 		e.preventDefault();
 
-		Geocode.fromAddress(this.state.address).then(
-			response => {
-				const { lat, lng } = response.results[0].geometry.location;
-				this.setState({ geo_tag: `${lat}, ${lng}` });
-
-				axios
-					.post("http://localhost:3001/api/users/register", {
-						email: this.state.email,
-						username: this.state.username,
-						password: this.state.password,
-						passwordConfirm: this.state.passwordConfirm,
-						geo_tag: this.state.geo_tag,
-						points: 1
-					})
-					.then(res => {
-						localStorage.setItem("id_token", res.data.token);
-						localStorage.setItem("email", this.state.email);
-						this.props.getUser();
-						window.location.assign('/');
-					})
-			},
-			error => {
-				console.error(error);
-			}
-		);
-	}
+		axios
+			.post("http://localhost:3001/api/users/register", {
+				email: this.state.email,
+				username: this.state.username,
+				password: this.state.password,
+				passwordConfirm: this.state.passwordConfirm,
+				geo_tag: this.state.geo_tag,
+				points: 1
+			})
+			.then(res => {
+				localStorage.setItem("id_token", res.data.token);
+				localStorage.setItem("email", this.state.email);
+				this.props.getUser();
+				window.location.assign("/");
+			});
+		error => {
+			console.error(error);
+		};
+	};
 
 	render() {
 		return (
@@ -137,30 +147,66 @@ class RegisterForm extends Component {
 								</p>
 							</div>
 
-							<div className="column">
-								<p className="control has-icons-left">
-									<input
-										className="input"
-										type="address"
-										placeholder="Address (i.e. H4C 1J7 or 1234 Example St.)"
-										autoComplete="address-level2"
-										name="address"
-										value={this.state.address}
-										onChange={e => this.handleChange(e)}
-									/>
-									<span className="icon is-small is-left">
-										<i className="fas fa-home"></i>
-									</span>
-								</p>
-							</div>
+						<div className="column is-full">
+							<p className="control has-icons-left">
+								<PlacesAutocomplete
+									value={this.state.address}
+									onChange={this.handleDropdown}
+									onSelect={this.handleSelect(this.state.address)}>
+									{({ getInputProps, suggestions, getSuggestionItemProps }) => (
+										<div>
+											<input
+												{...getInputProps({
+													placeholder: "Search Places ...",
+													className: "location-search-input"
+												})}
+												style={{ width: "100%" }}
+												className="input"
+												placeholder="Address (i.e. H4C 1J7 or 1234 Example St.)"
+											/>
+											<div className="autocomplete-dropdown-container">
+												{suggestions.map(suggestion => {
+													const className = suggestion.active
+														? "suggestion-item--active"
+														: "suggestion-item";
+													const style = suggestion.active
+														? {
+																backgroundColor: "#fafafa",
+																cursor: "pointer"
+														  }
+														: {
+																backgroundColor: "#ffffff",
+																cursor: "pointer"
+														  };
+													return (
+														<div
+															{...getSuggestionItemProps(suggestion, {
+																className,
+																style
+															})}>
+															<span>{suggestion.description}</span>
+														</div>
+													);
+												})}
+											</div>
+										</div>
+									)}
+								</PlacesAutocomplete>
+								<span className="icon is-small is-left">
+									<i className="fas fa-home" />
+								</span>
+							</p>
+						</div>
 						</div>
 
 						<button className="button is-light wide">Register</button>
 					</section>
 				</form>
-					<div>
-						<p>Already have an account?<Link to={'/login'}> Login</Link></p>
-					</div>
+				<div>
+					<p>
+						Already have an account?<Link to={"/login"}> Login</Link>
+					</p>
+				</div>
 			</div>
 		);
 	}
