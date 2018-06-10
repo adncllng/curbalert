@@ -24,11 +24,7 @@ class NavBar extends Component {
 		let navEnd;
 		if (this.Auth.loggedIn()) {
 			navEnd = (
-
-
-
-
-			<div className="navbar-end" aria-label="dropdown navigation">
+				<div className="navbar-end" aria-label="dropdown navigation">
 		      <div className="navbar-item has-dropdown is-hoverable">
 		        <a className="navbar-link">
 		          {this.props.username}
@@ -53,11 +49,7 @@ class NavBar extends Component {
 						</a>
 		      </div>
 		    </div>
-		 </div>
-
-
-
-
+			 </div>
 			);
 		} else {
 			navEnd = (

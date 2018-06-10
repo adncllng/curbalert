@@ -24,7 +24,7 @@ class PostModal extends Component {
 						Claim Item
 					</button>
 				):(
-					<p>post some trash to claim items</p>
+					<button className="button is-static is-outlined">No points left!</button>
 				)
 
 		return (
