@@ -75,8 +75,8 @@ class NavBar extends Component {
 				<div className="container">
 					<div className="navbar-brand">
 
-					<Link to={'/'} className="navbar-item">
-							<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528405871/curb-alert.png" className="logo"/>
+					<Link to={'/'} className="navbar-item brand">
+						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528672847/curb-alert-logo-long.png" className="logo"/>
 					</Link>
 					<a
 						role="button"
