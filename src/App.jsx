@@ -258,7 +258,12 @@ class App extends Component {
 					<Route
 						exact
 						path="/register"
-						render={() => <RegisterForm getUser={this.getUser} />}
+						render={() => (
+							<RegisterForm
+								centerZoom={this.centerZoom}
+								getUser={this.getUser}
+							/>
+						)}
 					/>
 
 					<Route
