@@ -56,8 +56,8 @@ class SideBarItem extends Component {
 							</div>
 							<small>(Posted {moment(this.props.created_at).fromNow()})</small>
 							<br />
-							<br />
-							<small className="is-centered">Click for details</small>
+							<hr />
+							<a className="is-centered">Click for details</a>
 						</div>
 					</div>
 				</li>
