@@ -114,7 +114,6 @@ class NewPost extends Component {
 		});
 		// Once all the files are uploaded
 		axios.all(uploaders).then(() => {
-			console.log("hello");
 		});
 	};
 
@@ -288,7 +287,7 @@ class NewPost extends Component {
 																})}
 																style={{ width: "100%" }}
 																className="input"
-																placeholder="Address (i.e. H4C 1J7 or 1234 Example St.)"
+																placeholder="Location (i.e. H4C 1J7 or 1234 Example St.)"
 															/>
 														</div>
 
@@ -321,7 +320,7 @@ class NewPost extends Component {
 												)}
 											</PlacesAutocomplete>
 											<span className="icon is-small is-left">
-												<i className="fas fa-home" />
+												<i className="fas fa-map" />
 											</span>
 										</p>
 
