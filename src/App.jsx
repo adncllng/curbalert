@@ -234,6 +234,7 @@ class App extends Component {
 				closeModal={this.closeModal}
 				claimItem={this.claimItem}
 				closeModal={this.closeModal}
+				currentUser={this.state.currentUser}
 			/>
 		) : (
 			""
