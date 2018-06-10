@@ -39,6 +39,9 @@ module.exports = (knex) => {
         const token = jwt.sign({ id: id[0] }, process.env.SECRET_TOKEN, { expiresIn: 129600 }); // Signing the token
         res.json({ token: token });
       })
+      .catch((error) => {
+        res.status(500).send('Email or username taken');
+      });
     })
   });
 
