@@ -14,7 +14,7 @@ exports.seed = function(knex, Promise) {
           geo_tag: knex.raw(`point(45.4768, -73.5842)`),
           point_value: faker.random.number({min:5, max:10}),
           visible: true,
-          claimed_by: faker.random.number({min:1, max:5})
+          claimed_by: null)
         },
         {
           user_id: faker.random.number({min:1, max:5}),
@@ -24,7 +24,7 @@ exports.seed = function(knex, Promise) {
           geo_tag: knex.raw(`point(45.4548, -73.5699)`),
           point_value: faker.random.number({min:5, max:10}),
           visible: true,
-          claimed_by: faker.random.number({min:1, max:5})
+          claimed_by: null)
         },
         {
           user_id: faker.random.number({min:1, max:5}),
@@ -34,7 +34,7 @@ exports.seed = function(knex, Promise) {
           geo_tag: knex.raw(`point(45.4914, -73.5605)`),
           point_value: faker.random.number({min:5, max:10}),
           visible: true,
-          claimed_by: faker.random.number({min:1, max:5})
+          claimed_by: null)
         },
         {
           user_id: faker.random.number({min:1, max:5}),
@@ -44,7 +44,7 @@ exports.seed = function(knex, Promise) {
           geo_tag: knex.raw(`point(45.5017, -73.5673)`),
           point_value: faker.random.number({min:5, max:10}),
           visible: true,
-          claimed_by: faker.random.number({min:1, max:5})
+          claimed_by: null)
         },
         {
           user_id: faker.random.number({min:1, max:5}),
@@ -54,7 +54,7 @@ exports.seed = function(knex, Promise) {
           geo_tag: knex.raw(`point(45.5232, -73.5870)`),
           point_value: faker.random.number({min:5, max:10}),
           visible: true,
-          claimed_by: faker.random.number({min:1, max:5})
+          claimed_by: null)
         }
       ]);
     });
