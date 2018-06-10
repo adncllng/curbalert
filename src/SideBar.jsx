@@ -7,7 +7,10 @@ class SideBar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			flash: '',
+			flash: "",
+			search: "",
+			latitude: Infinity,
+			longitude: Infinity
 		};
 	}
 
@@ -27,25 +30,25 @@ class SideBar extends Component {
 	handleRecenterSubmit = e => {
 		e.preventDefault();
 		Geocode.fromAddress(this.state.recenterLocation)
-		.catch(err => {
-			this.setState({
-				flash: "Invalid address"
-			})
-			setTimeout(() => {
+			.catch(err => {
 				this.setState({
-					flash: ""
-				})
-			}, 3000)
-		})
-		.then(response => {
-			if (response === undefined) {
-				console.log("afdasf");
-			} else {
-				let coordinates = response.results[0].geometry.location;
-				const { lat, lng } = coordinates;
-				this.props.centerZoom(lat, lng, 12);
-			}
-		})
+					flash: "Invalid address"
+				});
+				setTimeout(() => {
+					this.setState({
+						flash: ""
+					});
+				}, 3000);
+			})
+			.then(response => {
+				if (response === undefined) {
+					console.log("afdasf");
+				} else {
+					let coordinates = response.results[0].geometry.location;
+					const { lat, lng } = coordinates;
+					this.props.centerZoom(lat, lng, 12);
+				}
+			});
 	};
 
 	handleFormSubmit = e => {
