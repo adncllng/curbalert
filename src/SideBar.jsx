@@ -4,6 +4,13 @@ import Geocode from "react-geocode";
 import "./styles/scss/SideBar.css";
 
 class SideBar extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			flash: '',
+		};
+	}
+
 	handleChange = e => {
 		this.setState({
 			[e.target.name]: e.target.value
@@ -19,10 +26,26 @@ class SideBar extends Component {
 
 	handleRecenterSubmit = e => {
 		e.preventDefault();
-		Geocode.fromAddress(this.state.recenterLocation).then(response => {
-			const { lat, lng } = response.results[0].geometry.location;
-			this.props.centerZoom(lat, lng, 12);
-		});
+		Geocode.fromAddress(this.state.recenterLocation)
+		.catch(err => {
+			this.setState({
+				flash: "Invalid address"
+			})
+			setTimeout(() => {
+				this.setState({
+					flash: ""
+				})
+			}, 3000)
+		})
+		.then(response => {
+			if (response === undefined) {
+				console.log("afdasf");
+			} else {
+				let coordinates = response.results[0].geometry.location;
+				const { lat, lng } = coordinates;
+				this.props.centerZoom(lat, lng, 12);
+			}
+		})
 	};
 
 	handleFormSubmit = e => {
@@ -112,6 +135,7 @@ class SideBar extends Component {
 							}}>
 							New Location
 						</button>
+						<p>{this.state.flash}</p>
 						<form onSubmit={this.handleFormSubmit} ref="searchForm">
 							<br />
 							<div className="field">
