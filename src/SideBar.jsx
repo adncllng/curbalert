@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SideBarItem from "./SideBarItem.jsx";
+import Geocode from "react-geocode";
 import "./styles/scss/SideBar.css";
 
 class SideBar extends Component {
@@ -11,7 +12,16 @@ class SideBar extends Component {
 
 	handleClear = () => {
 		this.setState({
-			searchTag: ""
+			searchTag: "",
+			recenterLocation: ""
+		});
+	};
+
+	handleRecenterSubmit = e => {
+		e.preventDefault();
+		Geocode.fromAddress(this.state.recenterLocation).then(response => {
+			const { lat, lng } = response.results[0].geometry.location;
+			this.props.centerZoom(lat, lng, 12);
 		});
 	};
 
@@ -49,6 +59,7 @@ class SideBar extends Component {
 
 	render() {
 		const searchForm = this.refs.searchForm;
+		const recenterForm = this.refs.recenterForm;
 
 		let posts = null;
 		if (this.props.posts.length) {
@@ -70,6 +81,37 @@ class SideBar extends Component {
 			return (
 				<aside className="menu column is-fullheight has-shadow">
 					<div className="column">
+						<form onSubmit={this.handleRecenterSubmit} ref="recenterForm">
+							<br />
+							<div className="field">
+								<p className="control has-icons-left">
+									<input
+										style={{ width: "100%" }}
+										className="input"
+										type="recenter"
+										placeholder="Enter a location"
+										name="recenterLocation"
+										onChange={this.handleChange}
+									/>
+									<span className="icon is-small is-left">
+										<i className="fa fa-map" />
+									</span>
+								</p>
+							</div>
+							<button className="button is-light" style={{ width: "100%" }}>
+								Submit
+							</button>
+						</form>
+						<br />
+						<button
+							style={{ width: "100%" }}
+							className="button is-outlined"
+							onClick={() => {
+								this.props.clearSearchForm(recenterForm);
+								this.handleClear();
+							}}>
+							New Location
+						</button>
 						<form onSubmit={this.handleFormSubmit} ref="searchForm">
 							<br />
 							<div className="field">
@@ -95,7 +137,7 @@ class SideBar extends Component {
 						<button
 							style={{ width: "100%" }}
 							className="button is-outlined"
-							onClick={event => {
+							onClick={() => {
 								this.props.resetPosts();
 								this.props.clearSearchForm(searchForm);
 								this.handleClear();
