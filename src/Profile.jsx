@@ -68,6 +68,16 @@ class Profile extends Component {
 										<small>(Posted {moment(post.created_at).fromNow()})</small>
 									</div>
 								</div>
+								<footer className="card-footer">
+									<a
+										onClick={this.props.unclaimItem}
+										id={post.id}
+										style={{ marginBottom: "10px" }}
+										className="button is-small is-outlined is-pulled-right"
+										className="card-footer-item">
+										Unclaim
+									</a>
+								</footer>
 							</div>
 						</div>
 					);
