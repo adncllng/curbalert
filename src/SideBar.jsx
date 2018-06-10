@@ -100,9 +100,7 @@ class SideBar extends Component {
 			return (
 				<aside className="menu column is-fullheight has-shadow">
 					<div className="column">
-						<form onSubmit={this.handleRecenterSubmit} ref="recenterForm">
-							<br />
-							<div className="field">
+						<form onSubmit={this.handleRecenterSubmit} ref="recenterForm">							<div className="field">
 								<p className="control has-icons-left">
 									<PlacesAutocomplete
 										value={this.state.address}
@@ -159,14 +157,14 @@ class SideBar extends Component {
 						</form>
 						<p>{this.state.flash}</p>
 						<form onSubmit={this.handleFormSubmit} ref="searchForm">
-							<br />
+						<hr/>
 							<div className="field">
 								<p className="control has-icons-left">
 									<input
 										style={{ width: "100%" }}
 										className="input"
 										type="search"
-										placeholder="Search"
+										placeholder="Search for items"
 										name="searchTag"
 										onChange={this.handleChange}
 									/>

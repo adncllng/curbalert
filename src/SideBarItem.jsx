@@ -32,34 +32,28 @@ class SideBarItem extends Component {
 		this.props.clearHoverState();
 	};
 
+
 	render() {
 		return (
 			<ul
-				onClick={this.handlePostClick}
-				onMouseEnter={this.handleMouseEnter}
-				onMouseLeave={this.handleMouseLeave}
 				className="menu-list">
 				<br />
 				<li>
-					<div className="card" style={{ maxWidth: "100%" }}>
-						<div className="card-image">
-							<figure className="image">
-								<img src={this.props.image} style={{ maxWidth: "100%" }} />
-							</figure>
-						</div>
-						<div className="card-content">
-							<div className="media">
-								<div className="media-content">
-									<p className="title is-4">{this.props.title}</p>
-								</div>
-							</div>
+					<a
+						onClick={this.handlePostClick}
+						onMouseEnter={this.handleMouseEnter}
+						onMouseLeave={this.handleMouseLeave}>
+						{this.props.title}
+						<button
+							style={{ marginBottom: "10px" }}
+							className="button is-small is-outlined is-pulled-right">
+							Details
+						</button>
+						<img src={this.props.image} style={{ maxWidth: "100%" }} />
+						<div className="date-posted" style={{ paddingTop: "10px" }}>
 							<small>(Posted {moment(this.props.created_at).fromNow()})</small>
-							<br />
 						</div>
-							<div className="card-footer is-centered">
-								<a className="card-footer-item">Click for details</a>
-							</div>
-					</div>
+					</a>
 				</li>
 				<br />
 			</ul>
