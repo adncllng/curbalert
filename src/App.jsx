@@ -69,9 +69,11 @@ class App extends Component {
 			.post(
 				`http://localhost:3001/api/posts/${event.target.id}/${
 					this.state.currentUser.id
-				}`
+				}`,{claim: true, claimed_by:this.state.currentUser.id}
 			)
 			.then(response => {
+				console.log("RESPONSE:",response.status )
+					if(response.status == 200){
 				this.getUser();
 				let invisiblePosts = this.state.posts.map(post => {
 					return post.id == id
@@ -79,6 +81,7 @@ class App extends Component {
 						: post;
 				});
 				this.setState({ posts: invisiblePosts });
+			}
 			});
 	};
 
@@ -89,7 +92,7 @@ class App extends Component {
 			.post(
 				`http://localhost:3001/api/posts/${event.target.id}/${
 					this.state.currentUser.id
-				}`
+				}`,{claim: false, claimed_by:null}
 			)
 			.then(response => {
 				this.getUser();
@@ -164,7 +167,8 @@ class App extends Component {
 		this.centerZoom(post.geo_tag.x, post.geo_tag.y);
 		this.setState({
 			posts: [...this.state.posts, post],
-			center: { lat: post.geo_tag.x, lng: post.geo_tag.y }
+			center: { lat: post.geo_tag.x, lng: post.geo_tag.y },
+			currentUser:{...this.state.currentUser, points: (this.state.currentUser.points + 1) }
 		});
 	};
 
