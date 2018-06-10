@@ -32,7 +32,7 @@ module.exports = (knex) => {
         username,
         password_digest: hashedPassword,
         geo_tag,
-        points
+        points:100
       })
       .returning('id')
       .then((id) => {
