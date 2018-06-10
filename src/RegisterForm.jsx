@@ -46,7 +46,6 @@ class RegisterForm extends Component {
 			.then(coordinates => (latLng = coordinates))
 			.then(() => this.props.centerZoom(latLng.lat, latLng.lng, 11))
 			.then(() => this.setState({ geo_tag: `${latLng.lat}, ${latLng.lng}` }))
-			// .then(() => this.setState({ address: "" }))
 			.catch(error => console.error("Error", error));
 	};
 
@@ -147,56 +146,60 @@ class RegisterForm extends Component {
 								</p>
 							</div>
 
-						<div className="column is-full">
-							<p className="control has-icons-left">
-								<PlacesAutocomplete
-									value={this.state.address}
-									onChange={this.handleDropdown}
-									onSelect={this.handleSelect(this.state.address)}>
-									{({ getInputProps, suggestions, getSuggestionItemProps }) => (
-										<div>
-											<input
-												{...getInputProps({
-													placeholder: "Search Places ...",
-													className: "location-search-input"
-												})}
-												style={{ width: "100%" }}
-												className="input"
-												placeholder="Address (i.e. H4C 1J7 or 1234 Example St.)"
-											/>
-											<div className="autocomplete-dropdown-container">
-												{suggestions.map(suggestion => {
-													const className = suggestion.active
-														? "suggestion-item--active"
-														: "suggestion-item";
-													const style = suggestion.active
-														? {
-																backgroundColor: "#fafafa",
-																cursor: "pointer"
-														  }
-														: {
-																backgroundColor: "#ffffff",
-																cursor: "pointer"
-														  };
-													return (
-														<div
-															{...getSuggestionItemProps(suggestion, {
-																className,
-																style
-															})}>
-															<span>{suggestion.description}</span>
-														</div>
-													);
-												})}
+							<div className="column is-full">
+								<p className="control has-icons-left">
+									<PlacesAutocomplete
+										value={this.state.address}
+										onChange={this.handleDropdown}
+										onSelect={this.handleSelect(this.state.address)}>
+										{({
+											getInputProps,
+											suggestions,
+											getSuggestionItemProps
+										}) => (
+											<div>
+												<input
+													{...getInputProps({
+														placeholder: "Search Places ...",
+														className: "location-search-input"
+													})}
+													style={{ width: "100%" }}
+													className="input"
+													placeholder="Address (i.e. H4C 1J7 or 1234 Example St.)"
+												/>
+												<div className="autocomplete-dropdown-container">
+													{suggestions.map(suggestion => {
+														const className = suggestion.active
+															? "suggestion-item--active"
+															: "suggestion-item";
+														const style = suggestion.active
+															? {
+																	backgroundColor: "#fafafa",
+																	cursor: "pointer"
+															  }
+															: {
+																	backgroundColor: "#ffffff",
+																	cursor: "pointer"
+															  };
+														return (
+															<div
+																{...getSuggestionItemProps(suggestion, {
+																	className,
+																	style
+																})}>
+																<span>{suggestion.description}</span>
+															</div>
+														);
+													})}
+												</div>
 											</div>
-										</div>
-									)}
-								</PlacesAutocomplete>
-								<span className="icon is-small is-left">
-									<i className="fas fa-home" />
-								</span>
-							</p>
-						</div>
+										)}
+									</PlacesAutocomplete>
+									<span className="icon is-small is-left">
+										<i className="fas fa-home" />
+									</span>
+								</p>
+							</div>
 						</div>
 
 						<button className="button is-light wide">Register</button>

@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import Dropzone from "react-dropzone";
 import Geocode from "react-geocode";
+import PlacesAutocomplete, {
+	geocodeByAddress,
+	getLatLng
+} from "react-places-autocomplete";
 
 const vision = require("node-cloud-vision-api");
 vision.init({ auth: process.env.REACT_APP_GOOGLE_API_KEY });
@@ -112,6 +116,20 @@ class NewPost extends Component {
 		axios.all(uploaders).then(() => {
 			console.log("hello");
 		});
+	};
+
+	handleDropdown = address => {
+		this.setState({ address });
+	};
+
+	handleSelect = address => {
+		let latLng;
+		geocodeByAddress(address)
+			.then(results => getLatLng(results[0]))
+			.then(coordinates => (latLng = coordinates))
+			.then(() => this.props.centerZoom(latLng.lat, latLng.lng, 11))
+			.then(() => this.setState({ geo_tag: `${latLng.lat}, ${latLng.lng}` }))
+			.catch(error => console.error("Error", error));
 	};
 
 	handleFormSubmit = event => {
@@ -250,15 +268,63 @@ class NewPost extends Component {
 												placeholder="Description"
 											/>
 										</div>
-										<div className="field">
-											<input
-												className="input"
-												type="text"
-												placeholder="address"
-												name="address"
-												onChange={this.handleChange}
-											/>
-										</div>
+
+										<p className="control has-icons-left">
+											<PlacesAutocomplete
+												value={this.state.address}
+												onChange={this.handleDropdown}
+												onSelect={this.handleSelect(this.state.address)}>
+												{({
+													getInputProps,
+													suggestions,
+													getSuggestionItemProps
+												}) => (
+													<div>
+														<div className="field">
+															<input
+																{...getInputProps({
+																	placeholder: "Search Places ...",
+																	className: "location-search-input"
+																})}
+																style={{ width: "100%" }}
+																className="input"
+																placeholder="Address (i.e. H4C 1J7 or 1234 Example St.)"
+															/>
+														</div>
+
+														<div className="autocomplete-dropdown-container">
+															{suggestions.map(suggestion => {
+																const className = suggestion.active
+																	? "suggestion-item--active"
+																	: "suggestion-item";
+																const style = suggestion.active
+																	? {
+																			backgroundColor: "#fafafa",
+																			cursor: "pointer"
+																	  }
+																	: {
+																			backgroundColor: "#ffffff",
+																			cursor: "pointer"
+																	  };
+																return (
+																	<div
+																		{...getSuggestionItemProps(suggestion, {
+																			className,
+																			style
+																		})}>
+																		<span>{suggestion.description}</span>
+																	</div>
+																);
+															})}
+														</div>
+													</div>
+												)}
+											</PlacesAutocomplete>
+											<span className="icon is-small is-left">
+												<i className="fas fa-home" />
+											</span>
+										</p>
+
 										<div className="field is-grouped">
 											<p className="control is-expanded">
 												<input
