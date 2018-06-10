@@ -9,19 +9,20 @@ class SideBarItem extends Component {
 
 	handlePostClick = () => {
 		this.props.toggleModal(this.props.id);
-	};
-
-	onMouseEnterHandler = () => {
 		this.props.centerZoom(this.props.post.geo_tag.x, this.props.post.geo_tag.y);
 	};
 
-	onMouseExitHandler = () => {
-		this.props.centerZoom(
-			this.props.post.geo_tag.x,
-			this.props.post.geo_tag.y,
-			12
-		);
-	};
+	// onMouseEnterHandler = () => {
+	// 	this.props.centerZoom(this.props.post.geo_tag.x, this.props.post.geo_tag.y);
+	// };
+
+	// onMouseExitHandler = () => {
+	// 	this.props.centerZoom(
+	// 		this.props.post.geo_tag.x,
+	// 		this.props.post.geo_tag.y,
+	// 		11
+	// 	);
+	// };
 
 	handleMouseEnter = () => {
 		this.props.hoverState(this.props.id);
@@ -37,12 +38,10 @@ class SideBarItem extends Component {
 				onClick={this.handlePostClick}
 				onMouseEnter={this.handleMouseEnter}
 				onMouseLeave={this.handleMouseLeave}
-				onMouseEnter={this.onMouseEnterHandler}
-				onMouseLeave={this.onMouseExitHandler}
 				className="menu-list">
 				<br />
 				<li>
-					<div className="card">
+					<div className="card" style={{ maxWidth: "100%" }}>
 						<div className="card-image">
 							<figure className="image">
 								<img src={this.props.image} style={{ maxWidth: "100%" }} />
@@ -56,9 +55,10 @@ class SideBarItem extends Component {
 							</div>
 							<small>(Posted {moment(this.props.created_at).fromNow()})</small>
 							<br />
-							<hr />
-							<a className="is-centered">Click for details</a>
 						</div>
+							<div className="card-footer is-centered">
+								<a className="card-footer-item">Click for details</a>
+							</div>
 					</div>
 				</li>
 				<br />

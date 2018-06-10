@@ -31,7 +31,7 @@ class SideBar extends Component {
 	handleSelect = address => {
 		geocodeByAddress(address)
 			.then(results => getLatLng(results[0]))
-			.then(latLng => this.props.centerZoom(latLng.lat, latLng.lng, 12))
+			.then(latLng => this.props.centerZoom(latLng.lat, latLng.lng, 11))
 			.then(() => this.setState({ address: "" }))
 			.catch(error => console.error("Error", error));
 	};

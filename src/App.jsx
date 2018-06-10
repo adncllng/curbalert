@@ -131,7 +131,7 @@ class App extends Component {
 		}
 	};
 
-	centerZoom = (x, y, zoom = 12) => {
+	centerZoom = (x, y, zoom = 11) => {
 		this.setState({
 			center: { lat: x, lng: y },
 			zoom: zoom
