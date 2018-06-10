@@ -33,7 +33,7 @@ class App extends Component {
 			currentUser: {},
 			modalVisible: false,
 			modalParams: {},
-			addPostModalVisable: false,
+			addPostModalVisible: false,
 			markerParams: {}
 		};
 	}
@@ -152,11 +152,11 @@ class App extends Component {
 	};
 
 	showAddPostModal = () => {
-		this.setState({ addPostModalVisable: true });
+		this.setState({ addPostModalVisible: true });
 	};
 
 	closeAddPostModal = () => {
-		this.setState({ addPostModalVisable: false });
+		this.setState({ addPostModalVisible: false });
 	};
 
 	addPost = post => {
@@ -210,7 +210,7 @@ class App extends Component {
 
 	render() {
 		let addPostModal = null;
-		addPostModal = this.state.addPostModalVisable ? (
+		addPostModal = this.state.addPostModalVisible ? (
 			<NewPost
 				trashUploadHandler={this.trashUploadHandler}
 				addPost={this.addPost}
@@ -226,6 +226,8 @@ class App extends Component {
 			<PostModal
 				modalParams={this.state.modalParams}
 				posts={this.state.posts}
+				closeModal={this.closeModal}
+				claimItem={this.claimItem}
 				closeModal={this.closeModal}
 			/>
 		) : (
