@@ -14,6 +14,7 @@ class UserPost extends Component {
 
   render() {
     return (
+      <div className="column is-one-quarter is-mobile">
         <div className="card" ref="card">
           <div className="card-image">
             <figure className="image">
@@ -26,26 +27,23 @@ class UserPost extends Component {
                 <p className="title is-4">{this.props.title}</p>
               </div>
             </div>
-            <div className="content">
-              {this.props.content}
-              <br />
-              <br />
-              <i className="fas fa-map-pin" /> {this.props.address}
-              <br />
-              <br />
-              <small>(Posted {moment(this.props.created_at).fromNow()})</small>
+              <div className="content">
+                {this.props.content}
+                <br />
+                <br />
+                <i className="fas fa-map-pin" /> {this.props.address}
+                <br />
+                <br />
+                <small>(Posted {moment(this.props.created_at).fromNow()})</small>
+              </div>
             </div>
-          </div>
-          <footer className="card-footer">
-            <a onClick={this.handleDeleteClick}>
-              <button
-                style={{marginBottom: '10px'}} className="button is-small is-outlined is-pulled-right"
-                className="card-footer-item">
+            <footer className="card-footer">
+              <a onClick={this.handleDeleteClick} className="card-footer-item">
                 Delete
-              </button>
-            </a>
-          </footer>
+              </a>
+            </footer>
         </div>
+      </div>
     );
   }
 }

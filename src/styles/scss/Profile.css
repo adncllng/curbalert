@@ -1,2 +1,2 @@
-.is-size-5 {
-  margin-bottom: 20px; }
+.row .columns .claimed-items {
+  overflow-x: scroll; }

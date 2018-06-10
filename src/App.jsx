@@ -8,6 +8,7 @@ import "./styles/scss/Home.css";
 import "./styles/scss/SideBar.css";
 import "./styles/scss/Login.css";
 import "./styles/scss/NewPost.css";
+import "./styles/scss/userPost.css";
 import Profile from "./Profile.jsx";
 import NavBar from "./NavBar.jsx";
 import SideBar from "./SideBar.jsx";
