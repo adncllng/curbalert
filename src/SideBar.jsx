@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import SideBarItem from "./SideBarItem.jsx";
 import Geocode from "react-geocode";
+import PlacesAutocomplete, {
+	geocodeByAddress,
+	getLatLng
+} from "react-places-autocomplete";
 import "./styles/scss/SideBar.css";
 
 class SideBar extends Component {
@@ -20,35 +24,23 @@ class SideBar extends Component {
 		});
 	};
 
+	handleDropdown = address => {
+		this.setState({ address });
+	};
+
+	handleSelect = address => {
+		geocodeByAddress(address)
+			.then(results => getLatLng(results[0]))
+			.then(latLng => this.props.centerZoom(latLng.lat, latLng.lng, 12))
+			.then(() => this.setState({ address: "" }))
+			.catch(error => console.error("Error", error));
+	};
+
 	handleClear = () => {
 		this.setState({
 			searchTag: "",
 			recenterLocation: ""
 		});
-	};
-
-	handleRecenterSubmit = e => {
-		e.preventDefault();
-		Geocode.fromAddress(this.state.recenterLocation)
-			.catch(err => {
-				this.setState({
-					flash: "Invalid address"
-				});
-				setTimeout(() => {
-					this.setState({
-						flash: ""
-					});
-				}, 3000);
-			})
-			.then(response => {
-				if (response === undefined) {
-					console.log("afdasf");
-				} else {
-					let coordinates = response.results[0].geometry.location;
-					const { lat, lng } = coordinates;
-					this.props.centerZoom(lat, lng, 12);
-				}
-			});
 	};
 
 	handleFormSubmit = e => {
@@ -112,33 +104,59 @@ class SideBar extends Component {
 							<br />
 							<div className="field">
 								<p className="control has-icons-left">
-									<input
-										style={{ width: "100%" }}
-										className="input"
-										type="recenter"
-										placeholder="Enter a location"
-										name="recenterLocation"
-										onChange={this.handleChange}
-									/>
+									<PlacesAutocomplete
+										value={this.state.address}
+										onChange={this.handleDropdown}
+										onSelect={this.handleSelect}>
+										{({
+											getInputProps,
+											suggestions,
+											getSuggestionItemProps
+										}) => (
+											<div>
+												<input
+													{...getInputProps({
+														placeholder: "Search Places ...",
+														className: "location-search-input"
+													})}
+													style={{ width: "100%" }}
+													className="input"
+													placeholder="Enter a location"
+												/>
+												<div className="autocomplete-dropdown-container">
+													{suggestions.map(suggestion => {
+														const className = suggestion.active
+															? "suggestion-item--active"
+															: "suggestion-item";
+														const style = suggestion.active
+															? {
+																	backgroundColor: "#fafafa",
+																	cursor: "pointer"
+															  }
+															: {
+																	backgroundColor: "#ffffff",
+																	cursor: "pointer"
+															  };
+														return (
+															<div
+																{...getSuggestionItemProps(suggestion, {
+																	className,
+																	style
+																})}>
+																<span>{suggestion.description}</span>
+															</div>
+														);
+													})}
+												</div>
+											</div>
+										)}
+									</PlacesAutocomplete>
 									<span className="icon is-small is-left">
 										<i className="fa fa-map" />
 									</span>
 								</p>
 							</div>
-							<button className="button is-light" style={{ width: "100%" }}>
-								Submit
-							</button>
 						</form>
-						<br />
-						<button
-							style={{ width: "100%" }}
-							className="button is-outlined"
-							onClick={() => {
-								this.props.clearSearchForm(recenterForm);
-								this.handleClear();
-							}}>
-							New Location
-						</button>
 						<p>{this.state.flash}</p>
 						<form onSubmit={this.handleFormSubmit} ref="searchForm">
 							<br />
