@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import moment from "moment";
-import './styles/scss/userPost.css';
-
+import "./styles/scss/userPost.css";
 
 class UserPost extends Component {
-  constructor(props) {
-    super(props);
-  }
+	constructor(props) {
+		super(props);
+	}
 
-  handleDeleteClick = () => {
-    this.props.deletePost(this.props.id)
-  }
+	handleDeleteClick = () => {
+		this.props.deletePost(this.props.id);
+	};
 
   render() {
     return (

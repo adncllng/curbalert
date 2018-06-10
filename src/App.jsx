@@ -34,7 +34,7 @@ class App extends Component {
 			currentUser: {},
 			modalVisible: false,
 			modalParams: {},
-			addPostModalVisable: false,
+			addPostModalVisible: false,
 			markerParams: {}
 		};
 	}
@@ -62,19 +62,45 @@ class App extends Component {
 		});
 	};
 
-  claimItem = (event) => {
-		let id = event.target.id
-		event.preventDefault()
-		axios.post(`http://localhost:3001/api/posts/${event.target.id}/${this.state.currentUser.id}`)
-		.then(response => {
-			this.getUser()
-			console.log(this.state.currentUser)
-			let postWithPostToggledVisible = this.state.posts.map(post=>{
-				return post.id == id? {...post, visible:false, claimed_by:this.state.currentUser.id} : post
-			})
-			this.setState({posts:postWithPostToggledVisible})
-		})
-	}
+	claimItem = event => {
+		let id = event.target.id;
+		event.preventDefault();
+		axios
+			.post(
+				`http://localhost:3001/api/posts/${event.target.id}/${
+					this.state.currentUser.id
+				}`
+			)
+			.then(response => {
+				this.getUser();
+				let invisiblePosts = this.state.posts.map(post => {
+					return post.id == id
+						? { ...post, visible: false, claimed_by: this.state.currentUser.id }
+						: post;
+				});
+				this.setState({ posts: invisiblePosts });
+			});
+	};
+
+	unclaimItem = event => {
+		let id = event.target.id;
+		event.preventDefault();
+		axios
+			.post(
+				`http://localhost:3001/api/posts/${event.target.id}/${
+					this.state.currentUser.id
+				}`
+			)
+			.then(response => {
+				this.getUser();
+				let visiblePosts = this.state.posts.map(post => {
+					return post.id == id
+						? { ...post, visible: true, claimed_by: "" }
+						: post;
+				});
+				this.setState({ posts: visiblePosts });
+			});
+	};
 
 	createPostList = () => {
 		let postsArr = [];
@@ -106,12 +132,12 @@ class App extends Component {
 		}
 	};
 
-  centerZoom = (x, y, zoom = 11) => {
+	centerZoom = (x, y, zoom = 11) => {
 		this.setState({
 			center: { lat: x, lng: y },
 			zoom: zoom
-		})
-	}
+		});
+	};
 
 	resetPosts = () => {
 		let postsArr = [];
@@ -127,15 +153,15 @@ class App extends Component {
 	};
 
 	showAddPostModal = () => {
-		this.setState({ addPostModalVisable: true });
+		this.setState({ addPostModalVisible: true });
 	};
 
 	closeAddPostModal = () => {
-		this.setState({ addPostModalVisable: false });
+		this.setState({ addPostModalVisible: false });
 	};
 
 	addPost = post => {
-		this.centerZoom(post.geo_tag.x, post.geo_tag.y)
+		this.centerZoom(post.geo_tag.x, post.geo_tag.y);
 		this.setState({
 			posts: [...this.state.posts, post],
 			center: { lat: post.geo_tag.x, lng: post.geo_tag.y }
@@ -151,13 +177,13 @@ class App extends Component {
 	};
 
 	hoverMarker = params => {
-		this.setState({ markerParams: params })
-	}
+		this.setState({ markerParams: params });
+	};
 
 	clearHover = () => {
 		this.setState({ markerParams: {} });
-		console.log('hello');
-	}
+		console.log("hello");
+	};
 
 	logout = () => {
 		this.setState({
@@ -173,18 +199,19 @@ class App extends Component {
 			if (post.id === targetPostId) {
 				let index = posts.indexOf(post);
 				posts.splice(index, 1);
-				this.setState({ posts: posts })
+				this.setState({ posts: posts });
 			}
 		}
-		axios.delete(`http://localhost:3001/api/posts/${targetPostId}`)
-		.then(res => {
-			console.log(res.data)
-		});
+		axios
+			.delete(`http://localhost:3001/api/posts/${targetPostId}`)
+			.then(res => {
+				console.log(res.data);
+			});
 	};
 
 	render() {
 		let addPostModal = null;
-		addPostModal = this.state.addPostModalVisable ? (
+		addPostModal = this.state.addPostModalVisible ? (
 			<NewPost
 				trashUploadHandler={this.trashUploadHandler}
 				addPost={this.addPost}
@@ -201,6 +228,8 @@ class App extends Component {
 				modalParams={this.state.modalParams}
 				posts={this.state.posts}
 				closeModal={this.closeModal}
+				claimItem={this.claimItem}
+				closeModal={this.closeModal}
 			/>
 		) : (
 			""
@@ -210,11 +239,13 @@ class App extends Component {
 			<div className="App">
 				{postmodal}
 				{addPostModal}
+
 				<NavBar
 					logout={this.logout}
 					username={this.state.currentUser.username}
 					showAddPostModal={this.showAddPostModal}
 				/>
+
 				<Switch>
 					<Route exact path="/welcome" render={() => <LandingPage />} />
 
@@ -240,25 +271,10 @@ class App extends Component {
 								currentUser={this.state.currentUser}
 								deletePost={this.deletePost}
 								getUser={this.getUser}
+								unclaimItem={this.unclaimItem}
 							/>
 						)}
 					/>
-
-					{/* <Route
-            exact
-            path="/posts/new"
-            render={() =>
-              this.Auth.loggedIn() ? (
-                <NewPost
-                  trashUploadHandler={this.trashUploadHandler}
-                  addPost={this.addPost}
-                  currentUser={this.state.currentUser}
-                />
-              ) : (
-                <Redirect to="/welcome" />
-              )
-            }
-          />     */}
 
 					<Route
 						exact
@@ -286,7 +302,7 @@ class App extends Component {
 											posts={this.state.posts}
 											createPostList={this.createPostList}
 											showModal={this.showModal}
-							        markerParams={this.state.markerParams}
+											markerParams={this.state.markerParams}
 										/>
 									</div>
 								</div>
@@ -303,9 +319,11 @@ class App extends Component {
 							this.Auth.loggedIn() ? (
 								<PostList
 									posts={this.state.posts}
+									currentUser={this.state.currentUser}
 									createPostList={this.createPostList}
 									filterPosts={this.filterPosts}
 									resetPosts={this.resetPosts}
+									deletePost={this.deletePost}
 									clearSearchForm={this.clearSearchForm}
 									claimItem={this.claimItem}
 								/>

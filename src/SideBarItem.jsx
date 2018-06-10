@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import moment from "moment";
 import "./styles/scss/App.css";
 
 class SideBarItem extends Component {
@@ -8,19 +9,20 @@ class SideBarItem extends Component {
 
 	handlePostClick = () => {
 		this.props.toggleModal(this.props.id);
-	};
-
-	onMouseEnterHandler = () => {
 		this.props.centerZoom(this.props.post.geo_tag.x, this.props.post.geo_tag.y);
 	};
 
-	onMouseExitHandler = () => {
-		this.props.centerZoom(
-			this.props.post.geo_tag.x,
-			this.props.post.geo_tag.y,
-			12
-		);
-	};
+	// onMouseEnterHandler = () => {
+	// 	this.props.centerZoom(this.props.post.geo_tag.x, this.props.post.geo_tag.y);
+	// };
+
+	// onMouseExitHandler = () => {
+	// 	this.props.centerZoom(
+	// 		this.props.post.geo_tag.x,
+	// 		this.props.post.geo_tag.y,
+	// 		11
+	// 	);
+	// };
 
 	handleMouseEnter = () => {
 		this.props.hoverState(this.props.id);
@@ -30,11 +32,10 @@ class SideBarItem extends Component {
 		this.props.clearHoverState();
 	};
 
+
 	render() {
 		return (
 			<ul
-				onMouseEnter={this.onMouseEnterHandler}
-				onMouseLeave={this.onMouseExitHandler}
 				className="menu-list">
 				<br />
 				<li>
@@ -49,6 +50,9 @@ class SideBarItem extends Component {
 							Details
 						</button>
 						<img src={this.props.image} style={{ maxWidth: "100%" }} />
+						<div className="date-posted" style={{ paddingTop: "10px" }}>
+							<small>(Posted {moment(this.props.created_at).fromNow()})</small>
+						</div>
 					</a>
 				</li>
 				<br />
