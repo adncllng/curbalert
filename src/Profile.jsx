@@ -72,7 +72,6 @@ class Profile extends Component {
 									<a
 										onClick={this.props.unclaimItem}
 										id={post.id}
-										style={{ marginBottom: "10px" }}
 										className="button is-small is-outlined is-pulled-right"
 										className="card-footer-item">
 										Unclaim
@@ -96,26 +95,43 @@ class Profile extends Component {
 
 		return (
 			<div className="container">
+
+				<nav className="level is-mobile">
+				  <div className="level-item has-text-centered">
+				    <div>
+				      <p className="heading">Your Points</p>
+				      <p className="title">{this.props.currentUser.points}</p>
+				    </div>
+				  </div>
+				  <div className="level-item has-text-centered">
+				    <div>
+				      <p className="heading">Claimed Items</p>
+				      <p className="title">{claimedPosts.length}</p>
+				    </div>
+				  </div>
+				  <div className="level-item has-text-centered">
+				    <div>
+				      <p className="heading">Your posts</p>
+				      <p className="title">{userPosts.length}</p>
+				    </div>
+				  </div>
+				</nav>
+
 				<div className="section">
-					<div className="is-size-5">
-						<h1>Your Points:</h1>
-						<h1>{this.props.currentUser.points}</h1>
-					</div>
-				</div>
-				<div className="section">
-					<div className="is-size-5">
+					<div className="header">
 						<h1>Your Claimed Items</h1>
 					</div>
-					<div className="row columns is-multiline claimed-items">
+					<hr/>
+					<div className="row columns claimed-items is-multiline">
 						{claimedPosts}
 					</div>
 				</div>
-				<hr />
 				<div className="section">
-					<div className="is-size-5">
+					<div className="header">
 						<h1>Your Posts</h1>
 					</div>
-					<div className="row columns is-multiline user-posts">
+					<hr/>
+					<div className="row columns user-posts is-multiline">
 						{userPosts.reverse()}
 					</div>
 				</div>
