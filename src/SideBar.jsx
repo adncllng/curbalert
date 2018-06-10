@@ -95,6 +95,7 @@ class SideBar extends Component {
 						id={post.id}
 						title={post.title}
 						image={post.image_url}
+						created_at={post.created_at}
 						toggleModal={this.toggleModal}
 						hoverState={this.hoverState}
 						clearHoverState={this.clearHoverState}

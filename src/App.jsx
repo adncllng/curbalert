@@ -72,13 +72,32 @@ class App extends Component {
 			)
 			.then(response => {
 				this.getUser();
-				console.log(this.state.currentUser);
-				let postWithPostToggledVisible = this.state.posts.map(post => {
+				let invisiblePosts = this.state.posts.map(post => {
 					return post.id == id
 						? { ...post, visible: false, claimed_by: this.state.currentUser.id }
 						: post;
 				});
-				this.setState({ posts: postWithPostToggledVisible });
+				this.setState({ posts: invisiblePosts });
+			});
+	};
+
+	unclaimItem = event => {
+		let id = event.target.id;
+		event.preventDefault();
+		axios
+			.post(
+				`http://localhost:3001/api/posts/${event.target.id}/${
+					this.state.currentUser.id
+				}`
+			)
+			.then(response => {
+				this.getUser();
+				let visiblePosts = this.state.posts.map(post => {
+					return post.id == id
+						? { ...post, visible: true, claimed_by: "" }
+						: post;
+				});
+				this.setState({ posts: visiblePosts });
 			});
 	};
 
@@ -249,6 +268,7 @@ class App extends Component {
 								currentUser={this.state.currentUser}
 								deletePost={this.deletePost}
 								getUser={this.getUser}
+								unclaimItem={this.unclaimItem}
 							/>
 						)}
 					/>
