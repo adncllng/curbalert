@@ -74,13 +74,14 @@ class App extends Component {
 			.then(response => {
 				console.log("RESPONSE:",response.status )
 					if(response.status == 200){
-				this.getUser();
+				//this.getUser();
 				let invisiblePosts = this.state.posts.map(post => {
 					return post.id == id
 						? { ...post, visible: false, claimed_by: this.state.currentUser.id }
 						: post;
 				});
 				this.setState({ posts: invisiblePosts });
+				window.location.assign('/profile')
 			}
 			});
 	};
@@ -303,6 +304,7 @@ class App extends Component {
 											hoverMarker={this.hoverMarker}
 											clearHover={this.clearHover}
 											centerZoom={this.centerZoom}
+											center={this.state.center}
 										/>
 									</section>
 									<div className="map">
