@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import moment from "moment";
 import "./styles/scss/App.css";
 
 class SideBarItem extends Component {
@@ -33,23 +34,32 @@ class SideBarItem extends Component {
 	render() {
 		return (
 			<ul
+				onClick={this.handlePostClick}
+				onMouseEnter={this.handleMouseEnter}
+				onMouseLeave={this.handleMouseLeave}
 				onMouseEnter={this.onMouseEnterHandler}
 				onMouseLeave={this.onMouseExitHandler}
 				className="menu-list">
 				<br />
 				<li>
-					<a
-						onClick={this.handlePostClick}
-						onMouseEnter={this.handleMouseEnter}
-						onMouseLeave={this.handleMouseLeave}>
-						{this.props.title}
-						<button
-							style={{ marginBottom: "10px" }}
-							className="button is-small is-outlined is-pulled-right">
-							Details
-						</button>
-						<img src={this.props.image} style={{ maxWidth: "100%" }} />
-					</a>
+					<div className="card">
+						<div className="card-image">
+							<figure className="image">
+								<img src={this.props.image} style={{ maxWidth: "100%" }} />
+							</figure>
+						</div>
+						<div className="card-content">
+							<div className="media">
+								<div className="media-content">
+									<p className="title is-4">{this.props.title}</p>
+								</div>
+							</div>
+							<small>(Posted {moment(this.props.created_at).fromNow()})</small>
+							<br />
+							<br />
+							<small className="is-centered">Click for details</small>
+						</div>
+					</div>
 				</li>
 				<br />
 			</ul>

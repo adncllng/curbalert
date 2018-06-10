@@ -99,7 +99,7 @@ class PostList extends Component {
 										onClick={this.props.claimItem}
 										id={post.id}
 										className="card-footer-item">
-										Claim Item
+										Claim
 									</a>
 								</footer>
 							</div>
