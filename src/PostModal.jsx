@@ -16,6 +16,16 @@ class PostModal extends Component {
 	render() {
 		let lat = this.props.modalParams.geo_tag.x;
 		let lng = this.props.modalParams.geo_tag.y;
+		let claimButton = this.props.currentUser.points ?
+		      (<button
+						onClick={this.props.claimItem}
+						id={this.props.modalParams.id}
+						className="button is-warning">
+						Claim Item
+					</button>
+				):(
+					<p>post some trash to claim items</p>
+				)
 
 		return (
 			<div className="modal is-active is-pulled-right">
@@ -38,12 +48,7 @@ class PostModal extends Component {
 						</div>
 					</section>
 					<footer className="modal-card-foot">
-						<button
-							onClick={this.props.claimItem}
-							id={this.props.modalParams.id}
-							className="button is-warning">
-							Claim Item
-						</button>
+					{claimButton}
 						<small>
 							(Posted {moment(this.props.modalParams.created_at).fromNow()})
 						</small>
