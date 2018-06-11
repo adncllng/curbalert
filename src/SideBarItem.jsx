@@ -32,13 +32,12 @@ class SideBarItem extends Component {
 						onMouseEnter={this.handleMouseEnter}
 						onMouseLeave={this.handleMouseLeave}
 						className="side-bar-item-toggle">
-						<p className="is-size-5">{this.props.title}</p><br/>
-						<img src={this.props.image} style={{ maxWidth: "100%" }} />
+						<p className="is-size-5">{this.props.title}</p>
 						<div className="side-bar-item-content">
+							<img src={this.props.image} style={{ maxWidth: "50%" }} />
 							<div className="date-posted" style={{ paddingTop: "10px" }}>
 								<div>{this.props.address}</div>
 								<div className="side-bar-item-inner">
-									{/* {`${this.props.post.geo_tag.x} ${this.props.post.geo_tag.y}`} */}
 									<br/>
 									<small>
 										(Posted {moment(this.props.created_at).fromNow()})

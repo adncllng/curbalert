@@ -65,26 +65,6 @@
   margin-bottom: 0;
   padding-right: 30px; }
 
-.nav-items {
-  position: relative; }
-  .nav-items:hover .nav-content {
-    max-height: 200px; }
-
-.nav-content {
-  position: absolute;
-  -webkit-transition: max-height 1s;
-  -moz-transition: max-height 1s;
-  -ms-transition: max-height 1s;
-  -o-transition: max-height 1s;
-  transition: max-height 1s;
-  overflow: hidden;
-  max-height: 0px; }
-
-.nav-toggle {
-  padding-top: 13px;
-  margin-bottom: 0px;
-  max-height: 100%; }
-
 .brand-text {
   padding: 5px; }
 

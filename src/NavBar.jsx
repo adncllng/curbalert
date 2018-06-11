@@ -25,33 +25,29 @@ class NavBar extends Component {
 		let navEnd;
 		if (this.Auth.loggedIn()) {
 			navEnd = (
-				<div className="navbar-end nav-items" aria-label="dropdown navigation">
-					<div className="nav-button">
-						<a className="navbar-link nav-toggle">{this.props.username}</a>
-								<div className="nav-inner">
-									<div className="nav-content">
-										<div className="dropdown-content">
-									<Link
-										className="menu-item navbar-item"
-										to={"/profile"}
-										type="button is-active">
-										Profile
-									</Link>
-									<hr className="menu-item navbar-divider" />
-									<a
-										className="navbar-item"
-										type="button"
-										onClick={() => {
-											this.Auth.logout();
-											this.props.logout();
-										}}>
-										Logout
-									</a>
-								</div>
-							</div>
-							</div>
+				<div className="navbar-end" aria-label="dropdown navigation">
+					<div className="navbar-item has-dropdown is-hoverable">
+					<a className="navbar-link">{this.props.username}</a>
+					<div className="navbar-dropdown is-right">
+							<Link
+								className="navbar-item"
+								to={"/profile"}
+								type="button is-active">
+								Profile
+							</Link>
+						<hr className="navbar-divider" />
+						<a
+							className="navbar-item"
+							type="button"
+							onClick={() => {
+								this.Auth.logout();
+								this.props.logout();
+							}}>
+							Logout
+						</a>
 					</div>
 				</div>
+			</div>
 			);
 		} else {
 			navEnd = (
@@ -74,43 +70,45 @@ class NavBar extends Component {
 
 		return (
 			<nav className="navbar fixed has-shadow">
-					<div className="navbar-brand">
-
-					<Link to={'/'} className="navbar-item brand">
-						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528734125/green-logo.png" className="logo"/>
+				<div className="navbar-brand">
+					<Link to={"/"} className="navbar-item brand">
+						<img
+							src="http://res.cloudinary.com/ninayujiri/image/upload/v1528734125/green-logo.png"
+							className="logo"
+						/>
 					</Link>
-						<a
-							role="button"
-							className="navbar-burger"
-							data-target="navMenu"
-							ref="burger"
+					<a
+						role="button"
+						className="navbar-burger"
+						data-target="navMenu"
+						ref="burger"
+						onClick={this.toggleBurger}>
+						<span />
+						<span />
+						<span />
+					</a>
+				</div>
+				<div id="navMenu" className="navbar-menu" ref="menu">
+					<div className="navbar-start">
+						<Link
+							to={"/posts"}
+							className="navbar-item"
 							onClick={this.toggleBurger}>
-							<span />
-							<span />
-							<span />
-						</a>
-					</div>
-					<div id="navMenu" className="navbar-menu" ref="menu">
+							All Posts
+						</Link>
 						<div className="navbar-start">
-							<Link
-								to={"/posts"}
-								className="navbar-item"
-								onClick={this.toggleBurger}>
-								All Posts
-							</Link>
-							<div className="navbar-start">
-								<a
-									onClick={event => {
-										this.props.showAddPostModal();
-										this.toggleBurger();
-									}}
-									className="navbar-item">
-									Add Post
-								</a>
-							</div>
+							<a
+								onClick={event => {
+									this.props.showAddPostModal();
+									this.toggleBurger();
+								}}
+								className="navbar-item">
+								Add Post
+							</a>
 						</div>
-						{navEnd}
 					</div>
+					{navEnd}
+				</div>
 			</nav>
 		);
 	}

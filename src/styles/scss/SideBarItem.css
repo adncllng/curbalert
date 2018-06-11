@@ -4,7 +4,7 @@
   margin: 1%;
   width: 100%; }
   .side-bar-item:hover .side-bar-item-content {
-    max-height: 300px; }
+    max-height: 400px; }
 
 .side-bar-item-content {
   -webkit-transition: max-height 1s;
@@ -17,14 +17,3 @@
 
 .side-bar-item-inner {
   padding: 0; }
-
-.side-bar-item-toggle {
-  -webkit-transition: background 0.1s linear;
-  -moz-transition: background 0.1s linear;
-  -ms-transition: background 0.1s linear;
-  -o-transition: background 0.1s linear;
-  transition: background 0.1s linear;
-  border-radius: 3px;
-  display: block; }
-  .side-bar-item-toggle:hover {
-    background: #0000b3; }
