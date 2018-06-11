@@ -19,7 +19,12 @@ class PostList extends Component {
 	handleFormSubmit = e => {
 		e.preventDefault();
 		let foundPosts = this.props.posts.filter(post => {
+			if(this.state){
 			return post.tags.indexOf(this.state.searchTag) > -1;
+		}else{
+			return false
+		}
+
 		});
 		this.props.filterPosts(foundPosts);
 	};

@@ -35,21 +35,18 @@ class App extends Component {
 			modalVisible: false,
 			modalParams: {},
 			addPostModalVisible: false,
-			markerParams: {}
+			markerParams: {},
+			currentBounds: null
 		};
 	}
 
 	componentDidMount() {
 		this.getUser();
 	}
-
-	getAddress = (post) => {
-		Geocode.fromLatLng(post.geo_tag.x, post.geo_tag.y).then(response => {
-				let geoAddress = response.results[0].formatted_address;
-				this.setState({
-					geoAddress: geoAddress
-				})
-			});
+	setCurrentBounds = (currentBounds) => {
+		this.setState({
+			currentBounds
+		});
 	}
 
 	filterPosts = foundPosts => {
@@ -154,15 +151,7 @@ class App extends Component {
 
 	resetPosts = () => {
 		let postsArr = [];
-		axios
-			.get("http://localhost:3001/api/posts")
-			.then(response => {
-				postsArr = response.data;
-				this.setState({ posts: postsArr });
-			})
-			.catch(error => {
-				console.log(error);
-			});
+	  this.createPostList()
 	};
 
 	showAddPostModal = () => {
@@ -317,8 +306,8 @@ class App extends Component {
 											clearHover={this.clearHover}
 											centerZoom={this.centerZoom}
 											center={this.state.center}
-											getAddress={this.getAddress}
-											geoAddress={this.state.geoAddress}
+											currentBounds = {this.state.currentBounds}
+
 										/>
 									</section>
 									<div className="map">
@@ -329,6 +318,7 @@ class App extends Component {
 											createPostList={this.createPostList}
 											showModal={this.showModal}
 											markerParams={this.state.markerParams}
+											setCurrentBounds = {this.setCurrentBounds}
 										/>
 									</div>
 								</div>

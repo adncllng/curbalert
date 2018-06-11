@@ -17,7 +17,20 @@ class SideBar extends Component {
 			longitude: Infinity
 		};
 	}
-
+  isInBounds = (post) => {
+	 let x = post.geo_tag.x;
+	 let y = post.geo_tag.y;
+	 let upperX = this.props.currentBounds.ne.lat;
+	 let lowerX = this.props.currentBounds.se.lat;
+	 let upperY = this.props.currentBounds.ne.lng;
+	 let lowerY = this.props.currentBounds.nw.lng;
+	 console.log("x:",x,"upperX:",upperX,"lowerX:",lowerX,"y:",y,"upperY:",upperY,"lowerY:",lowerY)
+	 if(x<=upperX && x>=lowerY && y<=upperY && y>=lowerY){
+		 return true;
+	 }else{
+		 return false;
+	 }
+	}
 	handleChange = e => {
 		this.setState({
 			[e.target.name]: e.target.value
@@ -46,7 +59,11 @@ class SideBar extends Component {
 	handleFormSubmit = e => {
 		e.preventDefault();
 		let foundPosts = this.props.posts.filter(post => {
+			if(post.tags){
 			return post.tags.indexOf(this.state.searchTag) > -1;
+		}else{
+			return false
+		}
 		});
 		this.props.filterPosts(foundPosts);
 	};
@@ -81,7 +98,7 @@ class SideBar extends Component {
 
 		let posts = null;
 		if (this.props.posts.length) {
-			posts = this.props.posts.filter(post => post.visible).map(post => {
+			posts = this.props.posts.filter(post => (post.visible && this.isInBounds(post))).map(post => {
 				return (
 					<SideBarItem
 						id={post.id}
@@ -93,10 +110,8 @@ class SideBar extends Component {
 						hoverState={this.hoverState}
 						clearHoverState={this.clearHoverState}
 						centerZoom={this.props.centerZoom}
-						address={this.state.address}
+						address={post.address}
 						post={post}
-						getAddress={this.props.getAddress}
-						geoAddress={this.props.geoAddress}
 					/>
 				);
 			});
