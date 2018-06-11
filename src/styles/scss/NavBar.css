@@ -1,3 +1,8 @@
+body {
+  font-family: helvetica;
+  font-size: 18px;
+  text-align: center; }
+
 .navbar {
   z-index: 100;
   position: fixed !important;
@@ -36,6 +41,23 @@
 
 .nav.menu .nav-item.is-active .icon-btn .fa {
   color: #2EB398; }
+
+.nav-items {
+  position: relative;
+  z-index: 250; }
+  .nav-items:hover .nav-content {
+    max-height: 200px; }
+
+.nav-content {
+  position: absolute;
+  z-index: 200;
+  -webkit-transition: max-height 1s;
+  -moz-transition: max-height 1s;
+  -ms-transition: max-height 1s;
+  -o-transition: max-height 1s;
+  transition: max-height 1s;
+  overflow: hidden;
+  max-height: 0px; }
 
 .brand-text {
   padding: 5px; }

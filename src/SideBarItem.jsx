@@ -1,28 +1,21 @@
 import React, { Component } from "react";
 import moment from "moment";
-import "./styles/scss/App.css";
+import Geocode from "react-geocode";
+import "./styles/scss/SideBarItem.css";
 
 class SideBarItem extends Component {
 	constructor(props) {
 		super(props);
 	}
 
+	componentDidMount() {
+		this.props.getAddress(this.props.post);
+	}
+
 	handlePostClick = () => {
 		this.props.toggleModal(this.props.id);
 		this.props.centerZoom(this.props.post.geo_tag.x, this.props.post.geo_tag.y);
 	};
-
-	// onMouseEnterHandler = () => {
-	// 	this.props.centerZoom(this.props.post.geo_tag.x, this.props.post.geo_tag.y);
-	// };
-
-	// onMouseExitHandler = () => {
-	// 	this.props.centerZoom(
-	// 		this.props.post.geo_tag.x,
-	// 		this.props.post.geo_tag.y,
-	// 		11
-	// 	);
-	// };
 
 	handleMouseEnter = () => {
 		this.props.hoverState(this.props.id);
@@ -32,26 +25,28 @@ class SideBarItem extends Component {
 		this.props.clearHoverState();
 	};
 
-
 	render() {
 		return (
-			<ul
-				className="menu-list">
+			<ul className="menu-list">
 				<br />
-				<li>
+				<li className="side-bar-item">
 					<a
 						onClick={this.handlePostClick}
 						onMouseEnter={this.handleMouseEnter}
-						onMouseLeave={this.handleMouseLeave}>
+						onMouseLeave={this.handleMouseLeave}
+						className="side-bar-item-toggle">
 						{this.props.title}
-						<button
-							style={{ marginBottom: "10px" }}
-							className="button is-small is-outlined is-pulled-right">
-							Details
-						</button>
 						<img src={this.props.image} style={{ maxWidth: "100%" }} />
-						<div className="date-posted" style={{ paddingTop: "10px" }}>
-							<small>(Posted {moment(this.props.created_at).fromNow()})</small>
+						<div className="side-bar-item-content">
+							<div className="date-posted" style={{ paddingTop: "10px" }}>
+								<div>{`${this.props.geoAddress}`}</div>
+								<div className="side-bar-item-inner">
+									{/* {`${this.props.post.geo_tag.x} ${this.props.post.geo_tag.y}`} */}
+									<small>
+										(Posted {moment(this.props.created_at).fromNow()})
+									</small>
+								</div>
+							</div>
 						</div>
 					</a>
 				</li>
