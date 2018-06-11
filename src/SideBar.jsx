@@ -17,6 +17,7 @@ class SideBar extends Component {
 			longitude: Infinity
 		};
 	}
+
   isInBounds = (post) => {
 	 let x = post.geo_tag.x;
 	 let y = post.geo_tag.y;
@@ -27,10 +28,11 @@ class SideBar extends Component {
 	 console.log("x:",x,"upperX:",upperX,"lowerX:",lowerX,"y:",y,"upperY:",upperY,"lowerY:",lowerY)
 	 if(x<=upperX && x>=lowerY && y<=upperY && y>=lowerY){
 		 return true;
-	 }else{
+	 } else {
 		 return false;
 	 }
 	}
+
 	handleChange = e => {
 		this.setState({
 			[e.target.name]: e.target.value
