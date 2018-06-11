@@ -73,7 +73,7 @@ class NavBar extends Component {
 		}
 
 		return (
-			<nav className="navbar fixed">
+			<nav className="navbar fixed has-shadow">
 					<div className="navbar-brand">
 
 					<Link to={'/'} className="navbar-item brand">

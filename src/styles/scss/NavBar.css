@@ -45,7 +45,7 @@
 
 .navbar-item img {
   max-height: 2.25rem;
-  margin-left: 40px; }
+  padding-left: 30px; }
   @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     .navbar-item img {
       margin: 0; } }
