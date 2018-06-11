@@ -1,8 +1,3 @@
-body {
-	font-family: helvetica;
-	font-size: 18px;
-	text-align: center;
-}
 
 .side-bar-item {
 	display: inline-block;
@@ -28,7 +23,7 @@ body {
 }
 
 .side-bar-item-inner {
-	padding: 0 15px;
+	padding: 0;
 }
 
 .side-bar-item-toggle {
@@ -39,7 +34,6 @@ body {
 	transition: background 0.1s linear;
 	border-radius: 3px;
 	display: block;
-	text-align: center;
 
 	&:hover {
 		background: darken(blue, 15%);

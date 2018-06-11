@@ -22,10 +22,6 @@
   height: 94vh;
   flex-basis: 100%; }
 
-body {
-  font-family: helvetica;
-  font-size: 18px; }
-
 .navbar {
   z-index: 100;
   position: fixed !important;
@@ -61,7 +57,7 @@ body {
   max-height: 0px; }
 
 .nav-toggle {
-  padding-top: 12px;
+  padding-top: 13px;
   margin-bottom: 0px;
   max-height: 100%; }
 
