@@ -40,6 +40,38 @@
 
 .nav.menu .nav-item.is-active .icon-btn .fa {
   color: #2EB398; }
+  padding: 0;
+  margin: 0;
+  border: 0; }
+
+.nav-button {
+  padding: 0;
+  margin: 0;
+  border: 0; }
+
+.navbar-menu {
+  padding-bottom: 0;
+  margin-bottom: 0; }
+
+.nav-items {
+  position: relative; }
+  .nav-items:hover .nav-content {
+    max-height: 200px; }
+
+.nav-content {
+  position: absolute;
+  -webkit-transition: max-height 1s;
+  -moz-transition: max-height 1s;
+  -ms-transition: max-height 1s;
+  -o-transition: max-height 1s;
+  transition: max-height 1s;
+  overflow: hidden;
+  max-height: 0px; }
+
+.nav-toggle {
+  padding-top: 13px;
+  margin-bottom: 0px;
+  max-height: 100%; }
 
 .brand-text {
   padding: 5px; }

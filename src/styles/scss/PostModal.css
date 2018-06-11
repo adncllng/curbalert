@@ -1,5 +1,7 @@
 .modal is-active {
-  width: 275px;
+  width: 275px; }
+
+.post-modal {
   z-index: 150; }
 
 .modal-image {

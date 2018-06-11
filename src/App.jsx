@@ -43,6 +43,15 @@ class App extends Component {
 		this.getUser();
 	}
 
+	getAddress = (post) => {
+		Geocode.fromLatLng(post.geo_tag.x, post.geo_tag.y).then(response => {
+				let geoAddress = response.results[0].formatted_address;
+				this.setState({
+					geoAddress: geoAddress
+				})
+			});
+	}
+
 	filterPosts = foundPosts => {
 		this.setState({ posts: foundPosts });
 	};
@@ -74,13 +83,14 @@ class App extends Component {
 			.then(response => {
 				console.log("RESPONSE:",response.status )
 					if(response.status == 200){
-				this.getUser();
+				//this.getUser();
 				let invisiblePosts = this.state.posts.map(post => {
 					return post.id == id
 						? { ...post, visible: false, claimed_by: this.state.currentUser.id }
 						: post;
 				});
 				this.setState({ posts: invisiblePosts });
+				window.location.assign('/profile')
 			}
 			});
 	};
@@ -306,6 +316,9 @@ class App extends Component {
 											hoverMarker={this.hoverMarker}
 											clearHover={this.clearHover}
 											centerZoom={this.centerZoom}
+											center={this.state.center}
+											getAddress={this.getAddress}
+											geoAddress={this.state.geoAddress}
 										/>
 									</section>
 									<div className="map">
