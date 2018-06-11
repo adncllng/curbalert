@@ -22,58 +22,10 @@ class NavBar extends Component {
 	};
 
 	render() {
-		let navEnd;
+		let navBar;
 		if (this.Auth.loggedIn()) {
-			navEnd = (
-				<div className="navbar-end nav-items" aria-label="dropdown navigation">
-					<div className="nav-button">
-						<a className="navbar-link nav-toggle">{this.props.username}</a>
-								<div className="nav-inner">
-									<div className="nav-content">
-										<div className="dropdown-content">
-									<Link
-										className="menu-item navbar-item"
-										to={"/profile"}
-										type="button is-active">
-										Profile
-									</Link>
-									<hr className="menu-item navbar-divider" />
-									<a
-										className="navbar-item"
-										type="button"
-										onClick={() => {
-											this.Auth.logout();
-											this.props.logout();
-										}}>
-										Logout
-									</a>
-								</div>
-							</div>
-							</div>
-					</div>
-				</div>
-			);
-		} else {
-			navEnd = (
-				<div className="navbar-end">
-					<Link
-						to={"/login"}
-						className="navbar-item"
-						onClick={this.toggleBurger}>
-						Login
-					</Link>
-					<Link
-						to={"/register"}
-						className="navbar-item"
-						onClick={this.toggleBurger}>
-						Register
-					</Link>
-				</div>
-			);
-		}
-
-		return (
-			<nav className="navbar fixed has-shadow">
+			navBar = (
+				<nav className="navbar fixed has-shadow">
 					<div className="navbar-brand">
 
 					<Link to={'/'} className="navbar-item brand">
@@ -109,8 +61,78 @@ class NavBar extends Component {
 								</a>
 							</div>
 						</div>
-						{navEnd}
+						<div className="navbar-end nav-items" aria-label="dropdown navigation">
+							<div className="nav-button">
+								<a className="navbar-link nav-toggle">{this.props.username}</a>
+										<div className="nav-inner">
+											<div className="nav-content">
+												<div className="dropdown-content">
+											<Link
+												className="menu-item navbar-item"
+												to={"/profile"}
+												type="button is-active">
+												Profile
+											</Link>
+											<hr className="menu-item navbar-divider" />
+											<a
+												className="navbar-item"
+												type="button"
+												onClick={() => {
+													this.Auth.logout();
+													this.props.logout();
+												}}>
+												Logout
+											</a>
+										</div>
+									</div>
+									</div>
+							</div>
+						</div>
+				</div>
+			</nav>
+			);
+		} else {
+			navBar = (
+				<nav className="navbar fixed has-shadow">
+					<div className="navbar-brand">
+					<Link to={'/'} className="navbar-item brand">
+						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528734125/green-logo.png" className="logo"/>
+					</Link>
+						<a
+							role="button"
+							className="navbar-burger"
+							data-target="navMenu"
+							ref="burger"
+							onClick={this.toggleBurger}>
+							<span />
+							<span />
+							<span />
+						</a>
 					</div>
+					<div id="navMenu" className="navbar-menu" ref="menu">
+						<div className="navbar-end">
+							<Link
+								to={"/login"}
+								className="navbar-item"
+								onClick={this.toggleBurger}>
+								Login
+							</Link>
+							<Link
+								to={"/register"}
+								className="navbar-item"
+								onClick={this.toggleBurger}>
+								Register
+							</Link>
+						</div>
+				</div>
+			</nav>
+
+			);
+		}
+
+		return (
+			<nav className="navbar fixed has-shadow">
+				{navBar}
 			</nav>
 		);
 	}
