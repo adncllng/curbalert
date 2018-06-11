@@ -75,9 +75,9 @@ class NavBar extends Component {
 		return (
 			<nav className="navbar fixed">
 					<div className="navbar-brand">
-            
+
 					<Link to={'/'} className="navbar-item brand">
-						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528729525/logo.png" className="logo"/>
+						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528734125/green-logo.png" className="logo"/>
 					</Link>
 						<a
 							role="button"
@@ -111,7 +111,6 @@ class NavBar extends Component {
 						</div>
 						{navEnd}
 					</div>
-				</div>
 			</nav>
 		);
 	}

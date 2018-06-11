@@ -131,7 +131,7 @@ class PostList extends Component {
 							<div className="container">
 								<form onSubmit={this.handleFormSubmit} ref="searchForm">
 									<div className="search-field field has-addons is-grouped">
-										<div className="control is-expanded has-icons-left">
+										<div className="search-area control is-expanded has-icons-left">
 											<input
 												className="input"
 												type="search"

@@ -27,7 +27,7 @@
   text-align: center; }
 
 .landing-page .card {
-  background-color: #f4f7f2;
+  background-color: #EFEFE8;
   box-shadow: none; }
 
 .landing-page .card-content {
@@ -49,13 +49,11 @@
   top: 0;
   left: 0;
   right: 0;
-  padding-right: 40px; }
+  margin: 0;
+  border: 0; }
   @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     .navbar {
-      padding: 0 10px 0 0; } 
-    }
-  }
-
+      padding: 0 10px 0 0; } }
 
 .nav-button {
   padding: 0;
@@ -64,7 +62,8 @@
 
 .navbar-menu {
   padding-bottom: 0;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  padding-right: 30px; }
 
 .nav-items {
   position: relative; }
