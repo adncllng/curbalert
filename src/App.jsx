@@ -35,12 +35,18 @@ class App extends Component {
 			modalVisible: false,
 			modalParams: {},
 			addPostModalVisible: false,
-			markerParams: {}
+			markerParams: {},
+			currentBounds: null
 		};
 	}
 
 	componentDidMount() {
 		this.getUser();
+	}
+	setCurrentBounds = (currentBounds) => {
+		this.setState({
+			currentBounds
+		});
 	}
 
 	filterPosts = foundPosts => {
@@ -300,6 +306,8 @@ class App extends Component {
 											clearHover={this.clearHover}
 											centerZoom={this.centerZoom}
 											center={this.state.center}
+											currentBounds = {this.state.currentBounds}
+
 										/>
 									</section>
 									<div className="map">
@@ -310,6 +318,7 @@ class App extends Component {
 											createPostList={this.createPostList}
 											showModal={this.showModal}
 											markerParams={this.state.markerParams}
+											setCurrentBounds = {this.setCurrentBounds}
 										/>
 									</div>
 								</div>
