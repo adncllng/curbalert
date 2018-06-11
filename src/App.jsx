@@ -262,7 +262,10 @@ class App extends Component {
 				/>
 
 				<Switch>
-					<Route exact path="/welcome" render={() => <LandingPage />} />
+					<Route
+						exact path="/welcome"
+						render={() => <LandingPage />}
+					/>
 
 					<Route
 						exact

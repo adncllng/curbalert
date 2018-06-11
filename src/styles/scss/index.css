@@ -8,15 +8,36 @@
   margin-top: 54px;
   text-align: center;
   padding-top: 4em;
-  height: 748px; }
+  height: 550px; }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .landing-page .hero {
+      height: 500px;
+      padding-top: 120px; } }
 
 .landing-page .header-image {
-  background-image: url("http://res.cloudinary.com/ninayujiri/image/upload/v1528382296/chair2.jpg");
+  background-image: url("https://images.unsplash.com/photo-1488841714725-bb4c32d1ac94?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7d583c682a8495bbe8de0560dedc1942&auto=format&fit=crop&w=2816&q=80");
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: relative;
   background-size: cover;
   background-color: #999; }
+
+.landing-page .info-boxes {
+  margin-top: 40px;
+  text-align: center; }
+
+.landing-page .card {
+  background-color: #f4f7f2;
+  box-shadow: none; }
+
+.landing-page .card-content {
+  margin: 90px 0 90px 0; }
+
+.landing-page .footer {
+  background-color: white;
+  text-align: center;
+  margin-top: 40px;
+  height: 100px; }
 
 .map {
   height: 94vh;
@@ -28,9 +49,13 @@
   top: 0;
   left: 0;
   right: 0;
-  padding: 0;
-  margin: 0;
-  border: 0; }
+  padding-right: 40px; }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .navbar {
+      padding: 0 10px 0 0; } 
+    }
+  }
+
 
 .nav-button {
   padding: 0;
@@ -64,14 +89,21 @@
 .brand-text {
   padding: 5px; }
 
+.navbar-item img {
+  max-height: 2.25rem;
+  margin-left: 40px; }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .navbar-item img {
+      margin: 0; } }
+
 .sidebar {
   top: 0;
   bottom: 0;
   height: 94vh;
-  margin: 10px 10px 0 10px;
+  padding: 20px 0 0 10px;
   flex-basis: 400px;
   overflow-y: scroll;
-  background-color: white;
+  background-color: #fafafa;
   z-index: 50; }
   .sidebar .trash-icon {
     margin-left: 1.3em;
@@ -79,3 +111,11 @@
 
 body {
   margin-top: 54px; }
+
+.login-form {
+  text-align: center;
+  margin-top: 80px; }
+
+.register-form {
+  text-align: center;
+  margin-top: 80px; }

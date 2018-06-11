@@ -73,15 +73,12 @@ class NavBar extends Component {
 		}
 
 		return (
-			<nav className="navbar has-shadow fixed">
-				<div className="container">
+			<nav className="navbar fixed">
 					<div className="navbar-brand">
-						<Link to={"/"} className="navbar-item">
-							<img
-								src="http://res.cloudinary.com/ninayujiri/image/upload/v1528405871/curb-alert.png"
-								className="logo"
-							/>
-						</Link>
+            
+					<Link to={'/'} className="navbar-item brand">
+						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528729525/logo.png" className="logo"/>
+					</Link>
 						<a
 							role="button"
 							className="navbar-burger"
