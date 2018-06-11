@@ -70,7 +70,6 @@ class App extends Component {
 
 	claimItem = event => {
 		let id = event.target.id;
-		event.preventDefault();
 		axios
 			.post(
 				`http://localhost:3001/api/posts/${event.target.id}/${
@@ -87,7 +86,6 @@ class App extends Component {
 						: post;
 				});
 				this.setState({ posts: invisiblePosts });
-				window.location.assign('/profile')
 			}
 			});
 	};
