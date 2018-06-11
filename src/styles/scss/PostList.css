@@ -18,7 +18,8 @@
 
 .search-bar {
   text-align: center;
-  align-items: center; }
+  align-items: center;
+  margin-top: 54px; }
 
 .post-list {
   margin-top: 40px; }

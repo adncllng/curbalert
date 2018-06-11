@@ -337,7 +337,7 @@ class NewPost extends Component {
 												/>
 											</p>
 											<p className="control">
-												<a className="button is-info" onClick={this.addTag}>
+												<a className="button is-success" onClick={this.addTag}>
 													+ tag
 												</a>
 											</p>

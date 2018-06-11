@@ -22,93 +22,113 @@ class NavBar extends Component {
 	};
 
 	render() {
-		let navEnd;
+		let navBar;
 		if (this.Auth.loggedIn()) {
-			navEnd = (
-				<div className="navbar-end" aria-label="dropdown navigation">
-					<div className="navbar-item has-dropdown is-hoverable">
-					<a className="navbar-link">{this.props.username}</a>
-					<div className="navbar-dropdown is-right">
-							<Link
-								className="navbar-item"
-								to={"/profile"}
-								type="button is-active">
-								Profile
-							</Link>
-						<hr className="navbar-divider" />
+			navBar = (
+				<nav className="navbar fixed has-shadow">
+					<div className="navbar-brand">
+
+					<Link to={'/'} className="navbar-item brand">
+						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528734125/green-logo.png" className="logo"/>
+					</Link>
 						<a
-							className="navbar-item"
-							type="button"
-							onClick={() => {
-								this.Auth.logout();
-								this.props.logout();
-							}}>
-							Logout
+							role="button"
+							className="navbar-burger"
+							data-target="navMenu"
+							ref="burger"
+							onClick={this.toggleBurger}>
+							<span />
+							<span />
+							<span />
 						</a>
 					</div>
+					<div id="navMenu" className="navbar-menu" ref="menu">
+						<div className="navbar-start">
+							<Link
+								to={"/posts"}
+								className="navbar-item"
+								onClick={this.toggleBurger}>
+								All Posts
+							</Link>
+							<div className="navbar-start">
+								<a
+									onClick={event => {
+										this.props.showAddPostModal();
+										this.toggleBurger();
+									}}
+									className="navbar-item">
+									Add Post
+								</a>
+							</div>
+						</div>
+					<div className="navbar-end" aria-label="dropdown navigation">
+						<div className="navbar-item has-dropdown is-hoverable">
+						<a className="navbar-link">{this.props.username}</a>
+						<div className="navbar-dropdown is-right">
+								<Link
+									className="navbar-item"
+									to={"/profile"}
+									type="button is-active">
+									Profile
+								</Link>
+							<hr className="navbar-divider" />
+							<a
+								className="navbar-item"
+								type="button"
+								onClick={() => {
+									this.Auth.logout();
+									this.props.logout();
+								}}>
+								Logout
+							</a>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
+			</nav>
 			);
 		} else {
-			navEnd = (
-				<div className="navbar-end">
-					<Link
-						to={"/login"}
-						className="navbar-item"
-						onClick={this.toggleBurger}>
-						Login
+			navBar = (
+				<nav className="navbar fixed has-shadow">
+					<div className="navbar-brand">
+					<Link to={'/'} className="navbar-item brand">
+						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528734125/green-logo.png" className="logo"/>
 					</Link>
-					<Link
-						to={"/register"}
-						className="navbar-item"
-						onClick={this.toggleBurger}>
-						Register
-					</Link>
+						<a
+							role="button"
+							className="navbar-burger"
+							data-target="navMenu"
+							ref="burger"
+							onClick={this.toggleBurger}>
+							<span />
+							<span />
+							<span />
+						</a>
+					</div>
+					<div id="navMenu" className="navbar-menu" ref="menu">
+						<div className="navbar-end">
+							<Link
+								to={"/login"}
+								className="navbar-item"
+								onClick={this.toggleBurger}>
+								Login
+							</Link>
+							<Link
+								to={"/register"}
+								className="navbar-item"
+								onClick={this.toggleBurger}>
+								Register
+							</Link>
+						</div>
 				</div>
+			</nav>
+
 			);
 		}
 
 		return (
 			<nav className="navbar fixed has-shadow">
-				<div className="navbar-brand">
-					<Link to={"/"} className="navbar-item brand">
-						<img
-							src="http://res.cloudinary.com/ninayujiri/image/upload/v1528734125/green-logo.png"
-							className="logo"
-						/>
-					</Link>
-					<a
-						role="button"
-						className="navbar-burger"
-						data-target="navMenu"
-						ref="burger"
-						onClick={this.toggleBurger}>
-						<span />
-						<span />
-						<span />
-					</a>
-				</div>
-				<div id="navMenu" className="navbar-menu" ref="menu">
-					<div className="navbar-start">
-						<Link
-							to={"/posts"}
-							className="navbar-item"
-							onClick={this.toggleBurger}>
-							All Posts
-						</Link>
-						<div className="navbar-start">
-							<a
-								onClick={event => {
-									this.props.showAddPostModal();
-									this.toggleBurger();
-								}}
-								className="navbar-item">
-								Add Post
-							</a>
-						</div>
-					</div>
-					{navEnd}
-				</div>
+				{navBar}
 			</nav>
 		);
 	}
