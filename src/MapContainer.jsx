@@ -38,8 +38,8 @@ class MapContainer extends Component {
 				/>
 			));
 		return (
-			<GoogleMapReact center={this.props.center} zoom={this.props.zoom} onChange={({ center, zoom, bounds, marginBounds })=>{
-        console.log(center, zoom, bounds, marginBounds )
+			<GoogleMapReact center={this.props.center} zoom={this.props.zoom} onChange={({center, zoom, bounds, marginBounds})=>{
+        this.props.setCurrentBounds({...bounds})
       }}>
 				{markers}
 			</GoogleMapReact>
