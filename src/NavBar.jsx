@@ -25,10 +25,11 @@ class NavBar extends Component {
 		if (this.Auth.loggedIn()) {
 			navEnd = (
 				<div className="navbar-end nav-items" aria-label="dropdown navigation">
-					<div className="navbar-item ">
-						<a className="navbar-link nav-toggle dropdown">{this.props.username}</a>
+					<div>
+						<a className="navbar-link nav-toggle">{this.props.username}</a>
 								<div className="nav-inner">
-									<div className="nav-content dropdown-content">
+									<div className="nav-content">
+										<div className="dropdown-content">
 									<Link
 										className="navbar-item"
 										to={"/profile"}
@@ -46,6 +47,7 @@ class NavBar extends Component {
 										Logout
 									</a>
 								</div>
+							</div>
 							</div>
 					</div>
 				</div>

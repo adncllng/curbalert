@@ -43,14 +43,12 @@ body {
   color: #2EB398; }
 
 .nav-items {
-  position: relative;
-  z-index: 250; }
+  position: relative; }
   .nav-items:hover .nav-content {
     max-height: 200px; }
 
 .nav-content {
   position: absolute;
-  z-index: 200;
   -webkit-transition: max-height 1s;
   -moz-transition: max-height 1s;
   -ms-transition: max-height 1s;
