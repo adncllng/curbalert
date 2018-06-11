@@ -135,7 +135,7 @@ class PostList extends Component {
 											<input
 												className="input"
 												type="search"
-												placeholder="Search for items"
+												placeholder="I'm looking for..."
 												name="searchTag"
 												onChange={this.handleChange}
 											/>

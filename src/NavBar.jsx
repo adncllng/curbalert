@@ -71,11 +71,11 @@ class NavBar extends Component {
 		}
 
 		return (
-			<nav className="navbar has-shadow fixed">
+			<nav className="navbar fixed">
 					<div className="navbar-brand">
 
 					<Link to={'/'} className="navbar-item brand">
-						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528672847/curb-alert-logo-long.png" className="logo"/>
+						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528729525/logo.png" className="logo"/>
 					</Link>
 					<a
 						role="button"

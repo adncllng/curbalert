@@ -163,13 +163,13 @@ class SideBar extends Component {
 									<input
 										className="input"
 										type="search"
-										placeholder="Search for items"
+										placeholder="I'm looking for..."
 										name="searchTag"
 										onChange={this.handleChange}
 									/>
 								</div>
 								<div className="control">
-									<button className="button is-info">
+									<button className="button is-success">
 										<i className="fa fa-search" />
 									</button>
 								</div>

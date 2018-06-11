@@ -39,9 +39,10 @@ class LoginForm extends Component {
     return (
       <div className="column is-4 is-offset-4">
         <form onSubmit={this.handleFormSubmit}>
-        <section className="modal-card-body">
-          <p className="modal-card-title">Login</p>
-          <br/>
+        <section className="modal-card-body login-form">
+          <br/><p className="modal-card-title">Welcome back</p>
+          <br/><small>Not part of the network yet?<Link to={'/register'}> Create an account.</Link></small>
+          <br/><br/>
           <div className="field">
             <p className="control has-icons-left">
               <input
@@ -70,10 +71,9 @@ class LoginForm extends Component {
               </span>
             </p>
           </div>
-          <button className="button is-light">Submit</button>
+          <button className="button is-success is-rounded">Sign in</button>
         </section>
         </form>
-          <p>Don't have an account yet?<Link to={'/register'}> Register</Link></p>
       </div>
     );
   }

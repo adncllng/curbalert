@@ -84,11 +84,12 @@ class RegisterForm extends Component {
 		return (
 			<div className="modal-card">
 				<form onSubmit={e => this.handleFormSubmit(e)}>
-					<section className="modal-card-body">
+					<section className="modal-card-body register-form">
 						<br />
-						<p className="modal-card-title">Register</p>
-						<br />
-
+						<p className="modal-card-title">Join the network</p>
+						<br /><small>
+						Already have an account?<Link to={"/login"}> Login</Link></small>
+						<br /><br />
 						<div className="columns is-multiline is-mobile">
 							<div className="column is-full">
 								<p className="control has-icons-left">
@@ -210,16 +211,11 @@ class RegisterForm extends Component {
 							</div>
 						</div>
 
-						<button className="button is-light wide">Register</button>
+						<button className="button is-success is-rounded">Create Account</button>
 						<br/>
 						<small>{this.state.flash}</small>
 					</section>
 				</form>
-				<div>
-					<p>
-						Already have an account?<Link to={"/login"}> Login</Link>
-					</p>
-				</div>
 			</div>
 		);
 	}
