@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AuthService from "./AuthService.jsx";
 import { Link } from "react-router-dom";
+import "./styles/scss/NavBar.css";
 
 class NavBar extends Component {
 	constructor(props) {
@@ -25,18 +26,18 @@ class NavBar extends Component {
 		if (this.Auth.loggedIn()) {
 			navEnd = (
 				<div className="navbar-end nav-items" aria-label="dropdown navigation">
-					<div>
+					<div className="nav-button">
 						<a className="navbar-link nav-toggle">{this.props.username}</a>
 								<div className="nav-inner">
 									<div className="nav-content">
 										<div className="dropdown-content">
 									<Link
-										className="navbar-item"
+										className="menu-item navbar-item"
 										to={"/profile"}
 										type="button is-active">
 										Profile
 									</Link>
-									<hr className="navbar-divider" />
+									<hr className="menu-item navbar-divider" />
 									<a
 										className="navbar-item"
 										type="button"

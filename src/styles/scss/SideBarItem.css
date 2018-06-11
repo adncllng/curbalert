@@ -32,3 +32,5 @@ body {
   border-radius: 3px;
   display: block;
   text-align: center; }
+  .side-bar-item-toggle:hover {
+    background: #0000b3; }
