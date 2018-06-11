@@ -97,10 +97,8 @@ class SideBar extends Component {
 						hoverState={this.hoverState}
 						clearHoverState={this.clearHoverState}
 						centerZoom={this.props.centerZoom}
-						address={this.state.address}
+						address={post.address}
 						post={post}
-						getAddress={this.props.getAddress}
-						geoAddress={this.props.geoAddress}
 					/>
 				);
 			});
