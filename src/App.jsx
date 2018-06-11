@@ -145,15 +145,7 @@ class App extends Component {
 
 	resetPosts = () => {
 		let postsArr = [];
-		axios
-			.get("http://localhost:3001/api/posts")
-			.then(response => {
-				postsArr = response.data;
-				this.setState({ posts: postsArr });
-			})
-			.catch(error => {
-				console.log(error);
-			});
+	  this.createPostList()
 	};
 
 	showAddPostModal = () => {
