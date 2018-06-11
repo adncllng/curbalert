@@ -27,7 +27,8 @@
   position: fixed !important;
   top: 0;
   left: 0;
-  right: 0; }
+  right: 0;
+  padding-right: 20px; }
 
 .nav.is-dark {
   background-color: #232B2D;
@@ -65,8 +66,8 @@
   padding: 5px; }
 
 .navbar-item img {
-  max-height: 2.25rem;
-  margin: 10px; }
+  max-height: 2rem;
+  margin-left: 10px; }
 
 .sidebar {
   top: 0;

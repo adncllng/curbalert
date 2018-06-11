@@ -159,7 +159,7 @@ class SideBar extends Component {
 						<form onSubmit={this.handleFormSubmit} ref="searchForm">
 						<hr/>
 							<div className="field has-addons">
-								<div className="control" style={{width: '100%'}}>
+								<div className="control is-expanded">
 									<input
 										className="input"
 										type="search"

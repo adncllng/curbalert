@@ -1,8 +1,13 @@
-.hero {
+.no-results {
   text-align: center;
   height: 500px;
   vertical-align: center;
   padding-top: 150px;
+}
+
+.hero .is-light {
+  width: 100% !important;
+  display: flex;
 }
 
 .card {
@@ -11,15 +16,19 @@
   flex-direction: column;
 }
 
-.card-footer{
+.card-footer {
   margin-top: auto;
 }
 
-.box {
-  margin: 100px 25px 0 25px;
+.search-bar {
+  text-align: center;
+  align-items: center;
 }
 
-.search {
-  margin-left: 20px;
-  margin-bottom: 20px;
+.post-list {
+  margin-top: 40px;
+}
+
+.field.is-grouped>.control:not(:last-child) {
+  margin-right: 0;
 }
