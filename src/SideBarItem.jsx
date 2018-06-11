@@ -8,7 +8,6 @@ class SideBarItem extends Component {
 		super(props);
 	}
 
-
 	handlePostClick = () => {
 		this.props.toggleModal(this.props.id);
 		this.props.centerZoom(this.props.post.geo_tag.x, this.props.post.geo_tag.y);
@@ -32,13 +31,16 @@ class SideBarItem extends Component {
 						onMouseEnter={this.handleMouseEnter}
 						onMouseLeave={this.handleMouseLeave}
 						className="side-bar-item-toggle">
-						<p className="is-size-5">{this.props.title}</p>
+						<div className="is-size-6">
+							{this.props.title}
+							<i id="eye" className="fa fa-eye"/>
+						</div>
 						<div className="side-bar-item-content">
 							<img src={this.props.image} style={{ maxWidth: "50%" }} />
 							<div className="date-posted" style={{ paddingTop: "10px" }}>
 								<div>{this.props.address}</div>
 								<div className="side-bar-item-inner">
-									<br/>
+									<br />
 									<small>
 										(Posted {moment(this.props.created_at).fromNow()})
 									</small>
@@ -47,7 +49,7 @@ class SideBarItem extends Component {
 						</div>
 					</a>
 				</li>
-				<br />
+				<hr style={{ margin: "0" }} />
 			</ul>
 		);
 	}

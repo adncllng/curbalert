@@ -1,11 +1,13 @@
-
 .side-bar-item {
 	display: inline-block;
 	text-align: left;
-	margin: 1%;
 	width: 100%;
 
 	&:hover {
+		#eye {
+			color: darken(#cecece, 15%);
+			// visibility: hidden;
+		}
 		.side-bar-item-content {
 			max-height: 400px;
 		}
@@ -24,4 +26,15 @@
 
 .side-bar-item-inner {
 	padding: 0;
+}
+
+#eye {
+	-webkit-transition: color 1s linear;
+	-moz-transition: color 1s linear;
+	-ms-transition: color 1s linear;
+	-o-transition: color 1s linear;
+	transition: color 1s linear;
+	float: right;
+	color: #cecece;
+	// visibility: visible;
 }
