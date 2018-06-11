@@ -8,9 +8,6 @@ class SideBarItem extends Component {
 		super(props);
 	}
 
-	componentDidMount() {
-		this.props.getAddress(this.props.post);
-	}
 
 	handlePostClick = () => {
 		this.props.toggleModal(this.props.id);
@@ -39,7 +36,7 @@ class SideBarItem extends Component {
 						<img src={this.props.image} style={{ maxWidth: "100%" }} />
 						<div className="side-bar-item-content">
 							<div className="date-posted" style={{ paddingTop: "10px" }}>
-								<div>{`${this.props.geoAddress}`}</div>
+								<div>{this.props.address}</div>
 								<div className="side-bar-item-inner">
 									{/* {`${this.props.post.geo_tag.x} ${this.props.post.geo_tag.y}`} */}
 									<br/>
