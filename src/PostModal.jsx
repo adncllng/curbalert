@@ -24,11 +24,11 @@ class PostModal extends Component {
 						Claim Item
 					</button>
 				):(
-					<p>post some trash to claim items</p>
+					<button className="button is-static is-outlined">No points left!</button>
 				)
 
 		return (
-			<div className="modal is-active is-pulled-right">
+			<div className="modal post-modal is-active is-pulled-right">
 				<div className="modal-content-width">
 					<header className="modal-card-head">
 						<p className="modal-card-title">{this.props.modalParams.title}</p>

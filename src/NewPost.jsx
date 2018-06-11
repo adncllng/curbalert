@@ -6,6 +6,7 @@ import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng
 } from "react-places-autocomplete";
+import "./styles/scss/NewPost.css";
 
 const vision = require("node-cloud-vision-api");
 vision.init({ auth: process.env.REACT_APP_GOOGLE_API_KEY });
@@ -26,6 +27,7 @@ class NewPost extends Component {
 		event.preventDefault();
 		this.setState({ [event.target.name]: event.target.value });
 	};
+
 	addTag = event => {
 		event.preventDefault();
 		this.setState({
@@ -113,8 +115,7 @@ class NewPost extends Component {
 				});
 		});
 		// Once all the files are uploaded
-		axios.all(uploaders).then(() => {
-		});
+		axios.all(uploaders).then(() => {});
 	};
 
 	handleDropdown = address => {
@@ -196,16 +197,14 @@ class NewPost extends Component {
 		let { trashPicUrl, trashTags } = this.state;
 		let trashPic = null;
 		let tags = null;
-		if (trashPicUrl) {
-			trashPic = (
-				<img
-					style={{ minWidth: "100%", minHeight: "100%" }}
-					src={trashPicUrl}
-				/>
-			);
-		} else {
-			trashPic = null;
-		}
+		trashPicUrl
+			? (trashPic = (
+					<img
+						style={{ minWidth: "100%", minHeight: "100%" }}
+						src={trashPicUrl}
+					/>
+			  ))
+			: (trashPic = null);
 
 		if (trashTags) {
 			tags = trashTags.map(tag => {
@@ -237,8 +236,7 @@ class NewPost extends Component {
 								aria-label="close"
 							/>
 						</header>
-
-						<section className="modal-card-body">
+						<section className="modal-card-body upload-form is-mobile">
 							<div className="media-content">
 								<div className="columns">
 									<div className="media-left column is-one-third is-mobile">
@@ -267,7 +265,6 @@ class NewPost extends Component {
 												placeholder="Description"
 											/>
 										</div>
-
 										<p className="control has-icons-left">
 											<PlacesAutocomplete
 												value={this.state.address}
@@ -290,7 +287,6 @@ class NewPost extends Component {
 																placeholder="Location (i.e. H4C 1J7 or 1234 Example St.)"
 															/>
 														</div>
-
 														<div className="autocomplete-dropdown-container">
 															{suggestions.map(suggestion => {
 																const className = suggestion.active
@@ -323,7 +319,6 @@ class NewPost extends Component {
 												<i className="fas fa-map" />
 											</span>
 										</p>
-
 										<div className="field is-grouped">
 											<p className="control is-expanded">
 												<input
@@ -341,7 +336,7 @@ class NewPost extends Component {
 												</a>
 											</p>
 										</div>
-										<nav className="level is-mobile">
+										<nav>
 											<div className="level-left">
 												<div
 													style={{ width: "350px" }}

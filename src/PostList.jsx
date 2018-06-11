@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import moment from "moment";
 import "./styles/scss/PostList.css";
 
+
 class PostList extends Component {
 	handleChange = e => {
 		this.setState({
@@ -109,7 +110,7 @@ class PostList extends Component {
 			});
 		} else {
 			return (
-				<div className="hero is-centered">
+				<div className="no-results hero is-centered">
 					<div className="hero-content">
 						<p>No results found 👀</p>
 						<br />
@@ -123,38 +124,44 @@ class PostList extends Component {
 			);
 		}
 		return (
-			<div className="container">
-				<div className="box">
-					<section className="modal-card-body">
-						<form onSubmit={this.handleFormSubmit} ref="searchForm">
-							<div className="field is-three-quarters is-grouped">
-								<p className="control has-icons-left is-expanded">
-									<input
-										className="input"
-										type="search"
-										placeholder="Search"
-										name="searchTag"
-										onChange={this.handleChange}
-									/>
-									<span className="icon is-small is-left">
-										<i className="fa fa-search" />
-									</span>
-								</p>
+
+				<div>
+					<section className="hero is-light search-bar">
+						<div className="hero-body">
+							<div className="container">
+								<form onSubmit={this.handleFormSubmit} ref="searchForm">
+									<div className="search-field field has-addons is-grouped">
+										<div className="search-area control is-expanded has-icons-left">
+											<input
+												className="input"
+												type="search"
+												placeholder="I'm looking for..."
+												name="searchTag"
+												onChange={this.handleChange}
+											/>
+											<span className="icon is-small is-left">
+												<i className="fa fa-search" />
+											</span>
+										</div>
+											<div className="control">
+												<button className="button is-warning">Submit</button>
+											</div>
+									</div>
+								</form>
 							</div>
-							<button className="button is-warning">Submit</button>
-						</form>
+							<br/>
+							<button
+								className="button is-white"
+								onClick={event => {
+									this.props.resetPosts();
+									this.props.clearSearchForm(searchForm);
+									this.handleClear();
+								}}>
+								New Search
+							</button>
+						</div>
 					</section>
-					<button
-						className="button is-outlined search"
-						onClick={event => {
-							this.props.resetPosts();
-							this.props.clearSearchForm(searchForm);
-							this.handleClear();
-						}}>
-						New Search
-					</button>
-				</div>
-				<div className="section">
+				<div className="container post-list">
 					<div className="row columns is-multiline">{posts.reverse()}</div>
 				</div>
 			</div>

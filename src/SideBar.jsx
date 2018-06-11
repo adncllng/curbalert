@@ -24,15 +24,15 @@ class SideBar extends Component {
 		});
 	};
 
-	handleDropdown = address => {
-		this.setState({ address });
+	handleDropdown = recenterAddress => {
+		this.setState({ recenterAddress });
 	};
 
-	handleSelect = address => {
-		geocodeByAddress(address)
+	handleSelect = recenterAddress => {
+		geocodeByAddress(recenterAddress)
 			.then(results => getLatLng(results[0]))
 			.then(latLng => this.props.centerZoom(latLng.lat, latLng.lng, 11))
-			.then(() => this.setState({ address: "" }))
+			.then(() => this.setState({ recenterAddress: "" }))
 			.catch(error => console.error("Error", error));
 	};
 
@@ -88,11 +88,15 @@ class SideBar extends Component {
 						title={post.title}
 						image={post.image_url}
 						created_at={post.created_at}
+						geo_tag={post.geo_tag}
 						toggleModal={this.toggleModal}
 						hoverState={this.hoverState}
 						clearHoverState={this.clearHoverState}
 						centerZoom={this.props.centerZoom}
+						address={this.state.address}
 						post={post}
+						getAddress={this.props.getAddress}
+						geoAddress={this.props.geoAddress}
 					/>
 				);
 			});
@@ -100,10 +104,12 @@ class SideBar extends Component {
 			return (
 				<aside className="menu column is-fullheight has-shadow">
 					<div className="column">
-						<form onSubmit={this.handleRecenterSubmit} ref="recenterForm">							<div className="field">
+						<form onSubmit={this.handleRecenterSubmit} ref="recenterForm">
+							{" "}
+							<div className="field">
 								<p className="control has-icons-left">
 									<PlacesAutocomplete
-										value={this.state.address}
+										value={this.state.recenterAddress}
 										onChange={this.handleDropdown}
 										onSelect={this.handleSelect}>
 										{({
@@ -157,19 +163,19 @@ class SideBar extends Component {
 						</form>
 						<p>{this.state.flash}</p>
 						<form onSubmit={this.handleFormSubmit} ref="searchForm">
-						<hr/>
+							<hr />
 							<div className="field has-addons">
-								<div className="control" style={{width: '100%'}}>
+								<div className="control is-expanded">
 									<input
 										className="input"
 										type="search"
-										placeholder="Search for items"
+										placeholder="I'm looking for..."
 										name="searchTag"
 										onChange={this.handleChange}
 									/>
 								</div>
 								<div className="control">
-									<button className="button is-info">
+									<button className="button is-success">
 										<i className="fa fa-search" />
 									</button>
 								</div>

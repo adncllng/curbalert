@@ -43,6 +43,15 @@ class App extends Component {
 		this.getUser();
 	}
 
+	getAddress = (post) => {
+		Geocode.fromLatLng(post.geo_tag.x, post.geo_tag.y).then(response => {
+				let geoAddress = response.results[0].formatted_address;
+				this.setState({
+					geoAddress: geoAddress
+				})
+			});
+	}
+
 	filterPosts = foundPosts => {
 		this.setState({ posts: foundPosts });
 	};
@@ -253,7 +262,10 @@ class App extends Component {
 				/>
 
 				<Switch>
-					<Route exact path="/welcome" render={() => <LandingPage />} />
+					<Route
+						exact path="/welcome"
+						render={() => <LandingPage />}
+					/>
 
 					<Route
 						exact
@@ -305,6 +317,8 @@ class App extends Component {
 											clearHover={this.clearHover}
 											centerZoom={this.centerZoom}
 											center={this.state.center}
+											getAddress={this.getAddress}
+											geoAddress={this.state.geoAddress}
 										/>
 									</section>
 									<div className="map">
