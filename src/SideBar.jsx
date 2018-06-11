@@ -46,7 +46,11 @@ class SideBar extends Component {
 	handleFormSubmit = e => {
 		e.preventDefault();
 		let foundPosts = this.props.posts.filter(post => {
+			if(post.tags){
 			return post.tags.indexOf(this.state.searchTag) > -1;
+		}else{
+			return false
+		}
 		});
 		this.props.filterPosts(foundPosts);
 	};

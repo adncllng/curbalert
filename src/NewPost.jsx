@@ -134,6 +134,7 @@ class NewPost extends Component {
 
 	handleFormSubmit = event => {
 		event.preventDefault();
+		if(this.state.trashTags.length){
 		Geocode.fromAddress(this.state.address)
 			.then(response => {
 				const { lat, lng } = response.results[0].geometry.location;
@@ -191,6 +192,11 @@ class NewPost extends Component {
 					});
 				}, 3000);
 			});
+		}else{
+			this.setState({
+				flash:"add some tags"
+			})
+		}
 	};
 
 	render() {
