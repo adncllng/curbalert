@@ -212,7 +212,7 @@ class RegisterForm extends Component {
 						</div>
 
 						<button className="button is-success is-rounded">Create Account</button>
-						<br/>
+						<br/><br/>
 						<small>{this.state.flash}</small>
 					</section>
 				</form>

@@ -37,7 +37,7 @@ a {
   text-align: center; }
 
 .landing-page .card {
-  background-color: #EFEFE8;
+  background-color: #f1f5ef;
   box-shadow: none; }
 
 .landing-page .card-content {
@@ -80,7 +80,7 @@ a {
 
 .navbar-item img {
   max-height: 2.25rem;
-  padding-left: 30px; }
+  padding-left: 25px; }
   @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     .navbar-item img {
       margin: 0; } }

@@ -7,23 +7,24 @@ import { Link } from "react-router-dom";
 class LoginForm extends Component {
   constructor() {
     super();
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.Auth = new AuthService();
+    this.state = {
+
+    }
   }
 
   componentWillMount() {
     if (this.Auth.loggedIn())window.location.assign('/');
   }
 
-  handleChange(e) {
+  handleChange = e => {
     // need to move this to action.js eventually
     this.setState({
       [e.target.name]: e.target.value
     });
   }
 
-  handleFormSubmit(e) {
+  handleFormSubmit = e => {
     e.preventDefault();
     this.Auth.login(this.state.email, this.state.password)
     .then(res => {
@@ -31,8 +32,15 @@ class LoginForm extends Component {
       window.location.assign('/');
     })
     .catch(err => {
-      alert(err);
-    });
+     this.setState({
+       flash: 'Please enter a valid email and password'
+      });
+     setTimeout(() => {
+       this.setState({
+          flash: ""
+        });
+      }, 3000);
+    })
   }
 
   render() {
@@ -72,6 +80,7 @@ class LoginForm extends Component {
             </p>
           </div>
           <button className="button is-success is-rounded">Sign in</button>
+          <br/><br/><small>{this.state.flash}</small>
         </section>
         </form>
       </div>
