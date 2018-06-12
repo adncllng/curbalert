@@ -17,20 +17,34 @@ class PostModal extends Component {
 	render() {
 		let lat = this.props.modalParams.geo_tag.x;
 		let lng = this.props.modalParams.geo_tag.y;
-		let claimButton = this.props.currentUser.points ?
-		      (
-						<Link to='/profile'
+
+		let claimButton = this.props.currentUser.points ? (
+			(claimButton =
+				this.props.currentUser.id !== this.props.modalParams.user_id ? (
+					<Link
+						to="/profile"
 						onClick={this.props.claimItem}
 						id={this.props.modalParams.id}
 						className="button is-warning">
 						Claim Item
 					</Link>
-				):(
-					<button className="button is-static is-outlined">No points left!</button>
-				)
+				) : (
+					<button
+						onClick={() => {
+							this.props.deletePost(this.props.modalParams.id);
+						}}
+						className="button is-danger">
+						Delete
+					</button>
+				))
+		) : (
+			<button className="button is-static is-outlined">No points left!</button>
+		);
 
 		return (
-			<div className="modal post-modal is-active is-pulled-right" onClick={this.handleClick}>
+			<div
+				className="modal post-modal is-active is-pulled-right"
+				onClick={this.handleClick}>
 				<div className="modal-content-width">
 					<header className="modal-card-head">
 						<p className="modal-card-title">{this.props.modalParams.title}</p>
@@ -50,10 +64,10 @@ class PostModal extends Component {
 						</div>
 					</section>
 					<footer className="modal-card-foot">
-					{claimButton}
+						{claimButton}
 						<small className="is-size-7">
 							Posted {moment(this.props.modalParams.created_at).fromNow()}
-							<br/>by @{this.props.modalParams.username}
+							<br />by @{this.props.modalParams.username}
 						</small>
 					</footer>
 				</div>

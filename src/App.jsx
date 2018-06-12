@@ -88,6 +88,7 @@ class App extends Component {
 						: post;
 				});
 				this.setState({ posts: invisiblePosts });
+				this.getUser();
 			}
 			});
 	};
@@ -237,6 +238,7 @@ class App extends Component {
 				claimItem={this.claimItem}
 				closeModal={this.closeModal}
 				currentUser={this.state.currentUser}
+				deletePost={this.deletePost}
 			/>
 		) : (
 			""
