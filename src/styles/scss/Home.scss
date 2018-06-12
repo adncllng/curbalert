@@ -2,12 +2,9 @@
 
   .hero {
     text-align: center;
-    padding-top: 4em;
-    height: 550px;
-    background: linear-gradient(
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
-    ), url('https://unsplash.it/1200/900?random') no-repeat center center fixed;
+    padding-top: 3em;
+    height: 500px;
+
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -22,7 +19,7 @@
   }
 
   .header-image {
-    background-image: url("https://images.unsplash.com/photo-1488841714725-bb4c32d1ac94?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7d583c682a8495bbe8de0560dedc1942&auto=format&fit=crop&w=2816&q=80");
+    background-image: url("http://res.cloudinary.com/ninayujiri/image/upload/v1528773271/clem-onojeghuo-218551-unsplash.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: relative;
@@ -36,19 +33,19 @@
     }
 
     .card {
-      background-color: #f1f5ef;
+      background-color: #e4eae7;
       box-shadow: none;
     }
 
     .card-content {
-      margin: 90px 0 90px 0;
+      margin: 100px 0 100px 0;
     }
 
     .footer {
       background-color: white;
       text-align: center;
-      margin-top: 40px;
-      height: 100px;
+      margin-top: 30px;
+      height: 80px;
     }
 }
 

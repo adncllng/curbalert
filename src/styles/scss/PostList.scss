@@ -23,7 +23,31 @@
 .search-bar {
   text-align: center;
   align-items: center;
-  margin-top: 54px;
+
+  .button-wrapper {
+
+     &:hover {
+       .button-content {
+         max-height: 400px;
+
+         display: flex;
+         justify-content: center;
+        }
+     }
+  }
+
+  .button-content {
+    -webkit-transition: max-height 1s linear;
+    -moz-transition: max-height 1s linear;
+    -ms-transition: max-height 1s linear;
+    -o-transition: max-height 1s linear;
+    transition: max-height 1s linear;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    max-height: 0px;
+  }
+
 }
 
 .post-list {

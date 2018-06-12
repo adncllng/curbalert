@@ -230,10 +230,10 @@ class NewPost extends Component {
 		}
 
 		return (
-			<div className="modal is-active is-mobile" style={{ zIndex: "101" }}>
+			<div className="modal is-active" style={{ zIndex: "101" }}>
 				<form onSubmit={this.handleFormSubmit}>
 					<div className="modal-background" />
-					<div className="modal-card">
+					<div className="modal-card new-post-modal flex">
 						<header className="modal-card-head">
 							<p className="modal-card-title">Drop a bin</p>
 							<button

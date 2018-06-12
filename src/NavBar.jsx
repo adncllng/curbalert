@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import AuthService from "./AuthService.jsx";
 import { Link } from "react-router-dom";
 import "./styles/scss/NavBar.css";
+import bulmaBadge from '../node_modules/bulma-extensions/bulma-badge/dist/bulma-badge.min.css';
+
 
 class NavBar extends Component {
 	constructor(props) {
@@ -29,7 +31,7 @@ class NavBar extends Component {
 					<div className="navbar-brand">
 
 					<Link to={'/'} className="navbar-item brand">
-						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528758653/logo-green.png" className="logo"/>
+						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528768341/log.png" className="logo"/>
 					</Link>
 						<a
 							role="button"
@@ -61,16 +63,18 @@ class NavBar extends Component {
 								</a>
 							</div>
 						</div>
+
 					<div className="navbar-end" aria-label="dropdown navigation">
+
 						<div className="navbar-item has-dropdown is-hoverable">
-						<a className="navbar-link">{this.props.username}</a>
+						<a className="navbar-link"><span className="badge is-badge-light is-badge-small" data-badge={this.props.currentUser.points}>{this.props.username}</span></a>
 						<div className="navbar-dropdown is-right">
-								<Link
-									className="navbar-item"
-									to={"/profile"}
-									type="button is-active">
-									Profile
-								</Link>
+									<Link
+										className="navbar-item"
+										to={"/profile"}
+										type="button is-active">
+										Profile
+									</Link>
 							<hr className="navbar-divider" />
 							<a
 								className="navbar-item"
@@ -93,7 +97,7 @@ class NavBar extends Component {
 					<div className="container">
 						<div className="navbar-brand">
 						<Link to={'/'} className="navbar-item brand">
-							<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528758653/logo-green.png" style={{paddingLeft: '0px'}}className="logo"/>
+							<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528768341/log.png" style={{paddingLeft: '0px'}}className="logo"/>
 						</Link>
 							<a
 								role="button"
@@ -118,7 +122,7 @@ class NavBar extends Component {
 									to={"/register"}
 									className="navbar-item"
 									onClick={this.toggleBurger}>
-									Register
+									Join
 								</Link>
 							</div>
 					</div>
