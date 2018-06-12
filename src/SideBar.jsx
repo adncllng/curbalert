@@ -18,6 +18,7 @@ class SideBar extends Component {
 	}
 
 	isInBounds = post => {
+		if(this.props.currentBounds){
 		let x = post.geo_tag.x;
 		let y = post.geo_tag.y;
 		let upperX = this.props.currentBounds.ne.lat;
@@ -29,6 +30,8 @@ class SideBar extends Component {
 		} else {
 			return false;
 		}
+	}
+	return true;
 	};
 
 	handleChange = e => {
@@ -208,7 +211,7 @@ class SideBar extends Component {
 									className="button is-outlined is-extended newButton"
 									onClick={() => {
 										this.props.clearSearchForm(searchForm);
-										this.props.resetPosts();
+										this.props.createPostList();
 										this.handleClear();
 									}}>
 									New Search
