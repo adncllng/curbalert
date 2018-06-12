@@ -10,5 +10,13 @@
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
   .new-post-modal {
-    width: 90%;
-    align-content: center; } }
+    width: 88%; } }
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+  .column {
+    padding: .25rem; } }
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+  .modal-card {
+    display: inline-block;
+    overflow: scroll; } }
