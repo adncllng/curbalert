@@ -61,7 +61,6 @@ module.exports = (knex) => {
           const token = jwt.sign({ id: users[0].id }, process.env.SECRET_TOKEN, { expiresIn: 129600 });
           res.status(200).send({ token: token });
         })
-
         .catch((error) => {
           res.status(500).send('Email or password is incorrect');
         });

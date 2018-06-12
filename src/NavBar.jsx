@@ -29,7 +29,7 @@ class NavBar extends Component {
 					<div className="navbar-brand">
 
 					<Link to={'/'} className="navbar-item brand">
-						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528734125/green-logo.png" className="logo"/>
+						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528758653/logo-green.png" className="logo"/>
 					</Link>
 						<a
 							role="button"
@@ -90,36 +90,38 @@ class NavBar extends Component {
 		} else {
 			navBar = (
 				<nav className="navbar fixed has-shadow">
-					<div className="navbar-brand">
-					<Link to={'/'} className="navbar-item brand">
-						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528734125/green-logo.png" className="logo"/>
-					</Link>
-						<a
-							role="button"
-							className="navbar-burger"
-							data-target="navMenu"
-							ref="burger"
-							onClick={this.toggleBurger}>
-							<span />
-							<span />
-							<span />
-						</a>
-					</div>
-					<div id="navMenu" className="navbar-menu" ref="menu">
-						<div className="navbar-end">
-							<Link
-								to={"/login"}
-								className="navbar-item"
+					<div className="container">
+						<div className="navbar-brand">
+						<Link to={'/'} className="navbar-item brand">
+							<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528758653/logo-green.png" style={{paddingLeft: '0px'}}className="logo"/>
+						</Link>
+							<a
+								role="button"
+								className="navbar-burger"
+								data-target="navMenu"
+								ref="burger"
 								onClick={this.toggleBurger}>
-								Login
-							</Link>
-							<Link
-								to={"/register"}
-								className="navbar-item"
-								onClick={this.toggleBurger}>
-								Register
-							</Link>
+								<span />
+								<span />
+								<span />
+							</a>
 						</div>
+						<div id="navMenu" className="navbar-menu" ref="menu">
+							<div className="navbar-end">
+								<Link
+									to={"/login"}
+									className="navbar-item"
+									onClick={this.toggleBurger}>
+									Login
+								</Link>
+								<Link
+									to={"/register"}
+									className="navbar-item"
+									onClick={this.toggleBurger}>
+									Register
+								</Link>
+							</div>
+					</div>
 				</div>
 			</nav>
 

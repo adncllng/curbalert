@@ -42,7 +42,7 @@ class PostList extends Component {
 			posts = this.props.posts.filter(post => post.visible).map(post => {
 				if (post.user_id === this.props.currentUser.id) {
 					return (
-						<div className="column is-one-third">
+						<div className="column is-one-quarter">
 							<div className="card">
 								<div className="card-image">
 									<figure className="image">
@@ -77,7 +77,7 @@ class PostList extends Component {
 					);
 				} else {
 					return (
-						<div className="column is-one-third">
+						<div className="column is-one-quarter">
 							<div className="card">
 								<div className="card-image">
 									<figure className="image">

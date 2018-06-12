@@ -194,7 +194,7 @@ class NewPost extends Component {
 			});
 		}else{
 			this.setState({
-				flash:"add some tags"
+				flash: "Please add a tag to continue"
 			})
 		}
 	};
@@ -206,7 +206,7 @@ class NewPost extends Component {
 		trashPicUrl
 			? (trashPic = (
 					<img
-						style={{ minWidth: "100%", minHeight: "100%" }}
+						style={{ minWidth: "100%", minHeight: "100%"}}
 						src={trashPicUrl}
 					/>
 			  ))
@@ -217,7 +217,7 @@ class NewPost extends Component {
 				return (
 					<div className="control">
 						<div className="tags has-addons">
-							<a className="tag is-link">{tag}</a>
+							<a className="tag is-success">{tag}</a>
 							<a
 								className="tag is-delete"
 								name={tag}
@@ -235,7 +235,7 @@ class NewPost extends Component {
 					<div className="modal-background" />
 					<div className="modal-card">
 						<header className="modal-card-head">
-							<p className="modal-card-title">Add a post</p>
+							<p className="modal-card-title">Drop a bin</p>
 							<button
 								className="delete"
 								onClick={this.props.closeAddPostModal}
@@ -245,15 +245,16 @@ class NewPost extends Component {
 						<section className="modal-card-body upload-form is-mobile">
 							<div className="media-content">
 								<div className="columns">
-									<div className="media-left column is-one-third is-mobile">
+									<div className="media-left column is-one-third is-mobile is-centered">
 										<Dropzone
 											onDrop={this.handleDrop}
 											multiple
 											accept="image/*">
-											{trashPic || "click or drag and drop an image"}
+											{trashPic || <div style={{textAlign: 'center', paddingTop: '55px'}}><i className="fas fa-upload"></i><p>Drop your files here or click to upload</p></div>}
+
 										</Dropzone>
 									</div>
-									<div className="column is-two-thirds is-mobile">
+									<div className="column is-two-thirds is-mobile fields">
 										<div className="field">
 											<input
 												className="input"
@@ -290,7 +291,7 @@ class NewPost extends Component {
 																})}
 																style={{ width: "100%" }}
 																className="input"
-																placeholder="Location (i.e. H4C 1J7 or 1234 Example St.)"
+																placeholder="Location (be specific!)"
 															/>
 														</div>
 														<div className="autocomplete-dropdown-container">
@@ -325,11 +326,11 @@ class NewPost extends Component {
 												<i className="fas fa-map" />
 											</span>
 										</p>
-										<div className="field is-grouped">
+										<div className="field is-grouped has-addons">
 											<p className="control is-expanded">
 												<input
 													name="trashTag"
-													placeholder="add tags"
+													placeholder="Add tags"
 													onChange={this.handleChange}
 													className="input"
 													type="text"

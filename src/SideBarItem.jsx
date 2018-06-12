@@ -24,7 +24,6 @@ class SideBarItem extends Component {
 	render() {
 		return (
 			<ul className="menu-list">
-				<br />
 				<li className="side-bar-item">
 					<a
 						onClick={this.handlePostClick}
@@ -36,6 +35,7 @@ class SideBarItem extends Component {
 							<i id="eye" className="fa fa-eye"/>
 						</div>
 						<div className="side-bar-item-content">
+						 	<br/>
 							<img src={this.props.image} style={{ maxWidth: "50%" }} />
 							<div className="date-posted" style={{ paddingTop: "10px" }}>
 								<div>{this.props.address}</div>
