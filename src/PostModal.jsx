@@ -51,10 +51,10 @@ class PostModal extends Component {
 					</section>
 					<footer className="modal-card-foot">
 					{claimButton}
-						<small>
-							(Posted {moment(this.props.modalParams.created_at).fromNow()})
+						<small className="is-size-7">
+							Posted {moment(this.props.modalParams.created_at).fromNow()}
+							<br/>by @{this.props.modalParams.username}
 						</small>
-							<small> by {this.props.modalParams.username}</small>
 					</footer>
 				</div>
 			</div>
