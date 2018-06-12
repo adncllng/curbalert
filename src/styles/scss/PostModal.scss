@@ -3,7 +3,9 @@
   justify-content: flex-end;
 }
 
-.modal {
+.post-modal {
+  z-index: 150;
+
   justify-content: flex-end !important;
   margin-right: 30px;
 
@@ -13,10 +15,6 @@
         justify-content: center !important;
         margin-right: 0;
     }
-}
-
-.post-modal {
-  z-index: 150;
 }
 
 .modal-image {
