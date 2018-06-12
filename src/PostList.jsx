@@ -38,6 +38,7 @@ class PostList extends Component {
 	render() {
 		const searchForm = this.refs.searchForm;
 		let posts = null;
+
 		if (this.props.posts.length) {
 			posts = this.props.posts.filter(post => post.visible).map(post => {
 				if (post.user_id === this.props.currentUser.id) {
@@ -78,6 +79,17 @@ class PostList extends Component {
 						</div>
 					);
 				} else {
+						let claimLink = this.props.currentUser.points ?
+				      (
+							<a
+								onClick={this.props.claimItem}
+								id={post.id}
+								className="card-footer-item">
+								Claim
+							</a>
+						):(
+							<p className="card-footer-item">No points left!</p>
+						)
 					return (
 						<div className="column is-one-quarter">
 							<div className="card">
@@ -105,12 +117,7 @@ class PostList extends Component {
 									</div>
 								</div>
 								<footer className="card-footer">
-									<a
-										onClick={this.props.claimItem}
-										id={post.id}
-										className="card-footer-item">
-										Claim
-									</a>
+									{claimLink}
 								</footer>
 							</div>
 						</div>

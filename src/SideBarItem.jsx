@@ -42,7 +42,7 @@ class SideBarItem extends Component {
 								<div className="side-bar-item-inner">
 									<br />
 									<small>
-										(Posted {moment(this.props.created_at).fromNow()})
+										Posted {moment(this.props.created_at).fromNow()}
 									<br/>by <span className="tag is-white is-rounded">@{this.props.post.username}</span>
 									</small>
 								</div>
