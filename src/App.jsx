@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect, Link } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import axios from "axios";
 import "./styles/scss/NavBar.css";
 import "./styles/scss/App.css";
@@ -43,11 +44,11 @@ class App extends Component {
 	componentDidMount() {
 		this.getUser();
 	}
-	setCurrentBounds = (currentBounds) => {
+	setCurrentBounds = currentBounds => {
 		this.setState({
 			currentBounds
 		});
-	}
+	};
 
 	filterPosts = foundPosts => {
 		this.setState({ posts: foundPosts });
@@ -74,9 +75,11 @@ class App extends Component {
 			.post(
 				`http://localhost:3001/api/posts/${event.target.id}/${
 					this.state.currentUser.id
-				}`,{claim: true, claimed_by:this.state.currentUser.id}
+				}`,
+				{ claim: true, claimed_by: this.state.currentUser.id }
 			)
 			.then(response => {
+<<<<<<< HEAD
 				console.log("RESPONSE:",response.status )
 					if(response.status == 200){
 				//this.getUser();
@@ -87,6 +90,23 @@ class App extends Component {
 				});
 				this.setState({ posts: invisiblePosts });
 			}
+=======
+				console.log("RESPONSE:", response.status);
+				if (response.status == 200) {
+					//this.getUser();
+					let invisiblePosts = this.state.posts.map(post => {
+						return post.id == id
+							? {
+									...post,
+									visible: false,
+									claimed_by: this.state.currentUser.id
+							  }
+							: post;
+					});
+					this.setState({ posts: invisiblePosts });
+					window.location.assign("/profile");
+				}
+>>>>>>> 5c441e2c726a17713a0b9ec9099ff0bd8a461e86
 			});
 	};
 
@@ -97,7 +117,8 @@ class App extends Component {
 			.post(
 				`http://localhost:3001/api/posts/${event.target.id}/${
 					this.state.currentUser.id
-				}`,{claim: false, claimed_by:null}
+				}`,
+				{ claim: false, claimed_by: null }
 			)
 			.then(response => {
 				this.getUser();
@@ -149,7 +170,7 @@ class App extends Component {
 
 	resetPosts = () => {
 		let postsArr = [];
-	  this.createPostList()
+		this.createPostList();
 	};
 
 	showAddPostModal = () => {
@@ -165,7 +186,10 @@ class App extends Component {
 		this.setState({
 			posts: [...this.state.posts, post],
 			center: { lat: post.geo_tag.x, lng: post.geo_tag.y },
-			currentUser:{...this.state.currentUser, points: (this.state.currentUser.points + 1) }
+			currentUser: {
+				...this.state.currentUser,
+				points: this.state.currentUser.points + 1
+			}
 		});
 	};
 
@@ -238,116 +262,125 @@ class App extends Component {
 		);
 
 		return (
-			<div className="App">
-				{postmodal}
-				{addPostModal}
+			<Route
+				render={({ location }) => (
+					<div className="App">
+						{postmodal}
+						{addPostModal}
 
-				<NavBar
-					logout={this.logout}
-					username={this.state.currentUser.username}
-					showAddPostModal={this.showAddPostModal}
-				/>
+						<NavBar
+							logout={this.logout}
+							username={this.state.currentUser.username}
+							showAddPostModal={this.showAddPostModal}
+						/>
 
-				<Switch>
-					<Route
-						exact path="/welcome"
-						render={() => <LandingPage />}
-					/>
+						<TransitionGroup>
+							<CSSTransition
+								timeout={{ enter: 2000,
+ 														exit: 0,}}
+								classNames="fade"
+								key={location.key}
+								appear={false} >
+								<Switch location={location}>
+									<Route exact path="/welcome" render={() => <LandingPage />} />
 
-					<Route
-						exact
-						path="/login"
-						render={() => <LoginForm getUser={this.getUser} />}
-					/>
+									<Route
+										exact
+										path="/login"
+										render={() => <LoginForm getUser={this.getUser} />}
+									/>
 
-					<Route
-						exact
-						path="/register"
-						render={() => (
-							<RegisterForm
-								centerZoom={this.centerZoom}
-								getUser={this.getUser}
-							/>
-						)}
-					/>
+									<Route
+										exact
+										path="/register"
+										render={() => (
+											<RegisterForm
+												centerZoom={this.centerZoom}
+												getUser={this.getUser}
+											/>
+										)}
+									/>
 
-					<Route
-						exact
-						path="/profile"
-						render={() => (
-							<Profile
-								createPostList={this.createPostList}
-								posts={this.state.posts}
-								currentUser={this.state.currentUser}
-								deletePost={this.deletePost}
-								getUser={this.getUser}
-								unclaimItem={this.unclaimItem}
-							/>
-						)}
-					/>
+									<Route
+										exact
+										path="/profile"
+										render={() => (
+											<Profile
+												createPostList={this.createPostList}
+												posts={this.state.posts}
+												currentUser={this.state.currentUser}
+												deletePost={this.deletePost}
+												getUser={this.getUser}
+												unclaimItem={this.unclaimItem}
+											/>
+										)}
+									/>
 
-					<Route
-						exact
-						path="/"
-						render={() =>
-							this.Auth.loggedIn() ? (
-								<div className="home">
-									<section className="sidebar columns is-fullheight is-hidden-mobile">
-										<SideBar
-											posts={this.state.posts}
-											createPostList={this.createPostList}
-											filterPosts={this.filterPosts}
-											resetPosts={this.resetPosts}
-											clearSearchForm={this.clearSearchForm}
-											showModal={this.showModal}
-											hoverMarker={this.hoverMarker}
-											clearHover={this.clearHover}
-											centerZoom={this.centerZoom}
-											center={this.state.center}
-											currentBounds = {this.state.currentBounds}
+									<Route
+										exact
+										path="/"
+										render={() =>
+											this.Auth.loggedIn() ? (
+												<div className="home">
+													<section className="sidebar columns is-fullheight is-hidden-mobile">
+														<SideBar
+															posts={this.state.posts}
+															createPostList={this.createPostList}
+															filterPosts={this.filterPosts}
+															resetPosts={this.resetPosts}
+															clearSearchForm={this.clearSearchForm}
+															showModal={this.showModal}
+															hoverMarker={this.hoverMarker}
+															clearHover={this.clearHover}
+															centerZoom={this.centerZoom}
+															center={this.state.center}
+															currentBounds={this.state.currentBounds}
+														/>
+													</section>
+													<div className="map">
+														<MapContainer
+															center={this.state.center}
+															zoom={this.state.zoom}
+															posts={this.state.posts}
+															createPostList={this.createPostList}
+															showModal={this.showModal}
+															markerParams={this.state.markerParams}
+															setCurrentBounds={this.setCurrentBounds}
+														/>
+													</div>
+												</div>
+											) : (
+												<Redirect to="/welcome" />
+											)
+										}
+									/>
 
-										/>
-									</section>
-									<div className="map">
-										<MapContainer
-											center={this.state.center}
-											zoom={this.state.zoom}
-											posts={this.state.posts}
-											createPostList={this.createPostList}
-											showModal={this.showModal}
-											markerParams={this.state.markerParams}
-											setCurrentBounds = {this.setCurrentBounds}
-										/>
-									</div>
-								</div>
-							) : (
-								<Redirect to="/welcome" />
-							)
-						}
-					/>
-
-					<Route
-						exact
-						path="/posts"
-						render={() =>
-							this.Auth.loggedIn() ? (
-								<PostList
-									posts={this.state.posts}
-									currentUser={this.state.currentUser}
-									createPostList={this.createPostList}
-									filterPosts={this.filterPosts}
-									resetPosts={this.resetPosts}
-									deletePost={this.deletePost}
-									clearSearchForm={this.clearSearchForm}
-									claimItem={this.claimItem}
-								/>
-							) : (
-								<Redirect to="/welcome" />
-							)
-						}
-					/>
-				</Switch>
-			</div>
+									<Route
+										exact
+										path="/posts"
+										render={() =>
+											this.Auth.loggedIn() ? (
+												<PostList
+													posts={this.state.posts}
+													currentUser={this.state.currentUser}
+													createPostList={this.createPostList}
+													filterPosts={this.filterPosts}
+													resetPosts={this.resetPosts}
+													deletePost={this.deletePost}
+													clearSearchForm={this.clearSearchForm}
+													claimItem={this.claimItem}
+												/>
+											) : (
+												<Redirect to="/welcome" />
+											)
+										}
+									/>
+								</Switch>
+							</CSSTransition>
+						</TransitionGroup>
+					</div>
+				)}
+			/>
 		);
 	}
 }
