@@ -14,9 +14,9 @@ class Marker extends Component {
   render() {
     let img_url;
     if (this.props.markerParams.id == this.props.$dimensionKey) {
-      img_url = 'http://res.cloudinary.com/ninayujiri/image/upload/v1528754083/trash-2.svg'
+      img_url = 'http://res.cloudinary.com/ninayujiri/image/upload/v1528762215/pin2.svg'
     } else {
-      img_url = 'http://res.cloudinary.com/ninayujiri/image/upload/v1528753817/trash.svg'
+      img_url = 'http://res.cloudinary.com/ninayujiri/image/upload/v1528762321/pin1.svg'
     }
 
     return (
