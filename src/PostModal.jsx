@@ -54,6 +54,7 @@ class PostModal extends Component {
 						<small>
 							(Posted {moment(this.props.modalParams.created_at).fromNow()})
 						</small>
+							<small> by {this.props.modalParams.username}</small>
 					</footer>
 				</div>
 			</div>
