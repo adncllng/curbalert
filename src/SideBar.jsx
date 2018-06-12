@@ -25,7 +25,7 @@ class SideBar extends Component {
 		let lowerX = this.props.currentBounds.se.lat;
 		let upperY = this.props.currentBounds.ne.lng;
 		let lowerY = this.props.currentBounds.nw.lng;
-		if (x <= upperX && x >= lowerY && y <= upperY && y >= lowerY) {
+		if (x <= upperX && x >= lowerX && y <= upperY && y >= lowerY) {
 			return true;
 		} else {
 			return false;
