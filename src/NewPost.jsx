@@ -158,7 +158,8 @@ class NewPost extends Component {
 						let newPost = res.data[0];
 						let newPostWithAddress = {
 							...newPost,
-							address: this.state.address
+							address: this.state.address,
+							username: this.props.currentUser.username
 						};
 
 						this.props.addPost(newPostWithAddress);
