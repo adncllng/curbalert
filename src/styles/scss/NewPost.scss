@@ -1,7 +1,8 @@
 .upload-form {
   display: flex;
+  overflow: hidden;
 }
-//
-.column {
-  padding-right: 20px;
+
+.fields {
+  padding-right: 30px;
 }
