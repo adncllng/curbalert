@@ -45,6 +45,7 @@ module.exports = (knex) => {
   });
 
   router.post('/', (req, res) => {
+    console.log(req.body)
     const {
       user_id, title, content, image_url, geo_tag, point_value, visible, tags,
     } = req.body;
@@ -101,7 +102,7 @@ module.exports = (knex) => {
         'claimed_by'
       )
       .from('posts')
-      .leftOuterJoin('users', 'users.id', 'posts.id')
+      .leftOuterJoin('users', 'users.id', 'posts.user_id')
       .then((posts) => {
         const postIds = posts.map(result => result.id);
         knex
