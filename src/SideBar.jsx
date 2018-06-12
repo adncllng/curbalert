@@ -143,7 +143,7 @@ class SideBar extends Component {
 													})}
 													style={{ width: "100%" }}
 													className="input"
-													placeholder="Enter a location"
+													placeholder="Change your location"
 												/>
 												<div className="autocomplete-dropdown-container">
 													{suggestions.map(suggestion => {

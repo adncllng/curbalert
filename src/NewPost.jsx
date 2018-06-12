@@ -250,7 +250,8 @@ class NewPost extends Component {
 											onDrop={this.handleDrop}
 											multiple
 											accept="image/*">
-											{trashPic || "Click or drag & drop an image"}
+											{trashPic || <div style={{textAlign: 'center', paddingTop: '55px'}}><i className="fas fa-upload"></i><p>Drop your files here or click to upload</p></div>}
+
 										</Dropzone>
 									</div>
 									<div className="column is-two-thirds is-mobile fields">
