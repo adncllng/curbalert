@@ -129,42 +129,45 @@ class PostList extends Component {
 			);
 		}
 		return (
-
 				<div>
 					<section className="hero is-light search-bar">
-						<div className="hero-body">
-							<div className="container">
-								<form onSubmit={this.handleFormSubmit} ref="searchForm">
-									<div className="search-field field has-addons is-grouped">
-										<div className="search-area control is-expanded has-icons-left">
-											<input
-												className="input"
-												type="search"
-												placeholder="I'm looking for..."
-												name="searchTag"
-												onChange={this.handleChange}
-											/>
-											<span className="icon is-small is-left">
-												<i className="fa fa-search" />
-											</span>
-										</div>
-											<div className="control">
-												<button className="button is-warning">Submit</button>
+						<div className="hero-body has-text-centered">
+							<div className="column is-expanded is-narrow">
+								<div className="button-wrapper">
+									<form onSubmit={this.handleFormSubmit} ref="searchForm">
+										<div className="search-field field has-addons is-grouped">
+											<div className="search-area control is-expanded has-icons-left">
+												<input
+													className="input search-input"
+													type="search"
+													placeholder="I'm looking for..."
+													name="searchTag"
+													onChange={this.handleChange}
+												/>
+												<span className="icon is-small is-left">
+													<i className="fa fa-search" />
+												</span>
 											</div>
-									</div>
-								</form>
+												<div className="control">
+													<button className="button is-warning">Submit</button>
+												</div>
+										</div>
+									</form>
+									<br/>
+								<div className="button-content">
+									<button
+										className="button is-white is-full-width"
+										onClick={event => {
+											this.props.resetPosts();
+											this.props.clearSearchForm(searchForm);
+											this.handleClear();
+										}}>
+										New Search
+									</button>
+								</div>
 							</div>
-							<br/>
-							<button
-								className="button is-white"
-								onClick={event => {
-									this.props.resetPosts();
-									this.props.clearSearchForm(searchForm);
-									this.handleClear();
-								}}>
-								New Search
-							</button>
-						</div>
+					</div>
+					</div>
 					</section>
 				<div className="container post-list">
 					<div className="row columns is-multiline">{posts.reverse()}</div>

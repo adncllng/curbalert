@@ -29,7 +29,7 @@ class NavBar extends Component {
 					<div className="navbar-brand">
 
 					<Link to={'/'} className="navbar-item brand">
-						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528758653/logo-green.png" className="logo"/>
+						<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528768341/log.png" className="logo"/>
 					</Link>
 						<a
 							role="button"
@@ -93,7 +93,7 @@ class NavBar extends Component {
 					<div className="container">
 						<div className="navbar-brand">
 						<Link to={'/'} className="navbar-item brand">
-							<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528758653/logo-green.png" style={{paddingLeft: '0px'}}className="logo"/>
+							<img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528768341/log.png" style={{paddingLeft: '0px'}}className="logo"/>
 						</Link>
 							<a
 								role="button"
@@ -118,7 +118,7 @@ class NavBar extends Component {
 									to={"/register"}
 									className="navbar-item"
 									onClick={this.toggleBurger}>
-									Register
+									Join
 								</Link>
 							</div>
 					</div>

@@ -38,7 +38,7 @@ class SideBarItem extends Component {
 						 	<br/>
 							<img src={this.props.image} style={{ maxWidth: "50%" }} />
 							<div className="date-posted" style={{ paddingTop: "10px" }}>
-								<div>{this.props.address}</div>
+								<div><small><i className="fas fa-map-pin" /> {this.props.address}</small></div>
 								<div className="side-bar-item-inner">
 									<br />
 									<small>

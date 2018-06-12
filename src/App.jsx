@@ -185,7 +185,6 @@ class App extends Component {
 
 	clearHover = () => {
 		this.setState({ markerParams: {} });
-		console.log("hello");
 	};
 
 	logout = () => {
@@ -319,6 +318,8 @@ class App extends Component {
 											showModal={this.showModal}
 											markerParams={this.state.markerParams}
 											setCurrentBounds = {this.setCurrentBounds}
+											hoverMarker={this.hoverMarker}
+											clearHover={this.clearHover}
 										/>
 									</div>
 								</div>
