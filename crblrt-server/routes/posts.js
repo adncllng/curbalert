@@ -6,41 +6,41 @@ module.exports = (knex) => {
   router.post('/:post_id/:user_id', (req, res) => {
     // if current user points >= 1 do all this else send sorry
     //  console.log(req.parmas.user_id)
-    let decrementBy = req.body.claim ? 1 : 0;
-    console.log(req.body.claim, req.body.claimed_by)
+    const decrementBy = req.body.claim ? 1 : 0;
+    console.log(req.body.claim, req.body.claimed_by);
     knex('users')
       .where('id', Number(req.params.user_id))
-      .andWhere('points','>',0)
+      .andWhere('points', '>', 0)
       .decrement('points', decrementBy)
       .returning('*')
-      .then(user => {
-        console.log("points",user[0]);
-        if(user[0] || !req.body.claim){
-        knex('posts')
-          .where('id', Number(req.params.post_id))
-          .update({
-            claimed_by: req.body.claimed_by,
-            visible: !req.body.claim,
-          })
-          .then(() => {
-            res.send(user[0]);
-          });
-        }else{
-          res.status(400).send('not enough points')
+      .then((user) => {
+        console.log('points', user[0]);
+        if (user[0] || !req.body.claim) {
+          knex('posts')
+            .where('id', Number(req.params.post_id))
+            .update({
+              claimed_by: req.body.claimed_by,
+              visible: !req.body.claim,
+            })
+            .then(() => {
+              res.send(user[0]);
+            });
+        } else {
+          res.status(400).send('not enough points');
         }
       })
       .catch((err) => {
-          res.status(400).send('not enough points')
+        res.status(400).send('not enough points');
         // take away a point from :user_id
       });
   });
 
   router.delete('/:id', (req, res) => {
     knex('posts')
-    .where('id', Number(req.params.id))
-    .del()
-    .then(result => {
-        res.send(`Post #${req.params.id} was deleted`)
+      .where('id', Number(req.params.id))
+      .del()
+      .then((result) => {
+        res.send(`Post #${req.params.id} was deleted`);
       });
   });
 
@@ -72,15 +72,14 @@ module.exports = (knex) => {
                 .select('*')
                 .from('posts')
                 .where('id', Number(postId))
-                .then(result=>{
+                .then((result) => {
                   knex('users')
-                  .where('id', Number(user_id))
-                  .increment('points')
-                  .then(()=>{
-                    res.send(result)
-                  })
-                })
-              );
+                    .where('id', Number(user_id))
+                    .increment('points')
+                    .then(() => {
+                      res.send(result);
+                    });
+                }));
           });
       })
       .catch(err => res.status(400).send(JSON.stringify(err)));
@@ -88,8 +87,20 @@ module.exports = (knex) => {
 
   router.get('/', (req, res) => {
     knex
-      .select('*')
+      .select(
+        'posts.id',
+        'user_id',
+        'title',
+        'image_url',
+        'content',
+        'posts.geo_tag',
+        'point_value',
+        'visible',
+        'created_at',
+        'username',
+      )
       .from('posts')
+      .join('users', 'users.id', 'posts.id')
       .then((posts) => {
         const postIds = posts.map(result => result.id);
         knex

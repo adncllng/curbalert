@@ -79,7 +79,6 @@ class App extends Component {
 				{ claim: true, claimed_by: this.state.currentUser.id }
 			)
 			.then(response => {
-<<<<<<< HEAD
 				console.log("RESPONSE:",response.status )
 					if(response.status == 200){
 				//this.getUser();
@@ -90,23 +89,6 @@ class App extends Component {
 				});
 				this.setState({ posts: invisiblePosts });
 			}
-=======
-				console.log("RESPONSE:", response.status);
-				if (response.status == 200) {
-					//this.getUser();
-					let invisiblePosts = this.state.posts.map(post => {
-						return post.id == id
-							? {
-									...post,
-									visible: false,
-									claimed_by: this.state.currentUser.id
-							  }
-							: post;
-					});
-					this.setState({ posts: invisiblePosts });
-					window.location.assign("/profile");
-				}
->>>>>>> 5c441e2c726a17713a0b9ec9099ff0bd8a461e86
 			});
 	};
 
