@@ -71,7 +71,6 @@ class App extends Component {
 
 	claimItem = event => {
 		let id = event.target.id;
-		event.preventDefault();
 		axios
 			.post(
 				`http://localhost:3001/api/posts/${event.target.id}/${
@@ -80,21 +79,16 @@ class App extends Component {
 				{ claim: true, claimed_by: this.state.currentUser.id }
 			)
 			.then(response => {
-				console.log("RESPONSE:", response.status);
-				if (response.status == 200) {
-					//this.getUser();
-					let invisiblePosts = this.state.posts.map(post => {
-						return post.id == id
-							? {
-									...post,
-									visible: false,
-									claimed_by: this.state.currentUser.id
-							  }
-							: post;
-					});
-					this.setState({ posts: invisiblePosts });
-					window.location.assign("/profile");
-				}
+				console.log("RESPONSE:",response.status )
+					if(response.status == 200){
+				//this.getUser();
+				let invisiblePosts = this.state.posts.map(post => {
+					return post.id == id
+						? { ...post, visible: false, claimed_by: this.state.currentUser.id }
+						: post;
+				});
+				this.setState({ posts: invisiblePosts });
+			}
 			});
 	};
 
