@@ -65,23 +65,16 @@ class NavBar extends Component {
 						</div>
 
 					<div className="navbar-end" aria-label="dropdown navigation">
-						<div className="navbar-item">
-							<span className="badge is-badge-light" data-badge="2">
-								<Link to={"/profile"}>
-									Alerts
-								</Link>
-					    </span>
-				   	</div>
 
 						<div className="navbar-item has-dropdown is-hoverable">
-						<a className="navbar-link">{this.props.username}</a>
+						<a className="navbar-link"><span className="badge is-badge-light is-badge-small" data-badge={this.props.currentUser.points}>{this.props.username}</span></a>
 						<div className="navbar-dropdown is-right">
-								<Link
-									className="navbar-item"
-									to={"/profile"}
-									type="button is-active">
-									Profile
-								</Link>
+									<Link
+										className="navbar-item"
+										to={"/profile"}
+										type="button is-active">
+										Profile
+									</Link>
 							<hr className="navbar-divider" />
 							<a
 								className="navbar-item"

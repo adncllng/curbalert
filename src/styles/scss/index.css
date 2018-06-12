@@ -62,7 +62,8 @@ a {
   border: 0; }
   @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     .navbar {
-      padding: 0 10px 0 0; } }
+      padding: 0 10px 0 0;
+      margin: 0; } }
 
 .nav-button {
   padding: 0;
@@ -83,7 +84,8 @@ a {
   opacity: .85; }
   @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     .navbar-item img {
-      margin: 0; } }
+      margin: 0;
+      padding-left: 10px; } }
 
 .sidebar {
   top: 0;

@@ -127,18 +127,6 @@ class Profile extends Component {
 				  </div>
 				</nav>
 
-<br/>
-<div className="message is-light">
-    <div className="message-header">
-        <p>Someone claimed your post!</p>
-        <button className="delete"></button>
-    </div>
-
-    <div className="message-body">
-			You have earned 1 point.
-    </div>
-</div>
-
 				<div className="section">
 					<div className="header">
 						<h1>Your Claimed Items</h1>

@@ -247,6 +247,7 @@ class App extends Component {
 					logout={this.logout}
 					username={this.state.currentUser.username}
 					showAddPostModal={this.showAddPostModal}
+					currentUser={this.state.currentUser}
 				/>
 
 				<Switch>
