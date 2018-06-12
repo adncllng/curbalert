@@ -1,5 +1,14 @@
 .modal is-active {
-  width: 275px; }
+  width: 275px;
+  justify-content: flex-end; }
+
+.modal {
+  justify-content: flex-end !important;
+  margin-right: 30px; }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .modal {
+      justify-content: center !important;
+      margin-right: 0; } }
 
 .post-modal {
   z-index: 150; }
