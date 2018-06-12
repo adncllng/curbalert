@@ -62,8 +62,9 @@ class PostList extends Component {
 										<i className="fas fa-map-pin" /> {post.address}
 										<br />
 										<br />
-										<small>(Posted {moment(post.created_at).fromNow()})</small>
-										<small> by {post.username}</small>
+										<small>Posted {moment(post.created_at).fromNow()}
+											<br/>by <span className="tag is-light is-rounded">@{post.username}</span>
+										</small>
 									</div>
 								</div>
 								<footer className="card-footer">
@@ -98,8 +99,9 @@ class PostList extends Component {
 										<i className="fas fa-map-pin" /> {post.address}
 										<br />
 										<br />
-										<small>(Posted {moment(post.created_at).fromNow()})</small>
-										<small> by {post.username}</small>
+										<small>Posted {moment(post.created_at).fromNow()}
+												<br/>by <span className="tag is-light is-rounded">@{post.username}</span>
+										</small>
 									</div>
 								</div>
 								<footer className="card-footer">
@@ -137,23 +139,25 @@ class PostList extends Component {
 							<div className="column is-expanded is-narrow">
 								<div className="button-wrapper">
 									<form onSubmit={this.handleFormSubmit} ref="searchForm">
-										<div className="search-field field has-addons is-grouped">
-											<div className="search-area control is-expanded has-icons-left">
-												<input
-													className="input search-input"
-													type="search"
-													placeholder="I'm looking for..."
-													name="searchTag"
-													onChange={this.handleChange}
-												/>
-												<span className="icon is-small is-left">
-													<i className="fa fa-search" />
-												</span>
-											</div>
-												<div className="control">
-													<button className="button is-warning">Submit</button>
-												</div>
-										</div>
+
+								<div className="field has-addons">
+									<div className="control is-expanded">
+										<input
+											className="input search-input"
+											type="search"
+											placeholder="I'm looking for..."
+											name="searchTag"
+											onChange={this.handleChange}
+										/>
+									</div>
+									<div className="control">
+										<button className="button is-success">
+											<i className="fa fa-search" />
+										</button>
+									</div>
+								</div>
+
+
 									</form>
 									<br/>
 								<div className="button-content">

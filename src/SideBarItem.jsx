@@ -43,8 +43,8 @@ class SideBarItem extends Component {
 									<br />
 									<small>
 										(Posted {moment(this.props.created_at).fromNow()})
+									<br/>by <span className="tag is-white is-rounded">@{this.props.post.username}</span>
 									</small>
-                  <small> by {this.props.post.username}</small>
 								</div>
 							</div>
 						</div>
