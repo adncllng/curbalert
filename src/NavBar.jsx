@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import AuthService from "./AuthService.jsx";
 import { Link } from "react-router-dom";
 import "./styles/scss/NavBar.css";
+import bulmaBadge from '../node_modules/bulma-extensions/bulma-badge/dist/bulma-badge.min.css';
+
 
 class NavBar extends Component {
 	constructor(props) {
@@ -61,7 +63,16 @@ class NavBar extends Component {
 								</a>
 							</div>
 						</div>
+
 					<div className="navbar-end" aria-label="dropdown navigation">
+						<div className="navbar-item">
+							<span className="badge is-badge-light" data-badge="2">
+								<Link to={"/profile"}>
+									Alerts
+								</Link>
+					    </span>
+				   	</div>
+
 						<div className="navbar-item has-dropdown is-hoverable">
 						<a className="navbar-link">{this.props.username}</a>
 						<div className="navbar-dropdown is-right">
