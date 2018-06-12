@@ -24,7 +24,7 @@ class LandingPage extends Component {
               <div className="card info-box">
                 <div className="card-content">
                   <p className="is-size-5">
-                  <i className="fas fa-recycle"></i>
+                    <img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528825604/icon-01.svg" style={{width: '28px'}}/>
                     <br/>Easily locate and collect <br/>recycled items.
                   </p>
                 </div>
@@ -34,7 +34,7 @@ class LandingPage extends Component {
               <div className="card info-box">
                 <div className="card-content">
                   <p className="is-size-5">
-                  <i className="fas fa-money-bill-alt"></i>
+                    <img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528825604/icon-02.svg" style={{width: '30px'}}/>
                     <br/>Earn points for every post <br/>you make.
                   </p>
                 </div>
@@ -44,7 +44,7 @@ class LandingPage extends Component {
               <div className="card info-box">
                 <div className="card-content">
                   <p className="is-size-5">
-                  <i className="fas fa-tree"></i>
+                    <img src="http://res.cloudinary.com/ninayujiri/image/upload/v1528826622/icon-03-03.svg" style={{width: '32px'}}/>
                     <br/>Save items headed <br/>for the landfill.
                   </p>
                 </div>
