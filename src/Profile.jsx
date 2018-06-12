@@ -75,8 +75,9 @@ class Profile extends Component {
 										<i className="fas fa-map-pin" /> {post.address}
 										<br />
 										<br />
-										<small>(Posted {moment(post.created_at).fromNow()})</small>
-										<small> by {post.username}</small>
+										<small>Posted {moment(post.created_at).fromNow()}
+											<br/>by <span className="tag is-light is-rounded">@{post.username}</span>
+										</small>
 									</div>
 								</div>
 								<footer className="card-footer">
