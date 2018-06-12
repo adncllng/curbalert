@@ -3,6 +3,7 @@ import moment from "moment";
 import Geocode from "react-geocode";
 import "./styles/scss/App.css";
 import "./styles/scss/PostModal.css";
+import { Link } from "react-router-dom";
 
 class PostModal extends Component {
 	constructor(props) {
@@ -17,12 +18,13 @@ class PostModal extends Component {
 		let lat = this.props.modalParams.geo_tag.x;
 		let lng = this.props.modalParams.geo_tag.y;
 		let claimButton = this.props.currentUser.points ?
-		      (<button
+		      (
+						<Link to='/profile'
 						onClick={this.props.claimItem}
 						id={this.props.modalParams.id}
 						className="button is-warning">
 						Claim Item
-					</button>
+					</Link>
 				):(
 					<button className="button is-static is-outlined">No points left!</button>
 				)
@@ -52,6 +54,7 @@ class PostModal extends Component {
 						<small>
 							(Posted {moment(this.props.modalParams.created_at).fromNow()})
 						</small>
+							<small> by {this.props.modalParams.username}</small>
 					</footer>
 				</div>
 			</div>

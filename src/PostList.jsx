@@ -63,6 +63,7 @@ class PostList extends Component {
 										<br />
 										<br />
 										<small>(Posted {moment(post.created_at).fromNow()})</small>
+										<small> by {post.username}</small>
 									</div>
 								</div>
 								<footer className="card-footer">
@@ -98,6 +99,7 @@ class PostList extends Component {
 										<br />
 										<br />
 										<small>(Posted {moment(post.created_at).fromNow()})</small>
+										<small> by {post.username}</small>
 									</div>
 								</div>
 								<footer className="card-footer">
