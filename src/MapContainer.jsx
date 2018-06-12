@@ -23,6 +23,20 @@ class MapContainer extends Component {
 		this.props.showModal(thisPost);
 	};
 
+	hoverState = key => {
+		let thisPost = null;
+		this.props.posts.forEach((post, i) => {
+			if (post.id == key) {
+				thisPost = post;
+			}
+		});
+		this.props.hoverMarker(thisPost);
+	};
+
+	clearHoverState = () => {
+		this.props.clearHover();
+	};
+
 	render() {
 		const markers = this.props.posts
 			.filter(post => post.visible)
@@ -35,6 +49,8 @@ class MapContainer extends Component {
 					text={marker ? marker.title : ""}
 					toggleModal={this.toggleModal}
 					markerParams={this.props.markerParams}
+					hoverState={this.hoverState}
+					clearHoverState={this.clearHoverState}
 				/>
 			));
 		return (
