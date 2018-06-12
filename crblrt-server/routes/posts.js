@@ -101,7 +101,7 @@ module.exports = (knex) => {
         'claimed_by'
       )
       .from('posts')
-      .fullOuterJoin('users', 'users.id', 'posts.id')
+      .join('users', 'users.id', 'posts.id')
       .then((posts) => {
         const postIds = posts.map(result => result.id);
         knex
