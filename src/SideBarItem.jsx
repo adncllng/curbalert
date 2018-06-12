@@ -44,6 +44,7 @@ class SideBarItem extends Component {
 									<small>
 										(Posted {moment(this.props.created_at).fromNow()})
 									</small>
+                  <small> by {this.props.post.username}</small>
 								</div>
 							</div>
 						</div>
