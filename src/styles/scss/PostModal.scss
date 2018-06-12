@@ -1,0 +1,32 @@
+.modal is-active {
+  width: 275px;
+  justify-content: flex-end;
+}
+
+.post-modal {
+  z-index: 150;
+
+  justify-content: flex-end !important;
+  margin-right: 30px;
+
+    @media only screen
+    and (min-device-width: 375px)
+    and (max-device-width: 667px) {
+        justify-content: center !important;
+        margin-right: 0;
+    }
+}
+
+.modal-image {
+  width: 275px;
+}
+
+.content {
+  max-width: 260px;
+  overflow-wrap: break-word;
+}
+
+.modal-address {
+  max-width: 275px;
+  overflow-wrap: break-word;
+}

@@ -10,9 +10,7 @@ exports.seed = function(knex, Promise) {
           email: faker.internet.email(),
           username: faker.internet.userName(),
           password_digest: faker.internet.password(),
-          city: 'Montreal',
-          prov: 'Quebec',
-          country: 'Canada',
+          geo_tag: knex.raw(`point(45.4768, -73.5842)`),
           phone_number: faker.phone.phoneNumber(),
           points: faker.random.number({min:5, max:10}),
           notifications: faker.random.boolean()

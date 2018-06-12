@@ -1,0 +1,136 @@
+.App {
+  position: relative; }
+
+.home {
+  display: flex; }
+
+.button.is-success {
+  background-color: #77ab59; }
+
+.button.is-danger {
+  background-color: #ef5411; }
+
+a {
+  color: #77ab59; }
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1; }
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 700ms ease-in; }
+
+.landing-page .hero {
+  text-align: center;
+  padding-top: 3em;
+  height: 500px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .landing-page .hero {
+      height: 500px;
+      padding-top: 120px; } }
+
+.landing-page .header-image {
+  background-image: url("http://res.cloudinary.com/ninayujiri/image/upload/v1528773271/clem-onojeghuo-218551-unsplash.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: relative;
+  background-size: cover;
+  background-color: #999; }
+
+.landing-page .info-boxes {
+  margin-top: 40px;
+  text-align: center; }
+
+.landing-page .card {
+  background-color: #e4eae7;
+  box-shadow: none; }
+
+.landing-page .card-content {
+  margin: 100px 0 100px 0; }
+
+.landing-page .footer {
+  background-color: white;
+  text-align: center;
+  margin-top: 30px;
+  height: 80px; }
+
+.map {
+  height: 94vh;
+  flex-basis: 100%; }
+
+.navbar {
+  z-index: 100;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  border: 0; }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .navbar {
+      padding: 0 10px 0 0; } }
+
+.nav-button {
+  padding: 0;
+  margin: 0;
+  border: 0; }
+
+.navbar-menu {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  padding-right: 30px; }
+
+.brand-text {
+  padding: 5px; }
+
+.navbar-item img {
+  max-height: 1.75rem;
+  padding-left: 25px;
+  opacity: .85; }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .navbar-item img {
+      margin: 0;
+      padding-left: 10px; } }
+
+.sidebar {
+  top: 0;
+  bottom: 0;
+  height: 94vh;
+  padding: 0 0 0 10px;
+  flex-basis: 400px;
+  overflow-y: scroll;
+  background-color: #fafafa;
+  z-index: 50; }
+  .sidebar .trash-icon {
+    margin-left: 1.3em;
+    margin-right: 0.7em; }
+  .sidebar .button-wrapper:hover .button-content {
+    max-height: 400px;
+    display: flex;
+    justify-content: center; }
+  .sidebar .button-content {
+    -webkit-transition: max-height 1s linear;
+    -moz-transition: max-height 1s linear;
+    -ms-transition: max-height 1s linear;
+    -o-transition: max-height 1s linear;
+    transition: max-height 1s linear;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    max-height: 0px; }
+
+body {
+  margin-top: 54px; }
+
+.login-form {
+  text-align: center;
+  margin-top: 80px; }
+
+.register-form {
+  text-align: center;
+  margin-top: 80px; }

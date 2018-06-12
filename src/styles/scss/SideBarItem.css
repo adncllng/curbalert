@@ -1,0 +1,29 @@
+.side-bar-item {
+  display: inline-block;
+  text-align: left;
+  width: 100%; }
+  .side-bar-item:hover #eye {
+    color: #494949; }
+  .side-bar-item:hover .side-bar-item-content {
+    max-height: 400px; }
+
+.side-bar-item-content {
+  -webkit-transition: max-height 1s;
+  -moz-transition: max-height 1s;
+  -ms-transition: max-height 1s;
+  -o-transition: max-height 1s;
+  transition: max-height 1s;
+  overflow: hidden;
+  max-height: 0; }
+
+.side-bar-item-inner {
+  padding: 0; }
+
+#eye {
+  -webkit-transition: color 1s linear;
+  -moz-transition: color 1s linear;
+  -ms-transition: color 1s linear;
+  -o-transition: color 1s linear;
+  transition: color 1s linear;
+  float: right;
+  color: #cecece; }

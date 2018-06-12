@@ -1,0 +1,52 @@
+.landing-page {
+
+  .hero {
+    text-align: center;
+    padding-top: 3em;
+    height: 500px;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    @media only screen
+      and (min-device-width: 375px)
+      and (max-device-width: 667px) {
+        height: 500px;
+        padding-top: 120px;
+    }
+  }
+
+  .header-image {
+    background-image: url("http://res.cloudinary.com/ninayujiri/image/upload/v1528773271/clem-onojeghuo-218551-unsplash.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: relative;
+    background-size: cover;
+    background-color: #999;
+    }
+
+    .info-boxes {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .card {
+      background-color: #e4eae7;
+      box-shadow: none;
+    }
+
+    .card-content {
+      margin: 100px 0 100px 0;
+    }
+
+    .footer {
+      background-color: white;
+      text-align: center;
+      margin-top: 30px;
+      height: 80px;
+    }
+}
+
+

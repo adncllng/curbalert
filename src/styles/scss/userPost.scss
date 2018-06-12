@@ -1,0 +1,11 @@
+.level {
+  margin-top: 120px;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.current-tab {
+  display: inherit;
+}

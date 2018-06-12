@@ -1,0 +1,41 @@
+.no-results {
+  text-align: center;
+  height: 500px;
+  vertical-align: center;
+  padding-top: 150px; }
+
+.hero .is-light {
+  width: 100% !important;
+  display: flex; }
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column; }
+
+.card-footer {
+  margin-top: auto; }
+
+.search-bar {
+  text-align: center;
+  align-items: center; }
+  .search-bar .button-wrapper:hover .button-content {
+    max-height: 400px;
+    display: flex;
+    justify-content: center; }
+  .search-bar .button-content {
+    -webkit-transition: max-height 1s linear;
+    -moz-transition: max-height 1s linear;
+    -ms-transition: max-height 1s linear;
+    -o-transition: max-height 1s linear;
+    transition: max-height 1s linear;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    max-height: 0px; }
+
+.post-list {
+  margin-top: 40px; }
+
+.field.is-grouped > .control:not(:last-child) {
+  margin-right: 0; }

@@ -3,6 +3,10 @@
 # dependencies
 /node_modules
 /crblrt-server/node_modules
+.sass-cache
+
+# styles
+# src/**/*.css
 
 # testing
 /coverage
@@ -12,10 +16,11 @@
 
 # misc
 .DS_Store
-.env.local
+.env
 .env.development.local
 .env.test.local
 .env.production.local
+/crblrt-server/.env
 
 npm-debug.log*
 yarn-debug.log*

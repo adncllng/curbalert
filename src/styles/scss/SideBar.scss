@@ -1,0 +1,40 @@
+.sidebar {
+  top: 0;
+  bottom: 0;
+  height: 94vh;
+  padding: 0 0 0 10px;
+  flex-basis: 400px;
+  overflow-y: scroll;
+  background-color: #fafafa;
+  z-index: 50;
+
+  .trash-icon {
+    margin-left: 1.3em;
+    margin-right: 0.7em;
+  }
+
+  .button-wrapper {
+
+  	 &:hover {
+       .button-content {
+         max-height: 400px;
+
+         display: flex;
+         justify-content: center;
+   	    }
+     }
+  }
+
+  .button-content {
+    -webkit-transition: max-height 1s linear;
+    -moz-transition: max-height 1s linear;
+    -ms-transition: max-height 1s linear;
+    -o-transition: max-height 1s linear;
+    transition: max-height 1s linear;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    max-height: 0px;
+  }
+
+}

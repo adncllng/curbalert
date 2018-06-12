@@ -8,48 +8,53 @@ exports.seed = function(knex, Promise) {
       return knex('posts').insert([
         {
           user_id: faker.random.number({min:1, max:5}),
-          title: 'Bookshelf',
-          content: faker.lorem.sentence(),
-          image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1527806662/1.jpg',
+          title: 'Clothing',
+          content: faker.lorem.sentence(word_count = 4),
+          image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/1.jpg',
           geo_tag: knex.raw(`point(45.4768, -73.5842)`),
           point_value: faker.random.number({min:5, max:10}),
-          visible: faker.random.boolean()
+          visible: true,
+          claimed_by: null
         },
         {
           user_id: faker.random.number({min:1, max:5}),
-          title: 'Radio',
+          title: 'Books',
           content: null,
-          image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1527806879/2.jpg',
+          image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/2.jpg',
           geo_tag: knex.raw(`point(45.4548, -73.5699)`),
           point_value: faker.random.number({min:5, max:10}),
-          visible: faker.random.boolean()
+          visible: true,
+          claimed_by: null
         },
         {
           user_id: faker.random.number({min:1, max:5}),
-          title: 'Houseplant',
-          content: faker.lorem.sentence(),
-          image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1527806749/3.jpg',
+          title: 'Fan',
+          content: faker.lorem.sentence(word_count = 5),
+          image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/3.jpg',
           geo_tag: knex.raw(`point(45.4914, -73.5605)`),
           point_value: faker.random.number({min:5, max:10}),
-          visible: faker.random.boolean()
+          visible: true,
+          claimed_by: null
         },
         {
           user_id: faker.random.number({min:1, max:5}),
           title: 'Bike',
-          content: faker.lorem.sentence(),
-          image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1527805912/4.jpg',
+          content: faker.lorem.sentence(word_count = 10),
+          image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/4.jpg',
           geo_tag: knex.raw(`point(45.5017, -73.5673)`),
           point_value: faker.random.number({min:5, max:10}),
-          visible: faker.random.boolean()
+          visible: true,
+          claimed_by: null
         },
         {
           user_id: faker.random.number({min:1, max:5}),
-          title: 'Dresser',
-          content: faker.lorem.sentence(),
-          image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1527805912/5.jpg',
+          title: 'Chair',
+          content: faker.lorem.sentence(word_count = 7),
+          image_url: 'http://res.cloudinary.com/ninayujiri/image/upload/v1528420860/5.jpg',
           geo_tag: knex.raw(`point(45.5232, -73.5870)`),
           point_value: faker.random.number({min:5, max:10}),
-          visible: faker.random.boolean()
+          visible: true,
+          claimed_by: null
         }
       ]);
     });
