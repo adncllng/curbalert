@@ -24,7 +24,6 @@ class SideBarItem extends Component {
 	render() {
 		return (
 			<ul className="menu-list">
-				<br />
 				<li className="side-bar-item">
 					<a
 						onClick={this.handlePostClick}
