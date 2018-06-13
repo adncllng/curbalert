@@ -1,7 +1,5 @@
 # Curb Alert
 
-
-## Problem Statement
 Awareness of the problems caused by excessive waste is at an all-time high. Yet, every day, people throw out countless useful and valuable objects. Curb Alert seeks to solve two problems at once: reduce waste by inspiring good recycling practices, and give people access to everyday items without having to dip into their budget.
 
 Curb Alert will allow users to share images of abandoned items that look ready for a second life, and to tag a map with the location of the items. Other users can then view the items and their location, and make their way to the items to pick them up on a first-come basis.
@@ -28,17 +26,16 @@ Client-side:
 
 Server side:
 - Bcrypt
-- Body parser
+- BodyParser
 - Express
 - Faker
-- JsonWenToken
+- JsonWebToken
 - Knex
 - PG
-- Morga
+- Morgan
 
 
 ## APIs
 - Google Maps
 - Google Geocoder
 - Node Cloud Vision
-- Twilio
