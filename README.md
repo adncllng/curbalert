@@ -7,6 +7,17 @@ Curb Alert will allow users to share images of abandoned items that look ready f
 In order to foster a healthy community, users who contribute items/locations are rewarded with in-app currency when the item is picked up. A user can then spend currency to hide exisiting posts from other users, giving them the opportunity to claim an item before anyone else.
 
 
+## Final Product
+
+![Home Page](https://github.com/ninayujiri/curbalert/blob/production/docs/home-page.png?raw=true)
+
+
+![Add Feature](https://github.com/ninayujiri/curbalert/blob/production/docs/add-feature.gif?raw=true)
+
+
+![Claim Feature](https://github.com/ninayujiri/curbalert/blob/production/docs/claim-feature.gif?raw=true)
+
+
 ## Dependencies
 
 Client-side:
@@ -38,4 +49,4 @@ Server side:
 ## APIs
 - Google Maps
 - Google Geocoder
-- Node Cloud Vision
+- Google Cloud Vision
