@@ -30,10 +30,7 @@ Client-side:
 - React Dropzone
 - Jwt Decode
 - Moment
-- Express
-- Nodemon
-- Node Sass
-- Knex
+
 
 Server side:
 - Bcrypt
